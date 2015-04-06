@@ -1,0 +1,23 @@
+= form_for @book, html: { class: "form form-horizontal book" } do |f|
+  .form-group
+    = f.label :title, class: 'control-label'
+    .controls
+      = f.text_field :title, class: 'form-control', required: true
+    = error_span(@book[:title])
+  .form-group
+    = f.label :postcode, class: 'control-label'
+    .controls
+      = f.text_field :postcode, class: 'form-control', required: true
+    = error_span(@book[:postcode])
+  .form-group
+    = f.label :share, class: 'control-label'
+    .controls
+      = f.text_field :share, class: 'form-control', required: true
+    = error_span(@book[:share])
+  .form-group
+    = f.label :swap, class: 'control-label'
+    .controls
+      = f.text_field :swap, class: 'form-control', required: true
+    = error_span(@book[:swap])
+  = f.submit nil,class: 'btn btn-primary'
+  = link_to t('.cancel', :default => t("helpers.links.cancel")), books_path, :class => 'btn btn-default'
