@@ -25,17 +25,20 @@
           %span.icon-bar
           %span.icon-bar
           %span.icon-bar
-        %a.navbar-brand(href="#") Shelfless
+        %a.navbar-brand(href="#")
+          Shelfless
+          %sub
+            &beta;
         .navbar-collapse.collapse.navbar-responsive-collapse
           %ul.nav.navbar-nav
             %li= link_to "Books", books_path
-            %li= link_to "Ownership", "/path2"
-            %li= link_to "About", "/path3"
+            %li= link_to "About", about_path
 
     .container
       .row
         .col-lg-9
           = bootstrap_flash
           = yield
-      %footer
-        %p &copy; Shelfless 2015
+      %footer.navbar-fixed-bottom
+        .container
+          %p &copy; Shelfless 2015

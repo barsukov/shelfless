@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-
+ruby '2.1.2'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
 # Use sqlite3 as the database for Active Record
@@ -12,10 +12,11 @@ gem "twitter-bootstrap-rails"
 gem "rails_admin"
 
 gem "devise"
-
+gem "cancan"
 gem "pg"
 gem 'protected_attributes'
-
+gem 'rails_12factor', group: :production
+gem 'puma'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
