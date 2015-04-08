@@ -8,13 +8,15 @@
       %th= model_class.human_attribute_name(:postcode)
       %th= model_class.human_attribute_name(:share)
       %th= model_class.human_attribute_name(:swap)
-      %th= model_class.human_attribute_name(:created_at)
+      %th= model_class.human_attribute_name(:category)
   %tbody
     - @books.each do |book|
       %tr
         %td= link_to(book.title, book_path(book))
         %td= book.postcode
-        %td= book.share
-        %td= book.swap
-        %td=l book.created_at
+        %td
+          =get_boolean_icon(book.share)
+        %td
+          =get_boolean_icon(book.swap)
+        %td= book.category.try(:name)
 
