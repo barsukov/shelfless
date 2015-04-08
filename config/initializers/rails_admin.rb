@@ -30,4 +30,13 @@ RailsAdmin.config do |config|
     # history_index
     # history_show
   end
+  config.model Book do
+    list do
+      field :title
+      field :postcode
+      field :share
+      field :swap
+      field :category
+    end
+  end
 end
