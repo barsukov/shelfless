@@ -9,6 +9,8 @@
       %th= model_class.human_attribute_name(:share)
       %th= model_class.human_attribute_name(:swap)
       %th= model_class.human_attribute_name(:category)
+      %th= model_class.human_attribute_name(:author)
+      %th= model_class.human_attribute_name(:contact)
   %tbody
     - @books.each do |book|
       %tr
@@ -19,4 +21,10 @@
         %td
           =get_boolean_icon(book.swap)
         %td= book.category.try(:name)
+        %td= book.author.try(:name)
+        %td
+          -if user_signed_in?
+            = mail_to book.owner.try(:email)
+          -else
+            =I18n.t('login_please')
 

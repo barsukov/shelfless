@@ -33,6 +33,8 @@
           %ul.nav.navbar-nav
             %li= link_to "Books", books_path
             %li= link_to "About", about_path
+          %ul.nav.navbar-nav.pull-right
+            =render :partial => 'shared/login_form'
 
     .container
       .row

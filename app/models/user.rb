@@ -4,12 +4,14 @@ class User < ActiveRecord::Base
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :rememberable, :trackable, :validatable
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :role
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :role, :books_ids
   # attr_accessible :title, :body
 
   ROLES = [ :admin, :user, :guest].freeze
 
   validates :role, :presence => true, :inclusion => { :in => ROLES + ROLES.map(&:to_s) }
+
+  has_many :books
 
   def password=(val)
     val.blank? ? return : super(val)

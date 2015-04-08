@@ -30,12 +30,21 @@ RailsAdmin.config do |config|
     # history_index
     # history_show
   end
+
+  config.model User do
+    object_label_method do
+      :email
+    end
+  end
+
   config.model Book do
     list do
       field :title
       field :postcode
+      field :owner
       field :share
       field :swap
+      field :author
       field :category
     end
   end
