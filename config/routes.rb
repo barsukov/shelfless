@@ -2,7 +2,8 @@ Rails.application.routes.draw do
 
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
-  devise_for :users
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+
   resources :books, only: [:index, :show]
   root "main#index"
   get '/about', :to => 'main#about'

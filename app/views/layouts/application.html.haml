@@ -38,9 +38,12 @@
 
     .container
       .row
-        .col-lg-9
-          = bootstrap_flash
-          = yield
+        - if content_for?(:login)
+          = yield(:login)
+        - else
+          .col-lg-9
+            = bootstrap_flash
+            = yield
       %footer.navbar-fixed-bottom
         .container
           %p &copy; Shelfless 2015
