@@ -22,3 +22,14 @@
 en:
   hello: "Hello world"
   login_please: "Please sign in to see it"
+  wellcome:
+    title: "Welcome to Shelfless, Berlins community library. <3"
+    message:
+      "To make shareing together easier, here some information for you.
+      Books are accesible to anyone from anyone.
+
+      no discrimination here!
+
+      Finally, Respect our books - Sharing is caring. <3"
+
+

@@ -1,23 +1,41 @@
 <%= content_for :login do %>
-  <div class='col-md-3 col-md-offset-5'>
-    <h2 class="form-signin-heading">Please sign in</h2>
-    <%= simple_form_for(resource,as: resource_name, url: session_path(resource_name)) do |f|%>
-        <div class="field">
-          <%= f.input :email, placeholder: 'Email' %>
-        </div>
+<div class="col-md-4 col-md-offset-4">
+  <div class="panel panel-default ">
+      <div class='panel-heading'>
+        <h2 class="form-signin-heading">Please sign in</h2>
+      </div>
+      <div class='panel-body'>
+        <%= simple_form_for(resource,as: resource_name, url: session_path(resource_name)) do |f|%>
+            <div class="field">
+              <%= f.input :email, placeholder: 'Email' %>
+            </div>
 
-        <div class="field">
-          <%= f.input :password, placeholder: 'Password' %>
-        </div>
+            <div class="field">
+              <%= f.input :password, placeholder: 'Password' %>
+            </div>
 
-        <% if devise_mapping.rememberable? -%>
-          <div class="checkbox">
-            <%= f.input :remember_me, as: :boolean%>
-          </div>
-        <% end -%>
-         <%= f.button :submit %>
-    <% end %>
+            <% if devise_mapping.rememberable? -%>
+              <div class="checkbox">
+                <%= f.input :remember_me, as: :boolean%>
+              </div>
+            <% end -%>
+             <div class="controls">
+               <%= f.button :submit, 'Log in',class: "btn btn-block btn-lg btn-primary btn-loading" %>
+             </div>
+             <div class="form-group">
+                <div class="btn-group btn-group-justified form-control-static">
+                <%= link_to "Sign up", new_user_registration_path, class: "btn btn-link btn-xs ellipsis" %><br />
 
-    <%= render "devise/shared/links" %>
+                <%= link_to "Forgot your password?", new_user_password_path, class: "btn btn-link btn-xs ellipsis" %><br />
+                </div>
+              </div>
+        <% end %>
+        <legend class="text-muted text-center">or</legend>
+        <%=link_to user_omniauth_authorize_path(:facebook),
+          class: "btn btn-block btn-social btn-facebook" do %>
+          <i class="fa fa-facebook"></i> Sign in with Facebook
+        <% end %>
+      </div>
+    </div>
   </div>
 <% end %>
