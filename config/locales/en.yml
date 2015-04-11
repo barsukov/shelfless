@@ -22,6 +22,11 @@
 en:
   hello: "Hello world"
   login_please: "Please sign in to see it"
+  devise:
+    sign_in: "Sign in"
+    sign_up: "Sign up"
+    forgot_password: "Forgot your password?"
+    instructions: "Reset password"
   wellcome:
     title: "Welcome to Shelfless, Berlins community library. <3"
     message:

@@ -10,7 +10,7 @@ gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) support
 gem "twitter-bootstrap-rails"
 
 gem "rails_admin"
-
+gem "pry", group: :development
 gem "devise"
 gem "cancan"
 gem "pg"
