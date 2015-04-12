@@ -13,12 +13,19 @@ class User < ActiveRecord::Base
   ROLES = [ :admin, :user, :guest].freeze
 
   validates :role, :presence => true, :inclusion => { :in => ROLES + ROLES.map(&:to_s) }
+  has_one :identity, dependent: :destroy
+  has_one :account, dependent: :destroy
+  delegate :name, to: :account, allow_nil: true
+  delegate :surname, to: :account, allow_nil: true
 
-  has_one :account
   after_create :build_account
-
+  after_create :send_mail
   def build_account
     self.create_account!
+  end
+
+  def send_mail
+    UserMailer.new_user_notification(self).deliver_now
   end
 
   def self.from_omniauth(auth)

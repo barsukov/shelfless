@@ -22,6 +22,8 @@
 en:
   hello: "Hello world"
   login_please: "Please sign in to see it"
+  mail:
+    regards: "Best regards, Your shelfless team"
   book:
     owner: "Owner"
   devise:
@@ -30,13 +32,13 @@ en:
     forgot_password: "Forgot your password?"
     instructions: "Reset password"
   wellcome:
-    title: "Welcome to Shelfless, Berlins community library. <3"
+    title: "Welcome to Shelfless, Berlins community library."
     message:
       "To make shareing together easier, here some information for you.
       Books are accesible to anyone from anyone.
 
       no discrimination here!
 
-      Finally, Respect our books - Sharing is caring. <3"
+      Finally, Respect our books - Sharing is caring"
 
 
