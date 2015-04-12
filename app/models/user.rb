@@ -7,25 +7,24 @@ class User < ActiveRecord::Base
   devise :database_authenticatable,:recoverable, :rememberable, :registerable , :trackable,
     :validatable, :omniauthable, :omniauth_providers => [:facebook]
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :role, :books_ids
+  attr_accessible :email, :password, :account_id,:password_confirmation, :remember_me, :role, :books_ids
   # attr_accessible :title, :body
 
   ROLES = [ :admin, :user, :guest].freeze
 
   validates :role, :presence => true, :inclusion => { :in => ROLES + ROLES.map(&:to_s) }
 
-  has_many :books
+  has_one :account
+  after_create :build_account
+
+  def build_account
+    self.create_account!
+  end
 
   def self.from_omniauth(auth)
     # Get the identity and user if they exist
     identity = Identity.find_for_oauth(auth)
-
-    # If a signed_in_resource is provided it always overrides the existing user
-    # to prevent the identity being locked with accidentally created accounts.
-    # Note that this may leave zombie accounts (with no associated identity) which
-    # can be cleaned up at a later date.
     user = identity.user
-
     # Create the user if needed
     if user.nil?
 
@@ -38,9 +37,10 @@ class User < ActiveRecord::Base
 
       # Create the user if it's a new registration
       if user.nil?
+        account = Account.new(name: auth.extra.raw_info.first_name, 
+          last_name: auth.extra.raw_info.first_name)
         user = User.new(
-          name: auth.extra.raw_info.name,
-          #username: auth.info.nickname || auth.uid,
+          account: account,
           email: email ? email : "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com",
           password: Devise.friendly_token[0,20]
         )

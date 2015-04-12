@@ -38,10 +38,13 @@ RailsAdmin.config do |config|
   end
 
   config.model Book do
+    configure :account do
+      label I18n.t('book.owner')
+    end
     list do
       field :title
       field :postcode
-      field :owner
+      field :account
       field :share
       field :swap
       field :author

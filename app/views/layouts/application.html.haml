@@ -38,6 +38,7 @@
 
     .container
       .row
+        = bootstrap_flash
         - if content_for?(:login_panel_content)
           .col-md-4.col-md-offset-4
             .panel.panel-default
@@ -47,9 +48,7 @@
               .panel-body
                 = yield :login_panel_content
         - else
-          .col-lg-12
-            = bootstrap_flash
-            = yield
+          = yield
       %footer.navbar-fixed-bottom
         .container
           %p &copy; Shelfless 2015
