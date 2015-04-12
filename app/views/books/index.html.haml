@@ -24,7 +24,7 @@
         %td= book.author.try(:name)
         %td
           -if user_signed_in?
-            = mail_to book.account.try(:name)
+            = mail_to book.account.user.email,book.account.try(:name)
           -else
             =I18n.t('login_please')
 
