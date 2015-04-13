@@ -1,0 +1,18 @@
+<p>Welcome <%= @record.email %>!</p>
+<p><%= I18n.t('wellcome.confirmation') %>
+<%= link_to I18n.t('wellcome.link_title'), user_confirmation_url(@resource, confirmation_token: @token) %></p>
+
+<p>
+  <%= I18n.t('wellcome.mail') %>
+  <ul>
+    <li>
+      <%= I18n.t('wellcome.first_thing') %>
+    </li>
+    <li>
+      <%= I18n.t('wellcome.second_thing') %>
+    </li>
+  </ul>
+</p>
+<p><%= I18n.t('wellcome.contact_text') %></p>
+<p><%= I18n.t('wellcome.wellcome_mail') %></p>
+<p><%= I18n.t('wellcome.regards') %></p>

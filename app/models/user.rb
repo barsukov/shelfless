@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable,:recoverable, :rememberable, :registerable , :trackable,
-    :validatable, :omniauthable, :omniauth_providers => [:facebook]
+    :validatable, :omniauthable, :confirmable, :omniauth_providers => [:facebook]
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :account_id,:password_confirmation, :remember_me, :role, :books_ids
   # attr_accessible :title, :body
@@ -19,13 +19,8 @@ class User < ActiveRecord::Base
   delegate :surname, to: :account, allow_nil: true
 
   after_create :build_account
-  after_create :send_mail
   def build_account
     self.create_account!
-  end
-
-  def send_mail
-    UserMailer.new_user_notification(self).deliver_now
   end
 
   def self.from_omniauth(auth)

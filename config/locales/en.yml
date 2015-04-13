@@ -32,6 +32,20 @@ en:
     forgot_password: "Forgot your password?"
     instructions: "Reset password"
   wellcome:
+    confirmation:
+      "To start using Shelfless, please confirm your account by clicking"
+    link_title: "here."
+    mail: " Remember 2 things: "
+    first_thing:
+      "Books are accesible to anyone from anyone. No discrimination here!"
+    second_thing:
+      "Respect our books - sharing is caring."
+    contact_text:
+      "Feel free to contact us on info.at.shelfless.de"
+    wellcome_mail:
+      "Welcome to Shelfless, the community library."
+    regards:
+      "Your Shelfless Team."
     title: "Welcome to Shelfless, Berlins community library."
     message:
       "To make shareing together easier, here some information for you.
