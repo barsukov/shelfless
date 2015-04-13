@@ -28,6 +28,7 @@ en:
     owner: "Owner"
   devise:
     sign_in: "Sign in"
+    resend: "Resend confirmation instructions"
     sign_up: "Sign up"
     forgot_password: "Forgot your password?"
     instructions: "Reset password"

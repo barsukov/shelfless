@@ -1,16 +1,15 @@
-<h2>Resend confirmation instructions</h2>
-
-<%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
-  <%= devise_error_messages! %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Resend confirmation instructions" %>
-  </div>
+<%= content_for :login_panel_title do %>
+  <%= I18n.t('devise.resend') %>
 <% end %>
+<%= content_for :login_panel_content do %>
+  <%= simple_form_for(resource, as: resource_name, url: user_confirmation_url) do |f| %>
 
-<%= render "devise/shared/links" %>
+    <div class="field">
+      <%= f.input :email, placeholder: 'Email' %>
+    </div>
+
+    <div class="controls">
+      <%= f.button :submit, I18n.t('devise.resend'),class: "btn btn-block btn-lg btn-primary btn-loading" %>
+    </div>
+  <% end %>
+<% end %>
