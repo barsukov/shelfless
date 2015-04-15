@@ -4,7 +4,12 @@ Rails.application.routes.draw do
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
-  resources :books, only: [:index, :show]
+  resources :books
+
+  resources :accounts do
+    resources :books
+  end
+
   root "main#index"
   get '/about', :to => 'main#about'
   # The priority is based upon order of creation: first created -> highest priority.

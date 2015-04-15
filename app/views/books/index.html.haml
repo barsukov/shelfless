@@ -1,6 +1,16 @@
 - model_class = Book
 .page-header
   %h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
+%ul.nav.nav-pills
+  %li{:role=>"presentation"}
+    = link_to books_path do
+      %i.icon-th-list
+      %span List
+  %li{:role=>"presentation"}
+    = link_to new_account_book_path(current_user) do
+      %i.icon-th-list
+      %span.label.label-success Add new book
+
 %table.table.table-striped
   %thead
     %tr
