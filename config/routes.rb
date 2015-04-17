@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
   resources :accounts do
     resources :books
+    resources :reader_book_requests
+    resources :holder_book_request
   end
 
   root "main#index"

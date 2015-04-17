@@ -1,29 +1,29 @@
-- model_class = Book
+- model_class = BookRequest
 .page-header
   %h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
-= link_to I18n.t('books.add_new_book_btn'),new_account_book_path(current_user),
-  {class: "btn-sm btn-success",role: "button"}
 %table.table.table-striped
   %thead
     %tr
       %th= model_class.human_attribute_name(:title)
-      %th= model_class.human_attribute_name(:postcode)
-      %th= model_class.human_attribute_name(:share)
-      %th= model_class.human_attribute_name(:category)
       %th= model_class.human_attribute_name(:author)
-      %th= model_class.human_attribute_name(:contact)
+      %th= model_class.human_attribute_name(:postcode)
+      %th= model_class.human_attribute_name(:category)
+      %th= model_class.human_attribute_name(:status)
+      %th= model_class.human_attribute_name(:holder)
   %tbody
-    - @books.each do |book|
+    - @reader_requests.each do |book|
       %tr
         %td= link_to(book.title, book_path(book))
         %td= book.postcode
         %td
           =get_boolean_icon(book.share)
+        %td
+          =get_boolean_icon(book.swap)
         %td= book.category.try(:name)
         %td= book.author.try(:name)
         %td
           -if user_signed_in?
-            = link_to I18n.t('books.request_btn'), new_account_reader_book_request_path(current_user.account.id, book_id: book.id), {role: "button", class: "btn-sm btn-info"}
+            = mail_to book.account.try(:user).try(:email),book.account.try(:name)
           -else
             =I18n.t('login_please')
 
