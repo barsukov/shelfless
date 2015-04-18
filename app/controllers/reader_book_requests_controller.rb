@@ -1,13 +1,9 @@
 class ReaderBookRequestsController < ApplicationController
   before_action { :set_account }
-
   # GET /books
   # GET /books.json
   def index
     @reader_requests = BookRequest.get_reader_requests_by_account(@account)
-    respond_to do |format|
-      format.html { render 'reader_requests/index' }
-    end
   end
 
   # GET /books/1
@@ -17,8 +13,12 @@ class ReaderBookRequestsController < ApplicationController
 
   # GET /books/new
   def new
-    @book = Book.new
+    @book_request = BookRequest.new
+    respond_to do |format|
+      format.html { render 'reader_book_requests/new' }
+    end
   end
+
 
   # GET /books/1/edit
   def edit
@@ -67,7 +67,7 @@ class ReaderBookRequestsController < ApplicationController
   private
    # Use callbacks to share common setup or constraints between actions.
     def set_book
-      @account = Account.find(params[:account_id])
+      @account = Account.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

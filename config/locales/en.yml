@@ -25,6 +25,8 @@ en:
   books:
     request_btn: "Request"
     add_new_book_btn: "Add new book"
+  book_request:
+    new: "New book request"
   reading_list:
     nav_title: "My requests"
   holder_list:

@@ -1,0 +1,6 @@
+=content_for :panel_content do
+  .panel.panel-default
+    .panel-heading
+      %h1=t 'book_request.new'
+    .panel-body
+      = render :partial => "form"
