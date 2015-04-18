@@ -1,17 +1,13 @@
-= simple_form_for @book, :html => { :class => 'form-horizontal' } do |f|
+= simple_form_for @book, :html => { :class => 'form-vertical' } do |f|
   = f.input :title
   = error_span(@book[:title])
   = f.input :postcode
   = error_span(@book[:postcode])
-  = f.input :share
-  = error_span(@book[:share])
-  = f.input :swap
-  = error_span(@book[:swap])
-  = f.input :category_id
-  = error_span(@book[:category_id])
-  = f.input :author_id
-  = error_span(@book[:author_id])
-  = f.input :account_id
-  = error_span(@book[:account_id])
-  = f.button :submit, :class => 'btn-primary'
+  = f.association :category, label_method: :name, value_method: :id, include_blank: false
+  = error_span(@book[:category])
+  = f.association :author, label_method: :name, value_method: :id, include_blank: false
+  = error_span(@book[:author])
+  = f.input :state, :collection => [[0, 'Share'],[1, 'Unshare']],label_method: :last, value_method: :first, :as => :radio_buttons
+  = f.input :account, :as => :hidden, :input_html => { :value => current_user.account.id }
+  = f.button :submit, :class => 'btn-success'
   = link_to t('.cancel', :default => t("helpers.links.cancel")), books_path, :class => 'btn btn-default'

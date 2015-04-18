@@ -8,22 +8,22 @@
     %tr
       %th= model_class.human_attribute_name(:title)
       %th= model_class.human_attribute_name(:postcode)
-      %th= model_class.human_attribute_name(:share)
+      %th= model_class.human_attribute_name(:status)
       %th= model_class.human_attribute_name(:category)
       %th= model_class.human_attribute_name(:author)
-      %th= model_class.human_attribute_name(:contact)
+      %th= model_class.human_attribute_name(:request)
   %tbody
     - @books.each do |book|
       %tr
-        %td= link_to(book.title, book_path(book))
+        %td= book.title
         %td= book.postcode
         %td
-          =get_boolean_icon(book.share)
+          =get_boolean_icon(book.shared?)
         %td= book.category.try(:name)
         %td= book.author.try(:name)
         %td
           -if user_signed_in?
-            = link_to I18n.t('books.request_btn'), new_account_reader_book_request_path(current_user.account.id, book_id: book.id), {role: "button", class: "btn-sm btn-info"}
+            = get_request_label(book)
           -else
             =I18n.t('login_please')
 

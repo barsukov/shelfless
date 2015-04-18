@@ -34,6 +34,7 @@ en:
   mail:
     regards: "Best regards, Your shelfless team"
   book:
+    new: "Add new book to shelfless"
     owner: "Owner"
   devise:
     sign_in: "Sign in"
