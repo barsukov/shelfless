@@ -23,17 +23,28 @@ en:
   hello: "Hello world"
   login_please: "Please sign in to see it"
   books:
+    own: "My own books"
     request_btn: "Request"
+    unavailable_btn: "Unavailable"
+    your_book_btn: "Your book"
     add_new_book_btn: "Add new book"
   book_request:
+    decline: "Decline"
+    accept: 'Accept'
+    pending: 'Pending'
+    accepted: 'Accepted'
+    declined: 'Declined'
     new: "New book request"
   reading_list:
-    nav_title: "My requests"
+    nav_title: "Reading list"
   holder_list:
     nav_title: "Incoming requests"
   mail:
     regards: "Best regards, Your shelfless team"
   book:
+    no_reader: "No reader"
+    books: "Shelfless books"
+    my_books: "My books"
     new: "Add new book to shelfless"
     owner: "Owner"
   devise:

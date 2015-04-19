@@ -1,14 +1,19 @@
 class BookRequest < ActiveRecord::Base
+  attr_accessible :book, :state, :book_id, :reader_id, :holder_id, :reader, :holder
+
   belongs_to :book
   belongs_to :reader, class_name: "Account"
   belongs_to :holder, class_name: "Account"
 
-  scope :get_reader_requests_by_account, -> (account) { where(:reader => account) }
+  scope :get_reader_requests_by_account, -> (account) { where(:reader => account).order(updated_at: :desc)}
+  scope :get_holder_requests_by_account, -> (account) { where(:holder => account).order(updated_at: :desc)}
+
   delegate :title, to: :book, allow_nil: true
-  delegate :author, to: :book, allow_nil: true
-  delegate :postcode, to: :book, allow_nil: true
-  delegate :category, to: :book, allow_nil: true
-  delegate :holder_name, to: :holder, allow_nil: true
+  delegate :author_name, to: :book, allow_nil: true
+  delegate :postcode, to: :book, allow_nil: true, prefix: true
+  delegate :category_name, to: :book, allow_nil: true
+  delegate :full_name, to: :holder, allow_nil: true, prefix: true
+  delegate :full_name, to: :reader, allow_nil: true, prefix: true
 
   def status
     self.human_state_name

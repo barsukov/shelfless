@@ -5,4 +5,8 @@ class Account < ActiveRecord::Base
 
   has_many :book_reader_request, :class_name => "BookRequest", :foreign_key => "reader_id"
   has_many :book_holder_request, :class_name => "BookRequest", :foreign_key => "holder_id"
+
+  def full_name
+    name.to_s + " " + surname.to_s
+  end
 end

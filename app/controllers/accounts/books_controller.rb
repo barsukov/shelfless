@@ -1,10 +1,11 @@
 class Accounts::BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
+  include AccountParams
 
   # GET /books
   # GET /books.json
   def index
-    @books = Book.all
+    @books = Book.where(account: @account).paginate(:page => params[:page])
   end
 
   # GET /books/1
@@ -31,7 +32,7 @@ class Accounts::BooksController < ApplicationController
         format.html { redirect_to @book, notice: 'Book was successfully created.' }
         format.json { render :show, status: :created, location: @book }
       else
-        format.html { render :new }
+        format.html { render "books/new" }
         format.json { render json: @book.errors, status: :unprocessable_entity }
       end
     end

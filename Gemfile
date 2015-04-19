@@ -8,7 +8,7 @@ gem 'rails', '4.2.0'
 gem "therubyracer"
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
 gem "twitter-bootstrap-rails"
-
+gem "will_paginate"
 gem "rails_admin"
 gem "pry", group: :development
 gem "devise"
@@ -17,6 +17,7 @@ gem "pg"
 gem 'protected_attributes'
 gem 'rails_12factor', group: :production
 gem 'puma'
+gem 'will_paginate-bootstrap'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets

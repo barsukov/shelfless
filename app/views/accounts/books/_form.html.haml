@@ -1,0 +1,13 @@
+= simple_form_for @book, :url => account_books_path, :method => :post, :html => { :class => 'form-vertical' } do |f|
+  = f.input :title
+  = error_span(@book[:title])
+  = f.input :postcode
+  = error_span(@book[:postcode])
+  = f.association :category, label_method: :name, value_method: :id, include_blank: false
+  = error_span(@book[:category])
+  = f.association :author, label_method: :name, value_method: :id, include_blank: false
+  = error_span(@book[:author])
+  = f.input :state, :collection => [[0, 'Share'],[1, 'Unshare']],label_method: :last, value_method: :first, :as => :radio_buttons
+  = f.input :account_id, :as => :hidden, :input_html => { :value => current_user.account.id }
+  = f.button :submit, :class => 'btn-success'
+  = link_to t('.cancel', :default => t("helpers.links.cancel")), books_path, :class => 'btn btn-default'

@@ -10,15 +10,22 @@ module BooksHelper
     content_tag(:span, content, class: label)
   end
 
-  def get_request_label(book)
-    classess = "btn-sm"
-    if book.unshared?
-      button_tag "Unavailable",:disabled => true, class: "btn btn-default"
-    else
-      classess += " btn-info"
-      link_to I18n.t('books.request_btn'), new_account_reader_book_request_path(current_user.account.id, book_id: book.id),
-       {role: "button", class: classess}
-    end
+  def get_status_button(book)
+    get_request_button(book,"btn btn-sm")
+  end
 
+  def get_request_button(book, basic_icon_class="btn btn-sm btn-block")
+    if book.account == current_user.account
+      name = I18n.t('books.your_book_btn')
+      basic_icon_class += " btn-default disabled"
+    elsif book.unshared?
+      name = I18n.t('books.unavailable_btn')
+      basic_icon_class += " btn-warning disabled"
+    else
+      name = I18n.t('books.request_btn')
+      basic_icon_class += " btn-info"
+    end
+    link_to name, new_account_reader_book_request_path(current_user.account.id, book_id: book.id),
+       {role: "button", class: basic_icon_class}
   end
 end

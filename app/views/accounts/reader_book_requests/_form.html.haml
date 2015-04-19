@@ -1,0 +1,10 @@
+= simple_form_for @book_request, :url => account_reader_book_requests_path, :method => :post do |f|
+  = f.input :book_id, :as => :hidden, :input_html => { :value => @book.id }
+  = f.input :reader_id, :as => :hidden, :input_html => { :value => @account.id }
+  = f.input :holder_id, :as => :hidden, :input_html => { :value => @book.account.id }
+  = f.input :title, :readonly => true
+  = f.input :author_name, :readonly => true
+  = f.input :category_name, :readonly => true
+  = f.input :holder_full_name, :readonly => true
+  = f.button :submit, :class => 'btn-info'
+  = link_to t('.cancel', :default => t("helpers.links.cancel")), books_path, :class => 'btn btn-default'

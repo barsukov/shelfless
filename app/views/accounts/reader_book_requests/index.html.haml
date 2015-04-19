@@ -1,0 +1,24 @@
+- model_class = BookRequest
+.page-header
+  %h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
+%table.table.table-striped
+  %thead
+    %tr
+      %th= model_class.human_attribute_name(:title)
+      %th= model_class.human_attribute_name(:author)
+      %th= model_class.human_attribute_name(:postcode)
+      %th= model_class.human_attribute_name(:category)
+      %th= model_class.human_attribute_name(:holder)
+      %th= model_class.human_attribute_name(:status)
+  %tbody
+    - @reader_requests.each do |request|
+      %tr
+        %td= request.title
+        %td= request.book_postcode
+        %td= request.category_name
+        %td= request.author_name
+        %td= request.holder_full_name
+        %td= get_reader_request_status_button(request)
+- unless @reader_requests.empty?
+  =will_paginate @reader_requests,renderer: BootstrapPagination::Rails
+

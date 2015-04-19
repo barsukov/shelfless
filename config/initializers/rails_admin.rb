@@ -45,8 +45,7 @@ RailsAdmin.config do |config|
       field :title
       field :postcode
       field :account
-      field :share
-      field :swap
+      field :state
       field :author
       field :category
     end

@@ -7,9 +7,11 @@ Rails.application.routes.draw do
   resources :books, only: [:index, :show ,:create]
 
   resources :accounts do
-    resources :books
-    resources :reader_book_requests
-    resources :holder_book_request
+    scope module: :accounts do
+       resources :books
+       resources :reader_book_requests
+       resources :holder_book_requests
+    end
   end
 
   root "main#index"
