@@ -2,7 +2,7 @@
 .page-header
   %h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
   -if user_signed_in?
-    = link_to I18n.t('books.add_new_book_btn'),new_account_book_path(current_user),
+    = link_to I18n.t('books.add_new_book_btn'),new_account_book_path(account_id: current_user.account.id),
       {class: "btn-sm btn-success",role: "button"}
 %table.table.table-striped.table-hover
   %thead
@@ -25,4 +25,5 @@
           -else
             =I18n.t('login_please')
 .row.row-bottom-pading
-  =will_paginate @books,renderer: BootstrapPagination::Rails
+  -unless @books.empty?
+    =will_paginate @books,renderer: BootstrapPagination::Rails
