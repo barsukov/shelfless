@@ -20,19 +20,21 @@ class Accounts::BooksController < ApplicationController
 
   # GET /books/1/edit
   def edit
+    @book.build_author unless @book.author
+    @book.build_category unless @book.category
   end
 
   # POST /books
   # POST /books.json
   def create
+    binding.pry
     @book = Book.new(book_params)
-
     respond_to do |format|
       if @book.save
         format.html { redirect_to @book, notice: 'Book was successfully created.' }
         format.json { render :show, status: :created, location: @book }
       else
-        format.html { render "books/new" }
+        format.html { render :new, :flash => { :error => @book.errors.first }}
         format.json { render json: @book.errors, status: :unprocessable_entity }
       end
     end
@@ -43,7 +45,7 @@ class Accounts::BooksController < ApplicationController
   def update
     respond_to do |format|
       if @book.update(book_params)
-        format.html { redirect_to @book, notice: 'Book was successfully updated.' }
+        format.html { redirect_to account_book_path(@account, @book), notice: 'Book was successfully updated.' }
         format.json { render :show, status: :ok, location: @book }
       else
         format.html { render :edit }
@@ -57,7 +59,7 @@ class Accounts::BooksController < ApplicationController
   def destroy
     @book.destroy
     respond_to do |format|
-      format.html { redirect_to books_url, notice: 'Book was successfully destroyed.' }
+      format.html { redirect_to account_books_path(@account), notice: 'Book was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -70,6 +72,7 @@ class Accounts::BooksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def book_params
-      params[:book]
+      params[:book].permit(:id, :title, :postcode, :account_id,  category_attributes: [:_type,:id , :name],
+       author_attributes: [:_type, :name])
     end
 end

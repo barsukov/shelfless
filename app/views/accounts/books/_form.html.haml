@@ -3,11 +3,14 @@
   = error_span(@book[:title])
   = f.input :postcode
   = error_span(@book[:postcode])
-  = f.association :category, label_method: :name, value_method: :id, include_blank: false
-  = error_span(@book[:category])
-  = f.association :author, label_method: :name, value_method: :id, include_blank: false
+  = f.simple_fields_for :author, @book.build_author do |t|
+    = t.hidden_field :_type, value: t.object.class.name
+    = t.input :name, label: I18n.t('book.author')
+  = f.simple_fields_for :category, @book.build_category do |t|
+    = t.hidden_field :_type, value: t.object.class.name
+    = t.input :name, label: I18n.t('book.category')
   = error_span(@book[:author])
-  = f.input :state, :collection => [[0, 'Share'],[1, 'Unshare']],label_method: :last, value_method: :first, :as => :radio_buttons
+  = f.input :state, :collection => [[0, I18n.t('book.shared')],[1, I18n.t('book.unshared')]],label_method: :last, value_method: :first, :as => :radio_buttons
   = f.input :account_id, :as => :hidden, :input_html => { :value => current_user.account.id }
   = f.button :submit, :class => 'btn-success'
-  = link_to t('.cancel', :default => t("helpers.links.cancel")), books_path, :class => 'btn btn-default'
+  = link_to t('.cancel', :default => t("helpers.links.cancel")), account_books_path(@account), :class => 'btn btn-default'

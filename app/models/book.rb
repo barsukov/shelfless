@@ -1,5 +1,6 @@
 class Book < ActiveRecord::Base
-  attr_accessible :title, :postcode, :state, :author_id, :category_id, :account_id
+  attr_accessible :title, :author, :category, :postcode, :state,
+    :account_id, :category_attributes, :author_attributes
   validates :title, :postcode , presence: true
 
   belongs_to :category
@@ -8,6 +9,8 @@ class Book < ActiveRecord::Base
   has_many :book_requests
   delegate :name, to: :author, allow_nil: true, prefix: true
   delegate :name, to: :category, allow_nil: true, prefix: true
+  accepts_nested_attributes_for :category
+  accepts_nested_attributes_for :author
 
   def reader_name
     reader_full_name = book_requests.where(:state => 1 ).first.try(:reader_full_name)
