@@ -17,7 +17,7 @@
         %td= request.author_name
         %td= request.category_name
         %td= request.holder_full_name
-        %td= request.account_postcode
+        %td= request.holder_postcode
         %td= get_reader_request_status_button(request)
 - unless @reader_requests.empty?
   =will_paginate @reader_requests,renderer: BootstrapPagination::Rails
