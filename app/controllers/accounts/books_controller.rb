@@ -27,7 +27,6 @@ class Accounts::BooksController < ApplicationController
   # POST /books
   # POST /books.json
   def create
-    binding.pry
     @book = Book.new(book_params)
     respond_to do |format|
       if @book.save
