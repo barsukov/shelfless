@@ -9,7 +9,6 @@
       %th= model_class.human_attribute_name(:title)
       %th= model_class.human_attribute_name(:author)
       %th= model_class.human_attribute_name(:category)
-      %th= model_class.human_attribute_name(:postcode)
       %th= model_class.human_attribute_name(:status)
       %th= model_class.human_attribute_name(:current_reader)
   %tbody
@@ -18,7 +17,6 @@
         %td.col-md-3= link_to(book.title, edit_account_book_path(@account,book))
         %td.col-md-2= book.author.try(:name)
         %td.col-md-2= book.category.try(:name)
-        %td.col-md-1= book.postcode
         %td.col-md-1
           =get_boolean_icon(book.state)
         %td.col-md-2

@@ -11,11 +11,8 @@ describe Book, type: :model do
     end
   end
   context "validation" do
-    it 'needs postcode' do
-      expect(build(:book, :title => "")).to_not be_valid
-    end
     it 'needs title' do
-      expect(build(:book, :postcode => 1234)).to_not be_valid
+      expect(ild(:book)).to_not be_valid
     end
   end
 end

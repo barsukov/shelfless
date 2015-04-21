@@ -1,13 +1,14 @@
 class Book < ActiveRecord::Base
-  attr_accessible :title, :author, :category, :postcode, :state,
+  attr_accessible :title, :author, :category, :state,
     :account_id, :category_attributes, :author_attributes
-  validates :title, :postcode , presence: true
+  validates :title, presence: true
 
   belongs_to :category
   belongs_to :author
   belongs_to :account
   has_many :book_requests
   delegate :name, to: :author, allow_nil: true, prefix: true
+  delegate :postcode, to: :account, allow_nil: true, prefix: true
   delegate :name, to: :category, allow_nil: true, prefix: true
   accepts_nested_attributes_for :category
   accepts_nested_attributes_for :author

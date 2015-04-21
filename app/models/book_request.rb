@@ -10,7 +10,7 @@ class BookRequest < ActiveRecord::Base
 
   delegate :title, to: :book, allow_nil: true
   delegate :author_name, to: :book, allow_nil: true
-  delegate :postcode, to: :book, allow_nil: true, prefix: true
+  delegate :postcode, to: :account, allow_nil: true, prefix: true
   delegate :category_name, to: :book, allow_nil: true
   delegate :full_name, to: :holder, allow_nil: true, prefix: true
   delegate :full_name, to: :reader, allow_nil: true, prefix: true

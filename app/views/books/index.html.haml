@@ -10,7 +10,6 @@
       %th= model_class.human_attribute_name(:title)
       %th= model_class.human_attribute_name(:author)
       %th= model_class.human_attribute_name(:category)
-      %th= model_class.human_attribute_name(:postcode)
       %th= model_class.human_attribute_name(:request)
   %tbody
     - @books.each do |book|
@@ -18,7 +17,6 @@
         %td.col-md-3= link_to(book.title, book_path(book))
         %td.col-md-3= book.author.try(:name)
         %td.col-md-2= book.category.try(:name)
-        %td.col-md-1= book.postcode
         %td.col-md-1
           -if user_signed_in?
             = get_request_button(book)
