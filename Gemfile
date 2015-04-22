@@ -18,6 +18,7 @@ gem 'protected_attributes'
 gem 'rails_12factor', group: :production
 gem 'puma'
 gem 'sidekiq'
+gem 'redis'
 gem 'will_paginate-bootstrap'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'

@@ -308,6 +308,7 @@ DEPENDENCIES
   rails (= 4.2.0)
   rails_12factor
   rails_admin
+  redis
   rspec-rails
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)

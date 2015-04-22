@@ -10,8 +10,8 @@ describe BookRequest, type: :model do
   end
 
   context 'request processing' do
+    let(:request) { create(:simple_book_request) }
     context "accept request" do
-      let(:request) { create(:simple_book_request) }
 
       it "changes state of the book to unavailable for request" do
         request.accept!
@@ -26,7 +26,8 @@ describe BookRequest, type: :model do
     end
     context "decline request" do
       it "keeps old state of the book" do
-        pending
+        request.decline!
+        expect(request.book.unshared?).to be(false)
       end
       it "sends decline notification to user" do
         pending
