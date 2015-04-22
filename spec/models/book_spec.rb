@@ -12,7 +12,7 @@ describe Book, type: :model do
   end
   context "validation" do
     it 'needs title' do
-      expect(ild(:book)).to_not be_valid
+      expect(build(:book)).to_not be_valid
     end
   end
 end
