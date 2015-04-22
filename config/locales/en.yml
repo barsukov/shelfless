@@ -22,6 +22,11 @@
 en:
   hello: "Hello world"
   login_please: "Please sign in to see it"
+  notice:
+    update: '%{model} was successfully updated.'
+  account:
+    name: "Account"
+    settings: 'Settings'
   books:
     own: "My own books"
     request_btn: "Request"

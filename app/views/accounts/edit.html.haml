@@ -1,0 +1,6 @@
+=content_for :panel_content do
+  .panel.panel-success
+    .panel-heading
+      %h1=t 'account.edit'
+    .panel-body
+      = render :partial => "form"

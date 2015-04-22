@@ -1,0 +1,6 @@
+= simple_form_for @account, :url => account_path, :method => :put do |f|
+  = f.input :name
+  = f.input :surname
+  = f.input :postcode
+  = f.button :submit, :class => 'btn-info'
+  = link_to t('.cancel', :default => t("helpers.links.cancel")), account_path, :class => 'btn btn-default'
