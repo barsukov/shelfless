@@ -20,6 +20,9 @@ class BookRequest < ActiveRecord::Base
   end
 
   state_machine :state do
+    after_transition :pending => :accepted do |book_request, transition, block|
+      book_request.book.unshare!
+    end
     event :accept do
       transition :pending => :accepted
     end
@@ -27,7 +30,7 @@ class BookRequest < ActiveRecord::Base
       transition :pending => :declined
     end
     event :gift do
-      transition :pending => :declined
+      transition :pending => :accepted
     end
     state :gifted, :value => 3
     state :declined, :value => 2

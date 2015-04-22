@@ -11,8 +11,11 @@ describe BookRequest, type: :model do
 
   context 'request processing' do
     context "accept request" do
+      let(:request) { create(:simple_book_request) }
+
       it "changes state of the book to unavailable for request" do
-        pending
+        request.accept!
+        expect(request.book.unshared?).to be(true)
       end
       it "starts returner timer" do
         pending
