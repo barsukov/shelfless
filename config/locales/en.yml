@@ -47,6 +47,7 @@ en:
   mail:
     regards: "Best regards, Your shelfless team"
   book:
+    holder: "Holder"
     no_reader: "No reader"
     books: "Shelfless books"
     my_books: "My books"

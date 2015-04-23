@@ -39,11 +39,10 @@ RailsAdmin.config do |config|
 
   config.model Book do
     configure :account do
-      label I18n.t('book.owner')
+      label I18n.t('book.holder')
     end
     list do
       field :title
-      field :postcode
       field :account
       field :state
       field :author
