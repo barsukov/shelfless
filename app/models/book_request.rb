@@ -22,6 +22,7 @@ class BookRequest < ActiveRecord::Base
   state_machine :state do
     after_transition :pending => :accepted do |book_request, transition, block|
       book_request.book.unshare!
+      BookNotificationWorker.perform_at(1.minutes.from_now, book_request.holder, 1)
     end
     event :accept do
       transition :pending => :accepted
