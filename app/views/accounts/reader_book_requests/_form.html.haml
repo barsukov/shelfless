@@ -1,7 +1,7 @@
 = simple_form_for @book_request, :url => account_reader_book_requests_path, :method => :post do |f|
-  = f.input :book_id, :as => :hidden, :input_html => { :value => @book.id }
-  = f.input :reader_id, :as => :hidden, :input_html => { :value => @account.id }
-  = f.input :holder_id, :as => :hidden, :input_html => { :value => @book.account.id }
+  = f.input :book_id, :as => :hidden, :input_html => { :value => @book.try(:id) }
+  = f.input :reader_id, :as => :hidden, :input_html => { :value => @account.try(:id) }
+  = f.input :holder_id, :as => :hidden, :input_html => { :value => @book.account.try(:id) }
   = f.input :title, :readonly => true
   = f.input :author_name, :readonly => true
   = f.input :category_name, :readonly => true
