@@ -1,0 +1,12 @@
+%h4
+  =I18n.t('book_request.mail.holder_welcome',name: @holder.full_name)
+.row
+  %p
+    =I18n.t('book_request.mail.suggestion',reader: @reader.full_name, book: @book.title)
+.btn-group(role="group")
+  =link_to(I18n.t('book_request.accept'), account_holder_book_request_path(@holder.id, book_id: @book.id, id: @book_request.id), method: :put, class: "btn btn-sm btn-success", data: {role: "button"})
+  =link_to(I18n.t('book_request.decline'), account_holder_book_request_path(@holder.id, book_id: @book.id, id: @book_request.id), method: :delete, class: "btn btn-sm btn-danger",data: {role: "button"})
+%p
+  =I18n.t('book_request.mail.contact_form')
+%p
+  =I18n.t('book_request.mail.slogan')

@@ -40,12 +40,18 @@ en:
     accepted: 'Accepted'
     declined: 'Declined'
     new: "New book request"
+    mail:
+      title: "book request"
+      holder_welcome : "Hey %{name}"
+      suggestion: "Would you like to share %{book} with %{reader}?"
+      contact_form: "Feel free to contact us."
   reading_list:
     nav_title: "Reading list"
   holder_list:
     nav_title: "Incoming requests"
   mail:
     regards: "Best regards, Your shelfless team"
+    slogan: "Sharing Is Caring - Your Shelfless Team"
   book:
     holder: "Holder"
     no_reader: "No reader"

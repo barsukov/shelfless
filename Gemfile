@@ -36,13 +36,14 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
-gem 'sdoc', '~> 0.4.0',          group: :doc
+gem 'sdoc', '~> 0.4.0',  group: :doc
 gem 'simple_form'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'state_machine'
-gem 'hirb', group: :test
+gem 'hirb', group: :development
 group :test do
+  gem 'rspec-mocks'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
 end

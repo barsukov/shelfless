@@ -18,7 +18,8 @@ describe BookRequest, type: :model do
         expect(request.book.unshared?).to be(true)
       end
       it "starts returner timer" do
-        pending
+        expect { request.accept! }.to change { ActionMailer::Base.deliveries.count }.by(1)
+        expect_any_instance_of(BookRequestMailer).to receive(:delivery)
       end
       it "sends accepted notification" do
         pending
