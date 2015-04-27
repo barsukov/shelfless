@@ -1,6 +1,9 @@
 class BookRequestMailer < ActionMailer::Base
   default from: "info@shelfless.de"
 
+  def protect_against_forgery?
+    false
+  end
 
   def accepted(request)
 

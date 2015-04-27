@@ -4,8 +4,8 @@
   %p
     =I18n.t('book_request.mail.suggestion',reader: @reader.full_name, book: @book.title)
 .btn-group(role="group")
-  =link_to(I18n.t('book_request.accept'), account_holder_book_request_path(@holder.id, book_id: @book.id, id: @book_request.id), method: :put, class: "btn btn-sm btn-success", data: {role: "button"})
-  =link_to(I18n.t('book_request.decline'), account_holder_book_request_path(@holder.id, book_id: @book.id, id: @book_request.id), method: :delete, class: "btn btn-sm btn-danger",data: {role: "button"})
+  =link_to(I18n.t('book_request.accept'),accept_account_holder_book_requests_url(id: @book_request.id, account_id: @holder.id, book_id: @book.id))
+  =link_to(I18n.t('book_request.decline'),decline_account_holder_book_requests_url(account_id: @holder.id, book_id: @book.id, id: @book_request.id))
 %p
   =I18n.t('book_request.mail.contact_form')
 %p

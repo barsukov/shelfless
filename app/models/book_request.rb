@@ -15,6 +15,8 @@ class BookRequest < ActiveRecord::Base
   delegate :full_name, to: :holder, allow_nil: true, prefix: true
   delegate :full_name, to: :reader, allow_nil: true, prefix: true
 
+  after_create :notify_holder
+
   def status
     self.human_state_name
   end
@@ -22,7 +24,6 @@ class BookRequest < ActiveRecord::Base
   state_machine :state do
     after_transition :pending => :accepted do |book_request, transition, block|
       book_request.book.unshare!
-      BookNotificationWorker.perform_at(1.minutes.from_now, book_request.holder, 1)
     end
     event :accept do
       transition :pending => :accepted
@@ -39,4 +40,8 @@ class BookRequest < ActiveRecord::Base
     state :pending, :value => 0
   end
 
+  private
+    def notify_holder
+      BookRequestMailer.delay.notify_holder(self)
+    end
 end

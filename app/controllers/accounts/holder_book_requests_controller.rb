@@ -7,15 +7,13 @@ class Accounts::HolderBookRequestsController < ApplicationController
     @reader_requests = BookRequest.get_holder_requests_by_account(@account).paginate(page: params[:page])
   end
 
-  # GET /books/1
-  # GET /books/1.json
-  def show
+  def accept
+    update
   end
 
-  # GET /books/1/edit
-  def edit
+  def decline
+    update
   end
-
   # PATCH/PUT /books/1
   # PATCH/PUT /books/1.json
   def update
@@ -25,7 +23,7 @@ class Accounts::HolderBookRequestsController < ApplicationController
       else
         notice = 'Something goes wrong'
       end
-        format.html { redirect_to :back, notice: notice }
+      format.html { redirect_to account_holder_book_requests_url, notice: notice }
     end
   end
 
@@ -34,7 +32,7 @@ class Accounts::HolderBookRequestsController < ApplicationController
   def destroy
     @book_request.decline
     respond_to do |format|
-      format.html { redirect_to :back, notice: 'Book request was successfully destroyed.' }
+      format.html { redirect_to account_holder_book_requests_url, notice: 'Book request was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
