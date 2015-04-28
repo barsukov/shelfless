@@ -18,10 +18,7 @@
         %td.col-md-3= book.author.try(:name)
         %td.col-md-2= book.category.try(:name)
         %td.col-md-1
-          -if user_signed_in?
-            = get_request_button(book)
-          -else
-            =I18n.t('login_please')
+          = get_request_button(book)
 .row.row-bottom-pading
   -unless @books.empty?
     =will_paginate @books,renderer: BootstrapPagination::Rails

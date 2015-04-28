@@ -15,17 +15,23 @@ module BooksHelper
   end
 
   def get_request_button(book, basic_icon_class="btn btn-sm btn-block")
-    if book.account == current_user.account
-      name = I18n.t('books.your_book_btn')
-      basic_icon_class += " btn-default disabled"
-    elsif book.unshared?
-      name = I18n.t('books.unavailable_btn')
-      basic_icon_class += " btn-warning disabled"
+    if user_signed_in?
+      path = new_account_reader_book_request_path(current_user.account.id, book_id: book.id)
+      if book.account == current_user.account
+        name = I18n.t('books.your_book_btn')
+        basic_icon_class += " btn-default disabled"
+      elsif book.unshared?
+        name = I18n.t('books.unavailable_btn')
+        basic_icon_class += " btn-warning disabled"
+      else
+        basic_icon_class += " btn-info"
+        name = I18n.t('books.request_btn')
+      end
     else
-      name = I18n.t('books.request_btn')
-      basic_icon_class += " btn-info"
+      basic_icon_class += " btn-default"
+      name = I18n.t('login_please')
+      path = new_user_session_path
     end
-    link_to name, new_account_reader_book_request_path(current_user.account.id, book_id: book.id),
-       {role: "button", class: basic_icon_class}
+    link_to name, path , {role: "button", class: basic_icon_class}
   end
 end
