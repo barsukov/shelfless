@@ -24,6 +24,10 @@ class BookRequest < ActiveRecord::Base
   state_machine :state do
     after_transition :pending => :accepted do |book_request, transition, block|
       book_request.book.unshare!
+      BookRequestMailer.delay.accepted(book_request)
+    end
+    after_transition :pending => :declined do |book_request, transition, block|
+      BookRequestMailer.delay.declined(book_request)
     end
     event :accept do
       transition :pending => :accepted

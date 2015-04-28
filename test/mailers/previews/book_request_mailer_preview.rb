@@ -4,4 +4,14 @@ class BookRequestMailerPreview < ActionMailer::Preview
     book_request = BookRequest.where(:state => 0).first
     BookRequestMailer.notify_holder(book_request)
   end
+
+  def accepted
+    book_request = BookRequest.where(:state => 1).first
+    BookRequestMailer.accepted(book_request)
+  end
+
+  def declined
+    book_request = BookRequest.where(:state => 2).first
+    BookRequestMailer.declined(book_request)
+  end
 end

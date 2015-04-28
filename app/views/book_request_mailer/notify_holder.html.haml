@@ -1,5 +1,5 @@
 %h4
-  =I18n.t('book_request.mail.holder_welcome',name: @holder.full_name)
+  =I18n.t('book_request.mail.user_welcome',name: @holder.full_name)
 .row
   %p
     =I18n.t('book_request.mail.suggestion',reader: @reader.full_name, book: @book.title)
@@ -9,4 +9,4 @@
 %p
   =I18n.t('book_request.mail.contact_form')
 %p
-  =I18n.t('book_request.mail.slogan')
+  =I18n.t('mail.slogan')

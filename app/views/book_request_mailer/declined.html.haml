@@ -1,0 +1,12 @@
+%h4
+  =I18n.t('book_request.mail.user_welcome', name: @reader.full_name)
+.row
+  %p
+    =I18n.t('book_request.mail.rejected',holder: @holder.full_name)
+  %p
+    =I18n.t('book_request.mail.rejected_message', href: link_to(t("book_request.mail.link_to_lib"), books_url)).html_safe
+%p
+  =I18n.t('book_request.mail.contact_form')
+%p
+  =I18n.t('mail.slogan')
+

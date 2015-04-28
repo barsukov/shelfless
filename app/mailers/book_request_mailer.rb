@@ -5,20 +5,31 @@ class BookRequestMailer < ActionMailer::Base
     false
   end
 
-  def accepted(request)
-
+  def accepted(book_request)
+    init_variables(book_request)
+    mail to: @reader.user_email, subject: I18n.t('book_request.mail.accepted_subj')
   end
 
   def notify_holder(book_request)
-    @holder = book_request.holder
-    @reader = book_request.reader
-    @book = book_request.book
-    @book_request = book_request
+    init_variables(book_request)
     mail to: @holder.user_email, subject: I18n.t('book_request.mail.title')
   end
 
-  def declined(request)
-
+  def notify_reader(book_request)
+    init_variables(book_request)
+    mail to: @reader.user_email, subject: I18n.t('book_request.mail.title')
   end
 
+  def declined(book_request)
+    init_variables(book_request)
+    mail to: @reader.user_email, subject: I18n.t('book_request.mail.declined_subj')
+  end
+
+  private
+    def init_variables(book_request)
+      @holder = book_request.holder
+      @reader = book_request.reader
+      @book = book_request.book
+      @book_request = book_request
+    end
 end

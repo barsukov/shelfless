@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     scope module: :accounts do
        resources :books
        resources :reader_book_requests
-       resources :holder_book_requests, only: [:index, :create, :update, :delete] do
+       resources :holder_book_requests do
           collection do
             get 'accept'
             get 'decline'

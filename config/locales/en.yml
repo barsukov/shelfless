@@ -42,7 +42,15 @@ en:
     new: "New book request"
     mail:
       title: "book request"
-      holder_welcome : "Hey %{name}"
+      declined_subj: "Request declined: find an alternative"
+      accepted_subj: "Request accepted: contact the holder"
+      user_welcome : "Hey %{name}"
+      rejected: "%{holder} has rejected your request."
+      rejected_message: "To feed your curiosity, find an alternative in your %{href}"
+      link_to_lib: "Library"
+      contact_in_touch: "Get in touch with %{holder} to get %{book} "
+      user_contact: "Hodler email: %{email}"
+      return_date: "You are expected to return the book by the"
       suggestion: "Would you like to share %{book} with %{reader}?"
       contact_form: "Feel free to contact us."
   reading_list:
