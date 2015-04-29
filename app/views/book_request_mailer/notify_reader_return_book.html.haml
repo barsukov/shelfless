@@ -1,0 +1,16 @@
+%h4
+  =I18n.t('book_request.mail.user_welcome', name: @reader.full_name)
+.row
+  %p
+    =I18n.t('book_request.mail.contact_return_in_touch',holder: @holder.full_name, book: @book.title)
+  %p
+    =I18n.t('book_request.mail.user_contact', email: @holder.user_email)
+  %p
+    =I18n.t('book_request.mail.return_book_now', holder: @holder.full_name)
+%p
+  =I18n.t('book_request.mail.contact_form')
+%p
+  =I18n.t('mail.slogan')
+
+
+

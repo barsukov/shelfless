@@ -49,6 +49,8 @@ en:
       rejected_message: "To feed your curiosity, find an alternative in your %{href}"
       link_to_lib: "Library"
       contact_in_touch: "Get in touch with %{holder} to get %{book} "
+      contact_return_in_touch: "Get in touch with %{holder} to return %{book} "
+      return_book_now: " %{holder} has requested you return it. If you need an extension, kindly request it while you get in touch."
       user_contact: "Hodler email: %{email}"
       return_date: "You are expected to return the book by the"
       suggestion: "Would you like to share %{book} with %{reader}?"

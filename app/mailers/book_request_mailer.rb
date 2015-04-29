@@ -15,7 +15,7 @@ class BookRequestMailer < ActionMailer::Base
     mail to: @holder.user_email, subject: I18n.t('book_request.mail.title')
   end
 
-  def notify_reader(book_request)
+  def notify_reader_return_book(book_request)
     init_variables(book_request)
     mail to: @reader.user_email, subject: I18n.t('book_request.mail.title')
   end
