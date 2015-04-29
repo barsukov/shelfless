@@ -42,6 +42,8 @@ en:
     new: "New book request"
     mail:
       title: "book request"
+      return: "Return"
+      returned: "Returned"
       declined_subj: "Request declined: find an alternative"
       accepted_subj: "Request accepted: contact the holder"
       user_welcome : "Hey %{name}"
@@ -53,6 +55,14 @@ en:
       return_book_now: " %{holder} has requested you return it. If you need an extension, kindly request it while you get in touch."
       user_contact: "Hodler email: %{email}"
       return_date: "You are expected to return the book by the"
+      expired_subj: "book return date is over"
+      book_option: "Shelfless book option to return"
+      holder_return_option:
+        times_up: "Times up for %{reader}, who is currently reading your copy of %{book}"
+        choosen_text: "What would you like to do next?"
+        extend:  "Extend to %{href}"
+        return_request: "Request %{href} (start the conversation to get your books back)"
+        already_returned: "%{href} ( already returned, update status of book to shared)"
       suggestion: "Would you like to share %{book} with %{reader}?"
       contact_form: "Feel free to contact us."
   reading_list:

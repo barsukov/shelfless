@@ -15,7 +15,7 @@ class BookRequest < ActiveRecord::Base
   delegate :full_name, to: :holder, allow_nil: true, prefix: true
   delegate :full_name, to: :reader, allow_nil: true, prefix: true
 
-  after_create :notify_holder
+  after_create :new_request_notify_holder
 
   def status
     self.human_state_name
@@ -25,6 +25,7 @@ class BookRequest < ActiveRecord::Base
     after_transition :pending => :accepted do |book_request, transition, block|
       book_request.book.unshare!
       BookRequestMailer.delay.accepted(book_request)
+      BookRequestMailer.delay_until(Settings.return_time).expired_request_notify_holder(book_request)
     end
     after_transition :pending => :declined do |book_request, transition, block|
       BookRequestMailer.delay.declined(book_request)
@@ -45,7 +46,7 @@ class BookRequest < ActiveRecord::Base
   end
 
   private
-    def notify_holder
-      BookRequestMailer.delay.notify_holder(self)
+    def new_request_notify_holder
+      BookRequestMailer.delay.new_request_notify_holder(self)
     end
 end

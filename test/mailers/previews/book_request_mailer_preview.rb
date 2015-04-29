@@ -1,8 +1,13 @@
   # Preview all emails at http://localhost:3000/rails/mailers/book_request_mailer
 class BookRequestMailerPreview < ActionMailer::Preview
-  def notify_holder
+  def new_request_notify_holder
     book_request = BookRequest.where(:state => 0).first
-    BookRequestMailer.notify_holder(book_request)
+    BookRequestMailer.new_request_notify_holder(book_request)
+  end
+
+  def expired_request_notify_holder
+    book_request = BookRequest.where(:state => 1).first
+    BookRequestMailer.expired_request_notify_holder(book_request)
   end
 
   def notify_reader_return_book

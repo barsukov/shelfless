@@ -1,18 +1,19 @@
 class BookRequestMailer < ActionMailer::Base
   default from: "info@shelfless.de"
 
-  def protect_against_forgery?
-    false
-  end
-
   def accepted(book_request)
     init_variables(book_request)
     mail to: @reader.user_email, subject: I18n.t('book_request.mail.accepted_subj')
   end
 
-  def notify_holder(book_request)
+  def new_request_notify_holder(book_request)
     init_variables(book_request)
     mail to: @holder.user_email, subject: I18n.t('book_request.mail.title')
+  end
+
+  def expired_request_notify_holder(book_request)
+    init_variables(book_request)
+    mail to: @holder.user_email, subject: I18n.t('book_request.mail.expired_subj')
   end
 
   def notify_reader_return_book(book_request)
