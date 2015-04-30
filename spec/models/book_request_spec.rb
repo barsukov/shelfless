@@ -22,9 +22,19 @@ describe BookRequest, type: :model do
 
     context "accept request" do
       let(:mailer) { double("mailer", :deliver => true) }
+      let(:second_request) { create(:simple_book_request, book: request.book) }
+
       before(:each) do
         mailer.stub(:new_request_notify_holder)
       end
+
+      it "declines every pending request to this books" do
+        expect(second_request.declined?).to eq(false)
+        request.accept!
+        expect(request.accepted?).to eq(true)
+        expect(second_request.reload.declined?).to eq(true)
+      end
+
       it "changes state of the book to unavailable for request" do
         request.accept!
         expect(request.book.unshared?).to be(true)

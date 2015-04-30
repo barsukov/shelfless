@@ -26,6 +26,9 @@ class Book < ActiveRecord::Base
   end
 
   state_machine :state do
+    after_transition :shared => :unshared do |book, transition, block|
+      book.book_requests.where(:state => 0).map(&:decline)
+    end
     event :share do
       transition :unshared => :shared
     end
