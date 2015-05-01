@@ -44,6 +44,9 @@ class Accounts::BooksController < ApplicationController
   def update
     respond_to do |format|
       if @book.update(book_params)
+        if @book.shared?
+          @book.cancel_holder_notification
+        end
         format.html { redirect_to account_book_path(@account, @book), notice: 'Book was successfully updated.' }
         format.json { render :show, status: :ok, location: @book }
       else

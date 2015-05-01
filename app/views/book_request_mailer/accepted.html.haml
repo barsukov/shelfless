@@ -7,7 +7,7 @@
     =I18n.t('book_request.mail.user_contact', email: @holder.user_email)
   %p
     =I18n.t('book_request.mail.return_date')
-    =I18n.l Date.parse(Settings.return_time), :format => :short
+    =I18n.l Date.parse( @book_request.expired_date), :format => :short
 %p
   =I18n.t('book_request.mail.contact_form')
 %p

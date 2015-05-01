@@ -13,6 +13,9 @@ Rails.application.routes.draw do
        resources :holder_book_requests do
           collection do
             get 'accept'
+            get 'return_now'
+            get 'mark_returned'
+            get 'extend'
             get 'decline'
           end
        end

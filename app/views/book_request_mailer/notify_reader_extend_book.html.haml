@@ -1,0 +1,13 @@
+%h4
+  =I18n.t('book_request.mail.user_welcome', name: @reader.full_name)
+.row
+  %p
+    =I18n.t('book_request.mail.extend_book', date: @book_request.expired_date)
+  %p
+    =I18n.t('book_request.mail.suggestion_return',holder: @holder.full_name, book: @book.title)
+  %p
+    =I18n.t('book_request.mail.user_contact', email: @holder.user_email)
+%p
+  =I18n.t('book_request.mail.contact_form')
+%p
+  =I18n.t('mail.slogan')

@@ -11,8 +11,13 @@ class BookRequestMailerPreview < ActionMailer::Preview
   end
 
   def notify_reader_return_book
-    book_request = BookRequest.where(:state => 0).first
+    book_request = BookRequest.last
     BookRequestMailer.notify_reader_return_book(book_request)
+  end
+
+  def notify_reader_extend_book
+    book_request = BookRequest.last
+    BookRequestMailer.notify_reader_extend_book(book_request)
   end
 
   def accepted

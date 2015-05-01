@@ -1,5 +1,5 @@
 class Book < ActiveRecord::Base
-  attr_accessible :title, :author, :category, :state,
+  attr_accessible :title, :author, :category, :state, :state_event,
     :account_id, :category_attributes, :author_attributes
   validates :title, presence: true
 
@@ -23,6 +23,10 @@ class Book < ActiveRecord::Base
 
   def status
     self.human_state_name
+  end
+
+  def cancel_holder_notification(book = self)
+    BookRequest.get_accepted_active_book_request(book).map(&:destroy_notification)
   end
 
   state_machine :state do

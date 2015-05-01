@@ -7,11 +7,11 @@
     =I18n.t('book_request.mail.holder_return_option.choosen_text')
   %ul
     %li
-      =I18n.t('book_request.mail.holder_return_option.extend', href: link_to(t("book_request.mail.return"), books_url)).html_safe
+      =I18n.t('book_request.mail.holder_return_option.extend', href: link_to(t("book_request.mail.return"),extend_account_holder_book_requests_url(account_id: @holder.id, book_id: @book.id, id: @book_request.id))).html_safe
     %li
-      =I18n.t('book_request.mail.holder_return_option.return_request', href: link_to(t("book_request.mail.return"), books_url)).html_safe
+      =I18n.t('book_request.mail.holder_return_option.return_request', href: link_to(t("book_request.mail.return"), return_now_account_holder_book_requests_url(account_id: @holder.id, book_id: @book.id, id: @book_request.id))).html_safe
     %li
-      =I18n.t('book_request.mail.holder_return_option.already_returned', href: link_to(t("book_request.mail.returned"), books_url)).html_safe
+      =I18n.t('book_request.mail.holder_return_option.already_returned', href: link_to(t("book_request.mail.returned"), mark_returned_account_holder_book_requests_url(account_id: @holder.id, book_id: @book.id, id: @book_request.id))).html_safe
 %p
   =I18n.t('book_request.mail.contact_form')
 %p

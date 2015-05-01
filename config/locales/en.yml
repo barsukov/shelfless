@@ -40,6 +40,7 @@ en:
     accepted: 'Accepted'
     declined: 'Declined'
     new: "New book request"
+    was_declined: "Book request was successfully declined"
     mail:
       title: "book request"
       return: "Return"
@@ -52,11 +53,14 @@ en:
       link_to_lib: "Library"
       contact_in_touch: "Get in touch with %{holder} to get %{book} "
       contact_return_in_touch: "Get in touch with %{holder} to return %{book} "
+      suggestion_return: "You can always initiatie the return by simply getting touch with the holder:"
       return_book_now: " %{holder} has requested you return it. If you need an extension, kindly request it while you get in touch."
       user_contact: "Hodler email: %{email}"
       return_date: "You are expected to return the book by the"
       expired_subj: "book return date is over"
       book_option: "Shelfless book option to return"
+      extend_book_subj: "Shelfless book return extended"
+      extend_book: "Your book loan got extended until the %{date}"
       holder_return_option:
         times_up: "Times up for %{reader}, who is currently reading your copy of %{book}"
         choosen_text: "What would you like to do next?"
@@ -81,6 +85,9 @@ en:
     author: "Author"
     category: "Category"
     shared: "Shared"
+    request_to_return: "Book was requested to return"
+    returned: "Book was returned, And available in the list"
+    extended: "Book was successfully extended"
     unshared: "Unshared"
   devise:
     sign_in: "Sign in"

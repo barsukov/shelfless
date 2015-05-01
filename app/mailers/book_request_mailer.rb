@@ -21,6 +21,11 @@ class BookRequestMailer < ActionMailer::Base
     mail to: @reader.user_email, subject: I18n.t('book_request.mail.title')
   end
 
+  def notify_reader_extend_book(book_request)
+    init_variables(book_request)
+    mail to: @reader.user_email, subject: I18n.t('book_request.mail.extend_book_subj')
+  end
+
   def declined(book_request)
     init_variables(book_request)
     mail to: @reader.user_email, subject: I18n.t('book_request.mail.declined_subj')
