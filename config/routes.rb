@@ -4,7 +4,11 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks",
     confirmations: 'users/confirmations' }
 
-  resources :books, only: [:index, :show ,:create]
+  resources :books, only: [:index, :show ,:create] do
+    collection do
+      match 'search' => 'books#search', via: [:get, :post], as: :search
+    end
+  end
 
   resources :accounts do
     scope module: :accounts do

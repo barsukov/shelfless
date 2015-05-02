@@ -3,7 +3,14 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
-    @books = Book.all.paginate(:page => params[:page])
+    @title = params[:q][:title] if params[:q].present?
+    @q = Book.ransack(title_cont: @title)
+    @books = @q.result.includes(:category, :author).page(params[:page])
+  end
+
+  def search
+    index
+    render :index
   end
 
   # GET /books/1

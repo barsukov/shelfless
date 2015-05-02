@@ -20,7 +20,7 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  search: "Search..."
   login_please: "Please sign in to see it"
   notice:
     update: '%{model} was successfully updated.'
