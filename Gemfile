@@ -22,6 +22,7 @@ gem 'sidekiq'
 gem "rails_config"
 gem 'redis'
 gem 'will_paginate-bootstrap'
+gem 'analytics-ruby', '~> 2.0.0', :require => 'segment/analytics'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
