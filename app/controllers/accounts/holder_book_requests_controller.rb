@@ -1,5 +1,5 @@
 class Accounts::HolderBookRequestsController < ApplicationController
-  include AccountParams
+  include AccountKeeper
   before_action :set_book_request, except: [:index]
   # GET /books
   # GET /books.json

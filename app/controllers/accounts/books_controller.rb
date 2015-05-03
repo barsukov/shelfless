@@ -1,6 +1,6 @@
 class Accounts::BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
-  include AccountParams
+  include AccountKeeper
 
   # GET /books
   # GET /books.json

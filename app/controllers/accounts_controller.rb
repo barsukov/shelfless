@@ -1,5 +1,7 @@
 class AccountsController < ApplicationController
-  before_action :set_account
+  include BasicAccountKeeper
+  before_action { set_account params[:id] }
+
   def show
   end
 
@@ -19,9 +21,7 @@ class AccountsController < ApplicationController
       end
     end
   end
-  def set_account
-    @account = Account.find(params[:id])
-  end
+
   def account_params
     params[:account]
   end

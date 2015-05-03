@@ -1,5 +1,5 @@
 class Accounts::ReaderBookRequestsController < ApplicationController
-  include AccountParams
+  include AccountKeeper
   include BookParams
 
   # GET /books

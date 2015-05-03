@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
   has_one :identity, dependent: :destroy
   has_one :account, dependent: :destroy
   delegate :name, to: :account, allow_nil: true
+  delegate :id, to: :account, allow_nil: true, prefix: true
   delegate :surname, to: :account, allow_nil: true
 
   after_create :build_account
