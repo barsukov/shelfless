@@ -40,9 +40,9 @@ class BookRequest < ActiveRecord::Base
 
   state_machine :state do
     after_transition :pending => :accepted do |book_request, transition, block|
-      BookRequestMailer.delay.accepted(book_request)
       book_request.create_holder_return_notification(book_request)
       book_request.book.unshare!
+      BookRequestMailer.delay.accepted(book_request)
     end
     after_transition :pending => :declined do |book_request, transition, block|
       BookRequestMailer.delay.declined(book_request)
