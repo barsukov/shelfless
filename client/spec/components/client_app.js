@@ -1,7 +1,6 @@
 'use strict';
 
 describe('ClientApp', function () {
-  var React = require('react/addons');
   var ClientApp, component;
 
   beforeEach(function () {
@@ -9,7 +8,7 @@ describe('ClientApp', function () {
     container.id = 'content';
     document.body.appendChild(container);
 
-    ClientApp = require('components/ClientApp.js');
+    ClientApp = require('../components/client_app.js');
     component = React.createElement(ClientApp);
   });
 

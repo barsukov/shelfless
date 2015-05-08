@@ -7,68 +7,26 @@ module.exports = function (config) {
     basePath: '',
     frameworks: ['jasmine'],
     files: [
-      'test/helpers/**/*.js',
-      'test/spec/components/**/*.js',
-      'test/spec/stores/**/*.js',
-      'test/spec/actions/**/*.js'
+      'spec/test.webpack.js',
     ],
     preprocessors: {
-      'test/spec/components/**/*.js': ['webpack'],
-      'test/spec/stores/**/*.js': ['webpack'],
-      'test/spec/actions/**/*.js': ['webpack']
+      'spec/test.webpack.js': ['webpack'],
     },
-    webpack: {
-      cache: true,
-      module: {
-        loaders: [{
-          test: /\.gif/,
-          loader: 'url-loader?limit=10000&mimetype=image/gif'
-        }, {
-          test: /\.jpg/,
-          loader: 'url-loader?limit=10000&mimetype=image/jpg'
-        }, {
-          test: /\.png/,
-          loader: 'url-loader?limit=10000&mimetype=image/png'
-        }, {
-          test: /\.js$/,
-          loader: 'babel-loader'
-        }, {
-          test: /\.less/,
-          loader: 'style-loader!css-loader!less-loader'
-        }, {
-          test: /\.css$/,
-          loader: 'style-loader!css-loader'
-        }]
-      },
-      resolve: {
-        alias: {
-          'styles': path.join(process.cwd(), './src/styles/'),
-          'components': path.join(process.cwd(), './src/components/'),
-          'stores': '../../../src/stores/',
-          'actions': '../../../src/actions/'
-        }
-      }
-    },
+    webpack: require('./webpack.karma.config.js'),
     webpackServer: {
-      stats: {
-        colors: true
-      }
+      quiet: true,
+      stats: true
     },
     exclude: [],
     port: 8080,
-    logLevel: config.LOG_INFO,
-    colors: true,
-    autoWatch: false,
-    // Start these browsers, currently available:
-    // - Chrome
-    // - ChromeCanary
-    // - Firefox
-    // - Opera
-    // - Safari (only Mac)
-    // - PhantomJS
-    // - IE (only Windows)
-    browsers: ['PhantomJS'],
-    reporters: ['progress'],
+    plugins: [
+      require('rewire-webpack'),
+      require('karma-jasmine'),
+      require('karma-phantomjs2-launcher'),
+      require("karma-webpack")
+    ],
+    browsers: ['PhantomJS2'],
+    reporters: ['dots'],
     captureTimeout: 60000,
     singleRun: true
   });

@@ -23,6 +23,8 @@ module Shelfless
       :domain         => 'appc5dcab1996494ffda51e1b6e4a7385ae.mailgun.org',
       :authentication => :plain,
     }
+     # Add client/assets/stylesheets to asset pipeline's search path.
+   # config.assets.paths << Rails.root.join("client", "assets", "stylesheets")
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de

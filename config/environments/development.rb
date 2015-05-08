@@ -31,6 +31,11 @@ Rails.application.configure do
   # Checks for improperly declared sprockets dependencies.
   # Raises helpful error messages.
   config.assets.raise_runtime_errors = true
+  config.action_controller.asset_host = Proc.new do |source|
+    if source =~ /client-bundle.js/
+      "http://localhost:8080/"
+    end
+  end
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true

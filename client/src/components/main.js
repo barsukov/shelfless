@@ -1,18 +1,19 @@
 'use strict';
+import React from 'react';
+import Router from 'react-router';
 
-var ClientApp = require('./ClientApp');
-var React = require('react');
-var Router = require('react-router');
-var Route = Router.Route;
+import ClientApp from './client_app'
+import { DefaultRoute, Link, Route, RouteHandler } from 'react-router';
 
-var content = document.getElementById('content');
-
-var Routes = (
+let routes = (
   <Route handler={ClientApp}>
     <Route name="/" handler={ClientApp}/>
   </Route>
 );
-
-Router.run(Routes, function (Handler) {
-  React.render(<Handler/>, content);
+$(document).ready(function(){
+  Router.run(routes, function (Handler) {
+    React.render(<Handler/>, document.getElementById("react-content"));
+  });
 });
+
+module.exports = Router
