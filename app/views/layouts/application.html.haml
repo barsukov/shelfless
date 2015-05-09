@@ -17,8 +17,8 @@
     = favicon_link_tag 'favicon.ico', :rel => 'shortcut icon'
     = javascript_include_tag "application"
 
-
   %body
+    = javascript_include_tag "client-bundle"
     #react-content
     .navbar.navbar-default.navbar-static-top
       .container
