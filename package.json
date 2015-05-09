@@ -6,7 +6,7 @@
     "node": "0.11.4"
   },
   "scripts": {
-    "postinstall": "cd ./client && npm install && gulp build",
+    "postinstall": "cd ./client && npm install && npm run gulp build",
     "gulp": "cd ./client && npm run gulp"
   },
   "author": "barsukov"
