@@ -1,0 +1,13 @@
+{
+  "name": "shelfless.js",
+  "version": "0.1",
+  "description": "Shelfless frontend client",
+  "engines": {
+    "node": "0.12.2"
+  },
+  "scripts": {
+    "postinstall": "cd ./client && npm install && npm run gulp build",
+    "gulp": "cd ./client && npm run gulp"
+  },
+  "author": "barsukov"
+}

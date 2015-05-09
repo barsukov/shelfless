@@ -44,7 +44,7 @@
     "karma-phantomjs2-launcher": "^0.1.5"
   },
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=0.11.0"
   },
   "scripts":
   {
