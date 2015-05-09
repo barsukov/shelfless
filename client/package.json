@@ -10,17 +10,15 @@
   "mainInput": "main",
   "mainOutput": "main",
   "dependencies": {
-    "react-router": "^0.11.6",
+    "react": "~0.13.0",
+    "react-router": "^0.13.3",
     "reflux": "^0.2.7",
-    "react": "~0.12.2",
     "normalize.css": "~3.0.3",
     "webpack": "~1.4.3",
     "webpack-dev-server": "~1.6.5",
     "style-loader": "~0.8.0",
     "url-loader": "~0.5.5",
     "jquery": "^2.1.4",
-    "jshint-loader": "~0.8.0",
-    "jsxhint-loader": "~0.2.0",
     "less-loader": "^2.0.0",
     "gulp": "^3.8.11",
     "gulp-eslint": "^0.11.1",
@@ -32,9 +30,7 @@
   "devDependencies": {
     "react-hot-loader": "^1.0.7",
     "rewire": "^2.3.3",
-    "rewire-webpack": "^1.0.0"
-  },
-  "optionalDependencies": {
+    "rewire-webpack": "^1.0.0",
     "karma-phantomjs2-launcher": "^0.1.5",
     "karma": "~0.12.21",
     "karma-chrome-launcher": "~0.1.4",
@@ -46,8 +42,5 @@
   },
   "engines": {
     "node": ">=0.11.0"
-  },
-  "scripts": {
-    "postinstall": "gulp build"
   }
 }
