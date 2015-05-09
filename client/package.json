@@ -42,5 +42,9 @@
   },
   "optionalDependencies": {
     "karma-phantomjs2-launcher": "^0.1.5"
+  },
+  "scripts":
+  {
+    "postinstall": "gulp build"
   }
 }
