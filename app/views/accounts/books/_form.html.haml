@@ -1,9 +1,8 @@
 = simple_form_for @book, :url => account_books_path, :method => :post, :html => { :class => 'form-vertical' } do |f|
   = f.input :title
   = error_span(@book[:title])
-  = f.simple_fields_for :author, @book.build_author do |t|
-    = t.hidden_field :_type, value: t.object.class.name
-    = t.input :name, label: I18n.t('book.author')
+  = f.label I18n.t('book.author')
+  #author_type_head
   = f.simple_fields_for :category, @book.build_category do |t|
     = t.hidden_field :_type, value: t.object.class.name
     = t.input :name, label: I18n.t('book.category')

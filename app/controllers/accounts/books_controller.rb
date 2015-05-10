@@ -75,6 +75,6 @@ class Accounts::BooksController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def book_params
       params[:book].permit(:id, :title,:state, :account_id,  category_attributes: [:_type, :id , :name],
-       author_attributes: [:_type, :name])
+       author_attributes: [:id, :name])
     end
 end

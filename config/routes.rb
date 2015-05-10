@@ -10,6 +10,9 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :categories, only: [:index]
+  resources :authors, only: [:index]
+
   resources :accounts do
     scope module: :accounts do
        resources :books

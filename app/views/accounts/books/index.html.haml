@@ -1,7 +1,7 @@
 - model_class = Book
 .page-header
   %h1=t 'books.own'
-  = link_to I18n.t('books.add_new_book_btn'), new_account_book_path(@account.id),
+  = link_to I18n.t('books.add_new_book_btn'), new_account_book_path(@account.id, anchor: "/form_book"),
     {class: "btn-sm btn-success",role: "button"}
 %table.table.table-striped.table-hover
   %thead

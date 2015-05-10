@@ -13,9 +13,9 @@ module.exports = {
   // },
   resolve: {
     alias: {
-      'react': nodeDir +'/react/',
+      'react': nodeDir + '/react/',
       'jquery': nodeDir +'/jquery/dist/jquery.min.js',
-      'react-addons': nodeDir +'/react/addons.js'
+      'select-less': nodeDir +'/react-select/less/default.less',
     },
     extensions: ['', '.webpack.js', '.web.js', '.js', '.jsx', '.scss', '.css', 'config.js'],
     modulesDirectories: ["client", "node_modules"]
