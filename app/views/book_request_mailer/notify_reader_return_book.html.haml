@@ -7,6 +7,8 @@
     =I18n.t('book_request.mail.user_contact', email: @holder.user_email)
   %p
     =I18n.t('book_request.mail.return_book_now', holder: @holder.full_name)
+  %p
+    =I18n.t('book_request.mail.holder_return_option.ask_extension', href: link_to(t("book_request.mail.click"), ask_extend_account_reader_book_requests_url(account_id: @reader.id, book_id: @book.id, id: @book_request.id))).html_safe
 %p
   =I18n.t('book_request.mail.contact_form')
 %p

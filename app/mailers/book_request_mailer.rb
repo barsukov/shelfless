@@ -16,6 +16,11 @@ class BookRequestMailer < ActionMailer::Base
     mail to: @holder.user_email, subject: I18n.t('book_request.mail.expired_subj')
   end
 
+  def ask_extend_request_notify_holder(book_request)
+    init_variables(book_request)
+    mail to: @holder.user_email, subject: I18n.t('book_request.mail.ask_extend_subj')
+  end
+
   def notify_reader_return_book(book_request)
     init_variables(book_request)
     mail to: @reader.user_email, subject: I18n.t('book_request.mail.title')

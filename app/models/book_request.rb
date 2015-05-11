@@ -33,6 +33,10 @@ class BookRequest < ActiveRecord::Base
     destroy_holder_notification
   end
 
+  def ask_extend_book(book_request = self)
+    BookRequestMailer.delay.ask_extend_request_notify_holder(book_request)
+  end
+
   def extend_book(book_request = self)
     create_holder_return_notification(book_request)
     notify_reader_about_extenstion(book_request)

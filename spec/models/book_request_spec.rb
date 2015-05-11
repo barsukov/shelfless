@@ -19,7 +19,14 @@ describe BookRequest, type: :model do
         request
       end
     end
-
+    context "extend request" do
+      it "notifies hodler" do
+        mailer.stub(:new_request_notify_holder)
+        expect(mailer).to receive(:ask_extend_request_notify_holder)
+        expect(BookRequestMailer).to receive(:delay).at_most(:twice).and_return(mailer)
+        request.ask_extend_book
+      end
+    end
     context "accept request" do
       let(:mailer) { double("mailer", :deliver => true) }
       let(:second_request) { create(:simple_book_request, book: request.book) }

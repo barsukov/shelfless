@@ -1,5 +1,6 @@
 FactoryGirl.define do
   factory :author do
+    name "Peter Till"
     trait :simple_author do
       name "Peter Till"
        before(:build,:create) do |author|

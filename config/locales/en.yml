@@ -46,6 +46,7 @@ en:
       title: "book request"
       return: "Return"
       returned: "Returned"
+      ask_extend_subj: "Shelfless book extension request"
       declined_subj: "Request declined: find an alternative"
       accepted_subj: "Request accepted: contact the holder"
       user_welcome : "Hey %{name}"
@@ -61,7 +62,10 @@ en:
       expired_subj: "book return date is over"
       book_option: "Shelfless book option to return"
       extend_book_subj: "Shelfless book return extended"
+      ask_extension: "If you need an extension, %{href}"
+      reader_ask_extension: "%{reader} has requested an extension for %{book}, what would you like to do ?"
       extend_book: "Your book loan got extended until the %{date}"
+      click: "click here"
       holder_return_option:
         times_up: "Times up for %{reader}, who is currently reading your copy of %{book}"
         choosen_text: "What would you like to do next?"

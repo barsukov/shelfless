@@ -18,6 +18,10 @@ class Accounts::ReaderBookRequestsController < ApplicationController
     @book_request = BookRequest.new(book: @book, reader: @account, holder: @book.account)
   end
 
+  def ask_extend
+    book_request = BookRequest.find(book_request_params[:id])
+    book_request.ask_extend_book
+  end
 
   # GET /books/1/edit
   def edit
@@ -41,7 +45,7 @@ class Accounts::ReaderBookRequestsController < ApplicationController
   # DELETE /books/1
   # DELETE /books/1.json
   def destroy
-    @book.destroy
+    @book_request.destroy
     respond_to do |format|
       format.html { redirect_to books_url, notice: 'Book request was successfully destroyed.' }
       format.json { head :no_content }
