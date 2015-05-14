@@ -15,6 +15,11 @@ class BookRequestMailerPreview < ActionMailer::Preview
     BookRequestMailer.notify_reader_return_book(book_request)
   end
 
+  def ask_extend_request_notify_holder
+    book_request = BookRequest.last
+    BookRequestMailer.ask_extend_request_notify_holder(book_request)
+  end
+
   def notify_reader_extend_book
     book_request = BookRequest.last
     BookRequestMailer.notify_reader_extend_book(book_request)

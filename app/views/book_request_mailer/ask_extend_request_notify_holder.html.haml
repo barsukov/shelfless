@@ -2,10 +2,10 @@
   =I18n.t('book_request.mail.user_welcome', name: @holder.full_name)
 .row
   %p
-    =I18n.t('book_request.mail.holder_return_option.reader_ask_extension',reader: @reader.full_name, book: @book.title)
+    =I18n.t('book_request.mail.reader_ask_extension',reader: @reader.full_name, book: @book.title)
   %ul
     %li
-      =I18n.t('book_request.mail.holder_return_option.extend', href: link_to(t("book_request.mail.return"),extend_account_holder_book_requests_url(account_id: @holder.id, book_id: @book.id, id: @book_request.id))).html_safe
+      =link_to(I18n.t('book_request.mail.holder_return_option.extend'),extend_account_holder_book_requests_url(account_id: @holder.id, book_id: @book.id, id: @book_request.id))
     %li
       =I18n.t('book_request.mail.holder_return_option.return_request', href: link_to(t("book_request.mail.return"), return_now_account_holder_book_requests_url(account_id: @holder.id, book_id: @book.id, id: @book_request.id))).html_safe
 %p

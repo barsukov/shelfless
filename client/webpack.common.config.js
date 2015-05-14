@@ -15,7 +15,8 @@ module.exports = {
     alias: {
       'react': nodeDir + '/react/',
       'jquery': nodeDir +'/jquery/dist/jquery.min.js',
-      'select-less': nodeDir +'/react-select/less/default.less',
+      'selectize': nodeDir +'/selectize/dist/js/selectize.min.js',
+      'selectize-css': nodeDir +'/selectize/dist/css/selectize.bootstrap3.css',
     },
     extensions: ['', '.webpack.js', '.web.js', '.js', '.jsx', '.scss', '.css', 'config.js'],
     modulesDirectories: ["client", "node_modules"]
@@ -26,7 +27,13 @@ module.exports = {
     noParse: [
       nodeDir +'/jquery/dist/jquery.min.js'
     ],
-    loaders: [],
+    loaders: [
+      {test: /\.css$/, loader: 'style-loader!css-loader'},
+      {
+        test: /\.less/,
+        loader: 'style-loader!css-loader!less-loader'
+      }
+     ],
     preLoaders: []
   }
 };

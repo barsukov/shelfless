@@ -1,6 +1,6 @@
 class Book < ActiveRecord::Base
   attr_accessible :title, :author, :category, :state, :state_event,
-    :account_id, :category_attributes, :author_attributes
+    :account_id, :category_id, :author_id, :category_attributes, :author_attributes
   validates :title, presence: true
 
   belongs_to :category

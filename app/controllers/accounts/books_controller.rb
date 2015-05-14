@@ -1,5 +1,9 @@
 class Accounts::BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
+  before_action :set_collections, only: [:edit, :new]
+  before_action :set_author, only: [:create, :update]
+  before_action :set_category, only: [:create, :update]
+
   include AccountKeeper
 
   # GET /books
@@ -18,16 +22,13 @@ class Accounts::BooksController < ApplicationController
     @book = Book.new
   end
 
-  # GET /books/1/edit
-  def edit
-    @book.build_author unless @book.author
-    @book.build_category unless @book.category
-  end
 
   # POST /books
   # POST /books.json
   def create
     @book = Book.new(book_params)
+    @book.author = @author
+    @book.category = @category
     respond_to do |format|
       if @book.save
         format.html { redirect_to @book, notice: 'Book was successfully created.' }
@@ -43,6 +44,8 @@ class Accounts::BooksController < ApplicationController
   # PATCH/PUT /books/1.json
   def update
     respond_to do |format|
+      params[:book][:author_id] = @author.id
+      params[:book][:category_id] = @category.id
       if @book.update(book_params)
         if @book.shared?
           @book.cancel_holder_notification
@@ -67,6 +70,19 @@ class Accounts::BooksController < ApplicationController
   end
 
   private
+    def set_collections
+      @authors = Author.all
+      @categories = Category.all
+    end
+
+    def set_author
+      @author =  Author.find_or_create_by(name: params[:book][:author_name])
+    end
+
+    def set_category
+      @category = Category.find_or_create_by(name: params[:book][:category_name])
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_book
       @book = Book.find(params[:id])
@@ -74,7 +90,6 @@ class Accounts::BooksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def book_params
-      params[:book].permit(:id, :title,:state, :account_id,  category_attributes: [:_type, :id , :name],
-       author_attributes: [:id, :name])
+      params[:book].permit(:id, :title,:state, :account_id, :author_id, :category_id, :author_name, :category_name)
     end
 end

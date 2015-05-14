@@ -14,7 +14,7 @@
   %tbody
     - @books.each do |book|
       %tr
-        %td.col-md-3= link_to(book.title, edit_account_book_path(@account,book))
+        %td.col-md-3= link_to(book.title, edit_account_book_path(@account,book, anchor: "/form_book"))
         %td.col-md-2= book.author.try(:name)
         %td.col-md-2= book.category.try(:name)
         %td.col-md-1

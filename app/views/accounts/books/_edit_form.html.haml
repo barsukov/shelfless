@@ -1,15 +1,9 @@
 = simple_form_for @book, :url => account_book_path, :method => :put, :html => { :class => 'form-vertical' } do |f|
   = f.input :title
   = error_span(@book[:title])
-  = f.simple_fields_for :author, @book.author do |t|
-    = t.input :id, :as => :hidden, :input_html => { :value => @book.author.id }
-    = t.hidden_field :_type, value: t.object.class.name
-    = t.input :name, label: I18n.t('book.author')
-  = f.simple_fields_for :category, @book.category do |t|
-    = t.input :id, :as => :hidden, :input_html => { :value => @book.category.id }
-    = t.hidden_field :_type, value: t.object.class.name
-    = t.input :name, label: I18n.t('book.category')
-  = f.input :state, :collection => [[0, 'Share'],[1, 'Unshare']],label_method: :last, value_method: :first, :as => :radio_buttons
+  = f.input :author_name, label_method: :name, value_method: :name, label: I18n.t('book.author'), collection: @authors
+  = f.input :category_name, label_method: :name, value_method: :name,  label: I18n.t('book.category'), collection: @categories
+  = f.input :state, :collection => [[0, I18n.t('book.shared')],[1, I18n.t('book.unshared')]],label_method: :last, value_method: :first, :as => :radio_buttons
   = f.input :account_id, :as => :hidden, :input_html => { :value => current_user.account.id }
   = f.button :submit, :class => 'btn-success'
   = link_to t('.cancel', :default => t("helpers.links.cancel")), account_books_path(@account), :class => 'btn btn-default'

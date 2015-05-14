@@ -40,6 +40,7 @@ en:
     pending: 'Pending'
     accepted: 'Accepted'
     declined: 'Declined'
+    expired: "Days to return %{days}"
     new: "New book request"
     was_declined: "Book request was successfully declined"
     mail:
@@ -63,13 +64,13 @@ en:
       book_option: "Shelfless book option to return"
       extend_book_subj: "Shelfless book return extended"
       ask_extension: "If you need an extension, %{href}"
-      reader_ask_extension: "%{reader} has requested an extension for %{book}, what would you like to do ?"
+      reader_ask_extension: "'%{reader}' has requested an extension for '%{book}', what would you like to do ?"
       extend_book: "Your book loan got extended until the %{date}"
       click: "click here"
       holder_return_option:
         times_up: "Times up for %{reader}, who is currently reading your copy of %{book}"
         choosen_text: "What would you like to do next?"
-        extend:  "Extend to %{href}"
+        extend:  "Extend"
         return_request: "Request %{href} (start the conversation to get your books back)"
         already_returned: "%{href} ( already returned, update status of book to shared)"
       suggestion: "Would you like to share %{book} with %{reader}?"

@@ -22,6 +22,6 @@
               =link_to(I18n.t('book_request.accept'), account_holder_book_request_path(@account.id, book_id: request.book.id, id: request.id), method: :put, class: "btn btn-sm btn-success", data: {role: "button"})
               =link_to(I18n.t('book_request.decline'), account_holder_book_request_path(@account.id, book_id: request.book.id, id: request.id), method: :delete, class: "btn btn-sm btn-danger",data: {role: "button"})
           - else
-            = get_request_status_button(request)
+            = get_request_status(request)
 - unless @reader_requests.empty?
   =will_paginate @reader_requests,renderer: BootstrapPagination::Rails
