@@ -20,8 +20,6 @@
     "jquery": "^2.1.4",
     "less-loader": "^2.0.0",
     "react": "~0.13.0",
-    "react-autocomplete": "0.0.2",
-    "react-select": "^0.4.8",
     "reflux": "^0.2.7",
     "selectize": "^0.12.1",
     "style-loader": "~0.8.0",
