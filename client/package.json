@@ -24,10 +24,10 @@
     "style-loader": "~0.8.0",
     "underscore": "^1.8.3",
     "url-loader": "~0.5.5",
-    "webpack": "~1.4.3",
-    "webpack-dev-server": "~1.6.5"
+    "webpack": "~1.4.3"
   },
   "devDependencies": {
+    "webpack-dev-server": "~1.6.5",
     "react-hot-loader": "^1.0.7",
     "rewire": "^2.3.3",
     "rewire-webpack": "^1.0.0",
