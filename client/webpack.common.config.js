@@ -15,8 +15,8 @@ module.exports = {
     alias: {
       'react': nodeDir + '/react/',
       'jquery': nodeDir +'/jquery/dist/jquery.min.js',
-      'selectize': nodeDir +'/selectize/dist/js/selectize.min.js',
-      'selectize-css': nodeDir +'/selectize/dist/css/selectize.bootstrap3.css',
+      'selectize': __dirname + '/selectize/selectize.min.js',
+      'selectize-css': __dirname  +'/selectize/selectize.bootstrap3.css',
     },
     extensions: ['', '.webpack.js', '.web.js', '.js', '.jsx', '.scss', '.css', 'config.js'],
     modulesDirectories: ["client", "node_modules"]
@@ -25,6 +25,8 @@ module.exports = {
   ],
   module: {
     noParse: [
+      __dirname + '/selectize/selectize.min.js',
+      __dirname  +'/selectize/selectize.bootstrap3.css',
       nodeDir +'/jquery/dist/jquery.min.js'
     ],
     loaders: [
