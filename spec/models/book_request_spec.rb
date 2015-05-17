@@ -8,7 +8,29 @@ describe BookRequest, type: :model do
     expect(request.holder).to_not be_nil
     expect(request.reader).to_not be_nil
   end
+  describe "#extension_state" do
+    let(:request) { create(:simple_book_request) }
+    let(:mailer) { double("mailer", :deliver => true) }
 
+    context "ask_extend book" do
+      it "notifies hodler" do
+        mailer.stub(:new_request_notify_holder)
+        expect(mailer).to receive(:ask_extend_request_notify_holder)
+        expect(BookRequestMailer).to receive(:delay).at_most(:twice).and_return(mailer)
+        request.ask_extend_book
+        expect(request.pending_extension?).to be(true)
+      end
+    end
+
+    it "accept extension book" do
+
+    end
+
+    it "decline extension book" do
+
+    end
+
+  end
   context 'request processing' do
     let(:request) { create(:simple_book_request) }
     let(:mailer) { double("mailer", :deliver => true) }
@@ -17,14 +39,6 @@ describe BookRequest, type: :model do
         expect(mailer).to receive(:new_request_notify_holder)
         expect(BookRequestMailer).to receive(:delay).and_return(mailer)
         request
-      end
-    end
-    context "extend request" do
-      it "notifies hodler" do
-        mailer.stub(:new_request_notify_holder)
-        expect(mailer).to receive(:ask_extend_request_notify_holder)
-        expect(BookRequestMailer).to receive(:delay).at_most(:twice).and_return(mailer)
-        request.ask_extend_book
       end
     end
     context "accept request" do

@@ -33,15 +33,6 @@ class BookRequest < ActiveRecord::Base
     destroy_holder_notification
   end
 
-  def ask_extend_book(book_request = self)
-    BookRequestMailer.delay.ask_extend_request_notify_holder(book_request)
-  end
-
-  def extend_book(book_request = self)
-    create_holder_return_notification(book_request)
-    notify_reader_about_extenstion(book_request)
-  end
-
   state_machine :state do
     after_transition :pending => :accepted do |book_request, transition, block|
       book_request.create_holder_return_notification(book_request)
@@ -64,6 +55,41 @@ class BookRequest < ActiveRecord::Base
     state :declined, :value => 2
     state :accepted, :value => 1
     state :pending, :value => 0
+
+  end
+
+  state_machine :extension_state do
+    after_transition :pending => :pending_extension do |book_request, transition, block|
+      BookRequestMailer.delay.ask_extend_request_notify_holder(book_request)
+    end
+
+    after_transition :pending_extension => :extended do |book_request, transition, block|
+      create_holder_return_notification(book_request)
+      notify_reader_about_extenstion(book_request)
+    end
+
+    event :ask_extend_book do
+      transition :pending => :pending_extension
+    end
+
+    event :extend_book do
+      transition :pending_extension => :extended
+    end
+
+    event :decline_extend do
+      transition :pending_extension => :return_now
+    end
+
+    event :expire_extend do
+      transition :extended => :pending_extension
+    end
+
+
+    state :extended, :value => 3
+    state :return_now, :value => 2
+    state :pending_extension, :value => 1
+    state :pending, :value => 0
+
   end
 
   def create_holder_return_notification(book_request)
