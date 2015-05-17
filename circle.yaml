@@ -1,6 +1,5 @@
 deployment:
   production:
     branch: master
-    commands:
-      - git push git@heroku.com:mainshelfless.git $CIRCLE_SHA1:master
-      - heroku run rake db:migrate --app mainshelfless
+    heroku:
+      appname: mainshelfless
