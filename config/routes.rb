@@ -31,6 +31,7 @@ Rails.application.routes.draw do
 
   root "main#index"
   get '/about', :to => 'main#about'
+  get '/privacy', :to => 'main#privacy'
   authenticate :user, lambda { |u| u.role == :admin } do
     mount Sidekiq::Web => '/sidekiq'
   end

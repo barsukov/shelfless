@@ -22,6 +22,7 @@
 en:
   search: "Search..."
   login_please: "Please sign in to see it"
+  privacy: "Privay policies"
   notice:
     restricted: "You restrict to see it sory dude ;)"
     update: '%{model} was successfully updated.'

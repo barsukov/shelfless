@@ -55,6 +55,11 @@
                 = yield :login_panel_content
         - else
           = yield
-      %footer.navbar-fixed-bottom
-        .container
-          %p &copy; Shelfless 2015
+    %footer.footer
+      .container
+        .row
+          %p
+            &copy; Shelfless 2015
+          %p
+            =link_to t(".privacy"), privacy_path
+
