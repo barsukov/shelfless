@@ -13,6 +13,7 @@ class BookRequestMailer < ActionMailer::Base
 
   def expired_request_notify_holder(book_request)
     init_variables(book_request)
+    book_request.expire_extend
     mail to: @holder.user_email, subject: I18n.t('book_request.mail.expired_subj')
   end
 

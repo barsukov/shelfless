@@ -64,8 +64,12 @@ class BookRequest < ActiveRecord::Base
     end
 
     after_transition :pending_extension => :extended do |book_request, transition, block|
-      create_holder_return_notification(book_request)
-      notify_reader_about_extenstion(book_request)
+      book_request.create_holder_return_notification(book_request)
+      book_request.notify_reader_about_extenstion(book_request)
+    end
+
+    after_transition :pending_extension => :return_now do |book_request, transition, block|
+      BookRequestMailer.delay.notify_reader_return_book(book_request)
     end
 
     event :ask_extend_book do

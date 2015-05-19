@@ -7,5 +7,11 @@ FactoryGirl.define do
          br.holder = br.book.account
        end
     end
+    trait :pending_extend do
+      after(:build,:create) do |br|
+        br.ask_extend_book
+      end
+    end
+    factory :pending_extend_book_request, traits: [:pending_extend]
   end
 end
