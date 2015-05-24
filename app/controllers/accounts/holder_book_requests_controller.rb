@@ -23,14 +23,14 @@ class Accounts::HolderBookRequestsController < ApplicationController
   end
 
   def return_now
-    BookRequestMailer.delay.notify_reader_return_book(@book_request)
+    @book_request.return_now
     respond_to do |format|
       format.html { redirect_to @book_request.book, notice: I18n.t('book.requested_return') }
     end
   end
 
   def mark_returned
-    @book_request.return_book
+    @book_request.mark_returned
     respond_to do |format|
       format.html { redirect_to @book_request.book, notice: I18n.t('book.returned') }
     end

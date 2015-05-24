@@ -39,9 +39,17 @@ en:
     decline: "Decline"
     accept: 'Accept'
     pending: 'Pending'
+    pending_extension: 'Pending extension'
+    decline_extension: 'Decline extension'
+    expired_extension: 'Expired extension'
     accepted: 'Accepted'
     declined: 'Declined'
-    expired: "Days to return %{days}"
+    ask_extend: "Ask extend"
+    extend: "Extend"
+    ask_return: "Ask return"
+    already_returned: "Already returned"
+    not_expired: "Days to return %{days}"
+    expired: "Expired days %{days}"
     new: "New book request"
     was_declined: "Book request was successfully declined"
     mail:

@@ -19,8 +19,9 @@ class Accounts::ReaderBookRequestsController < ApplicationController
   end
 
   def ask_extend
-    book_request = BookRequest.find(book_request_params[:id])
+    book_request = BookRequest.find(params[:id])
     book_request.ask_extend_book
+    redirect_to account_reader_book_requests_path, notice: 'You asked extension.'
   end
 
   # GET /books/1/edit

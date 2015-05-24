@@ -26,7 +26,8 @@ class Book < ActiveRecord::Base
   end
 
   def cancel_holder_notification(book = self)
-    BookRequest.get_accepted_active_book_request(book).map(&:destroy_notification)
+    @request = BookRequest.get_accepted_active_book_request(book).first
+    @request.destroy_holder_notification if @request
   end
 
   state_machine :state do

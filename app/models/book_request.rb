@@ -28,9 +28,8 @@ class BookRequest < ActiveRecord::Base
     jobs.each(&:delete)
   end
 
-  def return_book
-    self.book.share!
-    destroy_holder_notification
+  def days_to_return
+    (expired_date - Time.zone.now).to_i / 1.day if expired_date?
   end
 
   state_machine :state do
@@ -39,18 +38,33 @@ class BookRequest < ActiveRecord::Base
       book_request.book.unshare!
       BookRequestMailer.delay.accepted(book_request)
     end
+
+    after_transition :accepted => :returned do |book_request, transition, block|
+      book_request.book.share! if book_request.book.unshared?
+      book_request.destroy_holder_notification
+    end
+
     after_transition :pending => :declined do |book_request, transition, block|
       BookRequestMailer.delay.declined(book_request)
     end
+
     event :accept do
       transition :pending => :accepted
     end
+
+    event :mark_returned do
+      transition :accepted => :returned
+    end
+    
     event :decline do
       transition :pending => :declined
     end
+    
     event :gift do
       transition :pending => :accepted
     end
+
+    state :returned, :value => 3
     state :gifted, :value => 3
     state :declined, :value => 2
     state :accepted, :value => 1
@@ -59,7 +73,7 @@ class BookRequest < ActiveRecord::Base
   end
 
   state_machine :extension_state do
-    after_transition :pending => :pending_extension do |book_request, transition, block|
+    after_transition :initial_extension => :pending_extension do |book_request, transition, block|
       BookRequestMailer.delay.ask_extend_request_notify_holder(book_request)
     end
 
@@ -73,14 +87,14 @@ class BookRequest < ActiveRecord::Base
     end
 
     event :ask_extend_book do
-      transition :pending => :pending_extension
+      transition [:initial_extension, :extended] => :pending_extension
     end
 
     event :extend_book do
       transition :pending_extension => :extended
     end
 
-    event :decline_extend do
+    event :return_now do
       transition :pending_extension => :return_now
     end
 
@@ -92,7 +106,7 @@ class BookRequest < ActiveRecord::Base
     state :extended, :value => 3
     state :return_now, :value => 2
     state :pending_extension, :value => 1
-    state :pending, :value => 0
+    state :initial_extension, :value => 0
 
   end
 

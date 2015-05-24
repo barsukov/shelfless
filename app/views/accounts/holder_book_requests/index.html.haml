@@ -1,6 +1,6 @@
 - model_class = BookRequest
 .page-header
-  %h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
+  %h1=t('holder_list.nav_title')
 %table.table.table-striped
   %thead
     %tr
@@ -9,6 +9,7 @@
       %th= model_class.human_attribute_name(:category)
       %th= model_class.human_attribute_name(:reader)
       %th= model_class.human_attribute_name(:status)
+      %th= model_class.human_attribute_name(:status_control)
   %tbody
     - @reader_requests.each do |request|
       %tr
@@ -16,12 +17,13 @@
         %td= request.category_name
         %td= request.author_name
         %td= request.reader_full_name
-        %td
+        %td.col-md-1= get_holder_request_status(request)
+        %td.col-md-3
           -if request.pending?
             .btn-group(role="group")
               =link_to(I18n.t('book_request.accept'), account_holder_book_request_path(@account.id, book_id: request.book.id, id: request.id), method: :put, class: "btn btn-sm btn-success", data: {role: "button"})
               =link_to(I18n.t('book_request.decline'), account_holder_book_request_path(@account.id, book_id: request.book.id, id: request.id), method: :delete, class: "btn btn-sm btn-danger",data: {role: "button"})
           - else
-            = get_request_status(request)
+            = get_holder_request_control(request)
 - unless @reader_requests.empty?
   =will_paginate @reader_requests,renderer: BootstrapPagination::Rails

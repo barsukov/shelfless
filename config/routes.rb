@@ -16,7 +16,11 @@ Rails.application.routes.draw do
   resources :accounts do
     scope module: :accounts do
        resources :books
-       resources :reader_book_requests
+       resources :reader_book_requests do
+         collection do
+           get 'ask_extend'
+         end
+       end
        resources :holder_book_requests do
           collection do
             get 'accept'
