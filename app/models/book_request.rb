@@ -1,5 +1,5 @@
 class BookRequest < ActiveRecord::Base
-  attr_accessible :book, :state, :book_id, :reader_id, :holder_id, :reader, :holder
+  attr_accessible :book, :state, :book_id, :extension_state, :reader_id, :holder_id, :reader, :holder
 
   belongs_to :book
   belongs_to :reader, class_name: "Account"
