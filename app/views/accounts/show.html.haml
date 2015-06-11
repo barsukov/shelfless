@@ -1,6 +1,6 @@
 -model_class = Account
 =content_for :panel_content do
-  .panel.panel-success
+  .panel.panel-default
     .panel-heading
       %h4
         =@account.user_email
@@ -17,4 +17,4 @@
         %strong= model_class.human_attribute_name(:surname) + ':'
         %br
         = @account.surname
-      = link_to t('.edit', :default => t("helpers.links.edit")), edit_account_path(@account), :class => 'btn btn-sm btn-info'
+      = link_to t('.edit', :default => t("helpers.links.edit")), edit_account_path(@account), :class => 'btn btn-sm btn-primary'

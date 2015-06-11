@@ -20,13 +20,13 @@
   %body
     = javascript_include_tag "client-bundle"
     #react-content
-    .navbar.navbar-default.navbar-static-top
+    .navbar.navbar-default.navbar-fixed-top.topnav
       .container
         %button.navbar-toggle(type="button" data-toggle="collapse" data-target=".navbar-responsive-collapse")
           %span.icon-bar
           %span.icon-bar
           %span.icon-bar
-        %a.navbar-brand(href="#{root_path}")
+        %a.navbar-brand.topnav{:href => root_path}
           Shelfless
           %sub
             &beta;
@@ -55,11 +55,3 @@
                 = yield :login_panel_content
         - else
           = yield
-    %footer.footer
-      .container
-        .row
-          %p
-            &copy; Shelfless 2015
-          %p
-            =link_to t(".privacy"), privacy_path
-
