@@ -12,7 +12,7 @@ describe BookRequest, type: :model do
   describe "#extension_state" do
     let(:request) { create(:simple_book_request) }
     let(:mailer) { double("mailer", :deliver => true) }
-  
+
     context "ask_extend book" do
       it "notifies hodler" do
         mailer.stub(:new_request_notify_holder)

@@ -5,5 +5,5 @@
   = f.input :category_name, label_method: :name, value_method: :name,  label: I18n.t('book.category'), collection: @categories
   = f.input :state, :collection => [[0, I18n.t('book.shared')],[1, I18n.t('book.unshared')]],label_method: :last, value_method: :first, :as => :radio_buttons
   = f.input :account_id, :as => :hidden, :input_html => { :value => current_user.account.id }
-  = f.button :submit, :class => 'btn-success'
+  = f.button :submit, :class => 'btn-primary'
   = link_to t('.cancel', :default => t("helpers.links.cancel")), account_books_path(@account), :class => 'btn btn-default'

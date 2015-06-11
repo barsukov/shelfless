@@ -1,7 +1,7 @@
 - model_class = Book
 =content_for :panel_content do
-  .panel.panel-success
+  .panel.panel-default
     .panel-heading
-      %h1=t 'book.new'
+      %h3=t 'book.new'
     .panel-body
       = render :partial => "form"

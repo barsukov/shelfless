@@ -94,7 +94,7 @@ en:
   book:
     holder: "Holder"
     no_reader: "No reader"
-    books: "Shelfless books"
+    books: "Library"
     my_books: "My books"
     new: "Add new book to shelfless"
     author: "Author"
