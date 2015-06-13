@@ -24,7 +24,7 @@ module BooksHelper
         name = I18n.t('books.unavailable_btn')
         basic_icon_class += " btn-warning disabled"
       else
-        basic_icon_class += " btn-info"
+        basic_icon_class += " btn-primary"
         name = I18n.t('books.request_btn')
       end
     else

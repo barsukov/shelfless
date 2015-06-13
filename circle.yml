@@ -3,3 +3,7 @@ deployment:
     branch: master
     heroku:
       appname: mainshelfless
+    commands:
+      - heroku pg:backups capture --app mainshelfless
+      - heroku run rake db:migrate --app mainshelfless:
+          timeout: 400 # if your deploys take a long time
