@@ -1,9 +1,7 @@
 deployment:
   production:
     branch: master
-    heroku:
-      appname: mainshelfless
     commands:
       - heroku pg:backups capture --app mainshelfless
-      - heroku run rake db:migrate --app mainshelfless:
-          timeout: 400 # if your deploys take a long time
+      - git push git@heroku.com:mainshelfless.git $CIRCLE_SHA1:master
+      - heroku run rake db:migrate --app mainshelfless
