@@ -1,7 +1,7 @@
 - model_class = Book
 
 .page-header
-  %h2=t '.title', :default => model_class.model_name.human.pluralize.titleize
+  %h2= I18n.t('book.books')
   .row
     .col-xs-10
       = search_form_for @q, url: search_books_path, :class => 'form-inline' , method: :post do |f|

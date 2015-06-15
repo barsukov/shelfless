@@ -25,7 +25,7 @@ class Accounts::HolderBookRequestsController < ApplicationController
   def return_now
     @book_request.return_now
     respond_to do |format|
-      format.html { redirect_to @book_request.book, notice: I18n.t('book.requested_return') }
+      format.html { redirect_to @book_request.book, notice: I18n.t('book.request_to_return') }
     end
   end
 
