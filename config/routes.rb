@@ -2,7 +2,8 @@ require 'sidekiq/web'
 Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks",
-    confirmations: 'users/confirmations' }
+    confirmations: 'users/confirmations', registrations: 'users/registrations',
+    passwords: 'users/passwords', :sessions => "users/sessions" }
 
   resources :books, only: [:index, :show ,:create] do
     collection do
