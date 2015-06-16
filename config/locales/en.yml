@@ -110,6 +110,19 @@ en:
     sign_up: "Sign up"
     forgot_password: "Forgot your password?"
     instructions: "Reset password"
+  landing_text:
+    first_step_title: "Search"
+    first_step:
+      "Search by title in the library to find your next read.
+      Then request to initiate the sharing.
+      The shared library contains over 600 books."
+    second_step_title: "Meet"
+    second_step:
+      "Set a time and date to meet after you’ve received a confirmation by the book owner.
+       Meet each other in real life."
+    third_step_title: "Return"
+    third_step: "4 weeks after your request you meet again to return the book to its holder."
+
   wellcome:
     confirmation:
       "To start using Shelfless, please confirm your account by clicking"
