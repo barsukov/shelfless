@@ -111,7 +111,8 @@ class BookRequest < ActiveRecord::Base
   end
 
   def create_holder_return_notification(book_request)
-    book_request.expired_date = Settings.return_time
+    #!!!remove this hack after testing and revert this commit
+    book_request.expired_date = 1.minutes.from_now
     jid = BookRequestMailer.delay_until(book_request.expired_date).expired_request_notify_holder(book_request)
     book_request.queue_id = jid
     book_request.save
