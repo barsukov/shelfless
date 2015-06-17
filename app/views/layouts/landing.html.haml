@@ -75,7 +75,7 @@
                 =I18n.t('landing_text.first_step_title')
               %p.lead=I18n.t('landing_text.first_step')
           .col-lg-5.col-lg-offset-2.col-sm-6
-            %img.img-responsive{:alt => ""}
+            %img.img-responsive{:alt => "", :src => asset_url('images/search.jpg')}
       / /.container
     / /.content-section-a
     .content-section-b
@@ -88,7 +88,7 @@
                 =I18n.t('landing_text.second_step_title')
               %p.lead=I18n.t('landing_text.second_step')
           .col-lg-5.col-sm-pull-6.col-sm-6
-            %img.img-responsive{:alt => "" }
+            %img.img-responsive{:alt => "", :src => asset_url('images/meet.jpg') }
       / /.container
     / /.content-section-b
     .content-section-a
@@ -101,8 +101,15 @@
                 =I18n.t('landing_text.third_step_title')
               %p.lead=I18n.t('landing_text.third_step')
           .col-lg-5.col-lg-offset-2.col-sm-6
-            %img.img-responsive{:alt => "", :src => ""}
+            %img.img-responsive{:alt => "", :src => asset_url('images/return.jpg')}
       / /.container
+    %aside.bg-dark.content-section-b
+      .container.text-center
+        .call-to-action
+          %h2 Start sharing
+          %a.btn.btn-default.btn-lg{:href => books_path}
+            %i.fa.fa-book.fa-fw
+            %span.network-name Try it
     / /.content-section-a
     %section#contact
       .container
