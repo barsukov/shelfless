@@ -18,7 +18,7 @@
         %td.col-md-2= book.author.try(:name)
         %td.col-md-2= book.category.try(:name)
         %td.col-md-1
-          =get_boolean_icon(book.state)
+          =get_boolean_icon(book.shared?)
         %td.col-md-2
           =book.reader_name
 .row.row-bottom-pading
