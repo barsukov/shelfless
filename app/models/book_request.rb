@@ -82,7 +82,7 @@ class BookRequest < ActiveRecord::Base
       book_request.notify_reader_about_extenstion(book_request)
     end
 
-    after_transition :pending_extension => :return_now do |book_request, transition, block|
+    after_transition :initial_extension => :return_now, :pending_extension => :return_now do |book_request, transition, block|
       BookRequestMailer.delay.notify_reader_return_book(book_request)
     end
 
@@ -95,7 +95,7 @@ class BookRequest < ActiveRecord::Base
     end
 
     event :return_now do
-      transition :pending_extension => :return_now
+      transition :pending_extension => :return_now, :initial_extension => :return_now
     end
 
     event :expire_extend do

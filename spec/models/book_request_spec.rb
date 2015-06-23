@@ -13,6 +13,17 @@ describe BookRequest, type: :model do
     let(:request) { create(:simple_book_request) }
     let(:mailer) { double("mailer", :deliver => true) }
 
+    context "return_now" do
+      it "notifies hodler" do
+        request = create(:simple_book_request)
+        mailer.stub(:notify_reader_return_book)
+        expect(mailer).to receive(:notify_reader_return_book)
+        expect(BookRequestMailer).to receive(:delay).at_most(:twice).and_return(mailer)
+        request.return_now
+        expect(request.extended?).to be(false)
+      end
+    end
+
     context "ask_extend book" do
       it "notifies hodler" do
         mailer.stub(:new_request_notify_holder)
@@ -60,7 +71,7 @@ describe BookRequest, type: :model do
         request
       end
     end
-    
+
     context "accepted request" do
       it "returns book" do
         request.accept!
@@ -88,7 +99,7 @@ describe BookRequest, type: :model do
         request.accept!
         expect(request.book.unshared?).to be(true)
       end
-      
+
       it "starts returner timer" do
         expect(mailer).to receive(:expired_request_notify_holder)
         time = Settings.return_time
