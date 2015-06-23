@@ -1,10 +1,10 @@
 module BookRequestReaderHelper
   include Concerns::BookRequestBase
- 
+
   def get_request_extension_controls(request)
     if request.initial_extension? || request.extended?
-      if request.days_to_return <= 1 
-        content = get_ask_extend_button(request) 
+      if request.days_to_return <= 1
+        content = get_ask_extend_button(request)
       else
         content = get_info_expired_button(request)
       end
@@ -28,7 +28,7 @@ module BookRequestReaderHelper
     end
     content_tag(:span, content, class: class_name)
   end
-  
+
   def get_ask_extend_button(request)
     class_name = "btn btn-sm btn-block btn-success"
     path = ask_extend_account_reader_book_requests_path(request.reader.id, book_id: request.book.id, id: request.id)
