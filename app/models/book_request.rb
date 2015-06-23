@@ -55,11 +55,11 @@ class BookRequest < ActiveRecord::Base
     event :mark_returned do
       transition :accepted => :returned
     end
-    
+
     event :decline do
       transition :pending => :declined
     end
-    
+
     event :gift do
       transition :pending => :accepted
     end
@@ -111,8 +111,16 @@ class BookRequest < ActiveRecord::Base
   end
 
   def create_holder_return_notification(book_request)
-    #!!!remove this hack after testing and revert this commit
-    book_request.expired_date = 1.minutes.from_now
+    # This is really big shit in my code please remove or forgive
+    # This is need during the test processing without sstaging and USE HEroku varible
+    # Than I can easily remove this shit after we test shelfless
+    expired_date = Settings.return_time
+
+    if ENV["RETURN_TIME"]
+      expired_date = eval(ENV["RETURN_TIME"])
+    end
+
+    book_request.expired_date = expired_date
     jid = BookRequestMailer.delay_until(book_request.expired_date).expired_request_notify_holder(book_request)
     book_request.queue_id = jid
     book_request.save
