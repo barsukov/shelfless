@@ -20,7 +20,7 @@ describe BookRequest, type: :model do
         expect(mailer).to receive(:notify_reader_return_book)
         expect(BookRequestMailer).to receive(:delay).at_most(:twice).and_return(mailer)
         request.return_now
-        expect(request.extended?).to be(false)
+        expect(request.returned_now?).to be(true)
       end
     end
 
@@ -54,8 +54,8 @@ describe BookRequest, type: :model do
       mailer.stub(:notify_reader_return_book)
       expect(mailer).to receive(:notify_reader_return_book)
       expect(BookRequestMailer).to receive(:delay).at_most(:twice).and_return(mailer)
-      request.return_now
-      expect(request.extended?).to be(false)
+      request.decline_extension
+      expect(request.declined_extension?).to be(true)
     end
 
   end

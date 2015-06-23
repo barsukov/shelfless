@@ -16,9 +16,16 @@ class Accounts::HolderBookRequestsController < ApplicationController
   end
 
   def extend
-    @book_request.extend_book()
+    @book_request.extend_book
     respond_to do |format|
       format.html { redirect_to @book_request.book, notice: I18n.t('book.extended') }
+    end
+  end
+
+  def decline_extension
+    @book_request.decline_extension
+    respond_to do |format|
+      format.html { redirect_to @book_request.book, notice: I18n.t('book_request.decline_extension') }
     end
   end
 

@@ -26,6 +26,7 @@ Rails.application.routes.draw do
           collection do
             get 'accept'
             get 'return_now'
+            get 'decline_extension'
             get 'mark_returned'
             get 'extend'
             get 'decline'

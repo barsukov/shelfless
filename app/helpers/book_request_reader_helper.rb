@@ -2,7 +2,7 @@ module BookRequestReaderHelper
   include Concerns::BookRequestBase
 
   def get_request_extension_controls(request)
-    if request.initial_extension? || request.extended?
+    if request.initial_extension? || request.extended? || request.returned_now?
       if request.days_to_return <= 1
         content = get_ask_extend_button(request)
       else
@@ -22,7 +22,7 @@ module BookRequestReaderHelper
     if request.pending_extension?
       content = I18n.t('book_request.pending_extension', days: request.days_to_return)
       class_name = basic_icon_class + "btn-default"
-    elsif request.return_now?
+    elsif request.declined_extension?
       content = I18n.t('book_request.decline_extension', days: request.days_to_return.abs)
       class_name = basic_icon_class + "btn-warning"
     end

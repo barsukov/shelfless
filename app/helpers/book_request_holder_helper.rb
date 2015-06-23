@@ -2,8 +2,17 @@ module BookRequestHolderHelper
   include  Concerns::BookRequestBase
 
   def get_ask_return_button(request)
-  path = return_now_account_holder_book_requests_path(request.holder.id, book_id: request.book.id, id: request.id)
-    get_link(I18n.t('book_request.ask_return'), path, "btn-primary")
+    if request.initial_extension? || request.returned_now?
+      path = return_now_account_holder_book_requests_path(request.holder.id, book_id: request.book.id, id: request.id)
+      text = I18n.t('book_request.ask_return')
+      class_name = "btn-primary"
+      get_link(text, path, class_name)
+    elsif request.pending_extension?
+      path = decline_extension_account_holder_book_requests_path(request.holder.id, book_id: request.book.id, id: request.id)
+      text = I18n.t('book_request.decline_extension')
+      class_name = "btn-warning"
+      get_link(text, path, class_name)
+    end
   end
 
   def makes_book_returned_button(request)
