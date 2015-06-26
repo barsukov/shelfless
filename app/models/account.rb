@@ -1,5 +1,5 @@
 class Account < ActiveRecord::Base
-  attr_accessible :user_id, :name, :surname, :postcode
+  attr_accessible :user_id, :name, :surname, :city
   belongs_to :user
   has_many :books
 

@@ -8,7 +8,7 @@ class Book < ActiveRecord::Base
   belongs_to :account
   has_many :book_requests
   delegate :name, to: :author, allow_nil: true, prefix: true
-  delegate :postcode, to: :account, allow_nil: true, prefix: true
+  delegate :city, to: :account, allow_nil: true, prefix: true
   delegate :name, to: :category, allow_nil: true, prefix: true
   accepts_nested_attributes_for :category
   accepts_nested_attributes_for :author

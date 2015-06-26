@@ -11,7 +11,7 @@ class BookRequest < ActiveRecord::Base
     .where(self.arel_table[:expired_date].gt(DateTime.now))}
   delegate :title, to: :book, allow_nil: true
   delegate :author_name, to: :book, allow_nil: true
-  delegate :postcode, to: :holder, allow_nil: true, prefix: true
+  delegate :city, to: :holder, allow_nil: true, prefix: true
   delegate :category_name, to: :book, allow_nil: true
   delegate :full_name, to: :holder, allow_nil: true, prefix: true
   delegate :full_name, to: :reader, allow_nil: true, prefix: true

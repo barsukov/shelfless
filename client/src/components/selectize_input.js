@@ -1,8 +1,8 @@
 require('selectize-css')
 var selectize = require('selectize')
-var selectizeInput = function(div) {
+var selectizeInput = function(div, createOption = true) {
   $(div).selectize({
-    create: true
+    create: createOption
   });
 }
 module.exports = selectizeInput;

@@ -6,9 +6,9 @@
         =@account.user_email
     .panel-body
       %p
-        %strong= model_class.human_attribute_name(:postcode) + ':'
+        %strong= model_class.human_attribute_name(:city) + ':'
         %br
-        = @account.postcode
+        = @account.city
       %p
         %strong= model_class.human_attribute_name(:name) + ':'
         %br
@@ -17,4 +17,4 @@
         %strong= model_class.human_attribute_name(:surname) + ':'
         %br
         = @account.surname
-      = link_to t('.edit', :default => t("helpers.links.edit")), edit_account_path(@account), :class => 'btn btn-sm btn-primary'
+      = link_to t('.edit', :default => t("helpers.links.edit")), edit_account_path(@account, anchor: "/form_account"), :class => 'btn btn-sm btn-primary'

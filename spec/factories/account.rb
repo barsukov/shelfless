@@ -1,5 +1,6 @@
 FactoryGirl.define do
   factory :account do
+    city "Berlin"
     trait :holder do
       name "Peter Till"
        before(:build,:create) do |account|

@@ -17,6 +17,7 @@
       %th= sort_link(@q, :title, model_class.human_attribute_name(:title), default_order: :desc)
       %th= model_class.human_attribute_name(:author)
       %th= model_class.human_attribute_name(:category)
+      %th= model_class.human_attribute_name(:city)
       %th= model_class.human_attribute_name(:request)
   %tbody
     - @books.each do |book|
@@ -24,6 +25,7 @@
         %td.col-md-3= link_to(book.title, book_path(book))
         %td.col-md-3= book.author.try(:name)
         %td.col-md-2= book.category.try(:name)
+        %td.col-md-2= book.account_city
         %td.col-md-1
           = get_request_button(book)
 .row.row-bottom-pading
