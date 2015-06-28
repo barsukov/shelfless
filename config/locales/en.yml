@@ -39,6 +39,7 @@ en:
     decline: "Decline"
     accept: 'Accept'
     pending: 'Pending'
+    returned: "Returned"
     pending_extension: 'Pending extension'
     decline_extension: 'Decline extension'
     expired_extension: 'Expired extension'
@@ -146,5 +147,3 @@ en:
       no discrimination here!
 
       Finally, Respect our books - Sharing is caring"
-
-

@@ -42,6 +42,9 @@ module BookRequestReaderHelper
     elsif request.declined?
        class_name = basic_icon_class + "btn-warning"
        content_tag(:span, I18n.t('book_request.declined'), class: class_name)
+    elsif request.returned?
+      class_name = basic_icon_class + "btn-default"
+      content_tag(:span, I18n.t('book_request.returned'), class: class_name)
     else
       get_request_extension_controls(request)
     end
