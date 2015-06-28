@@ -73,7 +73,7 @@ class BookRequest < ActiveRecord::Base
   end
 
   state_machine :extension_state do
-    after_transition :initial_extension => :pending_extension do |book_request, transition, block|
+    after_transition any => :pending_extension do |book_request, transition, block|
       BookRequestMailer.delay.ask_extend_request_notify_holder(book_request)
     end
 
@@ -103,7 +103,7 @@ class BookRequest < ActiveRecord::Base
     end
 
     event :expire_extend do
-      transition :extended => :pending_extension
+      transition :extended => :initial_extension
     end
 
     state :declined_extension, :value => 4

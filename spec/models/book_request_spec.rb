@@ -24,6 +24,13 @@ describe BookRequest, type: :model do
       end
     end
 
+    context "expired extension" do
+      it "makes state to initial_extension" do
+        request.expire_extend
+        expect(request.initial_extension?).to be(true)
+      end
+    end
+
     context "ask_extend book" do
       it "notifies hodler" do
         mailer.stub(:new_request_notify_holder)
