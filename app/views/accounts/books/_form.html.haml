@@ -1,5 +1,6 @@
 = simple_form_for @book, :url => account_books_path, :method => :post, :html => { :class => 'form-vertical' } do |f|
   = f.input :title
+  = f.input :language
   = error_span(@book[:title])
   = f.input :author_name, label_method: :name, value_method: :name, label: I18n.t('book.author'), collection: @authors
   = f.input :category_name, label_method: :name, value_method: :name,  label: I18n.t('book.category'), collection: @categories

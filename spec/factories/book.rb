@@ -1,5 +1,6 @@
 FactoryGirl.define do
   factory :book do
+    language "DE"
     trait :simple_book do
       author
       title "simple book"

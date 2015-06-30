@@ -9,6 +9,9 @@ describe Book, type: :model do
     it "has a nice author" do
       expect(book.author.name).to eq("Peter Till")
     end
+    it "has a nice deutch language" do
+      expect(book.language).to eq("DE")
+    end
   end
   context "validation" do
     it 'needs title' do

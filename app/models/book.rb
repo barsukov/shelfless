@@ -1,5 +1,5 @@
 class Book < ActiveRecord::Base
-  attr_accessible :title, :author, :category, :state, :state_event,
+  attr_accessible :title, :author, :category, :state, :state_event, :language,
     :account_id, :category_id, :author_id, :category_attributes, :author_attributes
   validates :title, presence: true
 
