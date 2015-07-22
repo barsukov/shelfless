@@ -1,5 +1,5 @@
 class UserMailer < Devise::Mailer
-  default from: "info@shelfless.de"
+  default from: "info@shelfless.io"
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
   #

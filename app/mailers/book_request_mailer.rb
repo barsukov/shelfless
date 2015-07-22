@@ -1,5 +1,5 @@
 class BookRequestMailer < ActionMailer::Base
-  default from: "info@shelfless.de"
+  default from: "info@shelfless.io"
 
   def accepted(book_request)
     init_variables(book_request)

@@ -1,3 +1,3 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "info@shelfless.de"
+  default from: "info@shelfless.io"
 end
