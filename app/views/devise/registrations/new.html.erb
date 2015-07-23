@@ -9,6 +9,18 @@
     </div>
 
     <div class="field">
+      <%= f.input :city, collection: CityFinder.cities, placeholder: 'City' %>
+    </div>
+
+    <div class="field">
+      <%= f.input :name, placeholder: 'Name' %>
+    </div>
+
+    <div class="field">
+      <%= f.input :surname, placeholder: 'Surname' %>
+    </div>
+
+    <div class="field">
       <%= f.input :password,  autocomplete: "off" , placeholder: 'Password' %>
     </div>
 

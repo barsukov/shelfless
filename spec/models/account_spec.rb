@@ -1,7 +1,22 @@
 require 'rails_helper'
 
 describe Account, type: :model do
-  let(:account) { create(:reader)}
+  let(:account) { create(:account)}
+
+
+  describe "#full_name" do
+    it "called my name muster" do
+      expect(account.name).to eq("Muster")
+    end
+
+    it "called my surname is man" do
+      expect(account.surname).to eq("Man")
+    end
+
+    it "called my full_name is muster man" do
+      expect(account.full_name).to eq("Muster Man")
+    end
+  end
 
   describe "#city" do
     it "lives in berlin" do

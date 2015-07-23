@@ -1,5 +1,9 @@
 class Account < ActiveRecord::Base
   attr_accessible :user_id, :name, :surname, :city
+  validates :city, presence: true
+  validates :name, presence: true
+  validates :surname, presence: true
+
   belongs_to :user
   has_many :books
 

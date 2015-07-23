@@ -16,13 +16,10 @@ class User < ActiveRecord::Base
   has_one :identity, dependent: :destroy
   has_one :account, dependent: :destroy
   delegate :name, to: :account, allow_nil: true
+  delegate :city, to: :account, allow_nil: true
   delegate :id, to: :account, allow_nil: true, prefix: true
   delegate :surname, to: :account, allow_nil: true
 
-  after_create :build_account
-  def build_account
-    self.create_account!
-  end
 
   def self.from_omniauth(auth)
     # Get the identity and user if they exist
@@ -40,13 +37,14 @@ class User < ActiveRecord::Base
 
       # Create the user if it's a new registration
       if user.nil?
-        account = Account.new(name: auth.extra.raw_info.first_name, 
-          last_name: auth.extra.raw_info.first_name)
+        account = Account.new(name: auth.extra.raw_info.first_name,
+          surname: auth.extra.raw_info.last_name, city: Settings.default_city)
         user = User.new(
-          account: account,
           email: email ? email : "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com",
           password: Devise.friendly_token[0,20]
         )
+        user.build_account
+        user.account = account
         user.save!
       end
     end
