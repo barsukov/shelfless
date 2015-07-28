@@ -1,4 +1,38 @@
 namespace :import do
+  def create_book(row)
+    author =  Author.find_or_create_by(name: row[1])
+    category = Category.find_or_create_by(name: row[2])
+    user = User.find_by_email row[6]
+    if user
+      book = Book.new
+      book.title = row[0]
+      book.author = author
+      book.category = category
+      book.language = row[3]
+      book.account = user.account if user
+      book.save
+      puts "It was created #{row[0]}"
+      return true
+    end
+    return false
+  end
+
+  task update_last: :environment do
+    arr_of_arrs = CSV.read("public/shelfless_updated.csv")
+    added = 0
+    arr_of_arrs.each_with_index do |row, index|
+      book = Book.where(title: row[0]).first
+      if book
+        puts "I found Hey #{book.title}"
+      else
+        puts "It is not already there #{row[0]}"
+        status = create_book(row)
+        added += 1 if status
+      end
+    end
+    puts "Added #{added} of #{arr_of_arrs.length}"
+  end
+
   desc "TODO"
   task update: :environment do
     arr_of_arrs = CSV.read("public/shelfless_updated.csv")
@@ -55,14 +89,7 @@ namespace :import do
     arr_of_arrs = CSV.read("public/shelfless.csv")
     arr_of_arrs.each_with_index do |row, index|
       begin
-        author =  Author.find_or_create_by(name: row[1])
-        category = Category.find_or_create_by(name: row[2])
-        book = Book.new
-        book.title = row[0]
-        book.author = author
-        book.category = category
-        book.language = row[3]
-        book.save
+        create_book row
         puts "Iport correct #{index} of #{arr_of_arrs.length}"
       rescue
         puts "Iport failed #{index} of #{arr_of_arrs.length}"
