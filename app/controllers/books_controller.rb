@@ -3,8 +3,7 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
-    @title = params[:q][:title] if params[:q].present?
-    @q = Book.ransack(title_cont: @title)
+    @q = Book.ransack(params[:q])
     @books = @q.result.includes(:category, :author).page(params[:page])
   end
 

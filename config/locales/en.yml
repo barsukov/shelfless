@@ -20,7 +20,8 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  search: "Search..."
+  default_search: "Tite / Author"
+  city: "City"
   login_please: "Please sign in to see it"
   privacy: "Privay policies"
   notice:

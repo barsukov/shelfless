@@ -2,23 +2,15 @@
 
 .page-header
   %h2= I18n.t('book.books')
-  .row
-    .col-xs-10
-      = search_form_for @q, url: search_books_path, :class => 'form-inline' , method: :post do |f|
-        =f.label :title, class: "sr-only"
-        =f.search_field :title, class: "form-control input-sm", placeholder: I18n.t('search'),:value => @title
-        = f.button :search, :class => 'btn btn-sm btn-primary'
-        -if user_signed_in?
-          = link_to I18n.t('books.add_new_book_btn'), new_account_book_path(account_id: current_user.account.id, anchor: "/form_book"),
-            {class: "btn btn-sm btn-success",role: "button"}
+  = render partial: "shared/book_search"
 %table.table.table-striped.table-hover
   %thead
     %tr
       %th= sort_link(@q, :title, model_class.human_attribute_name(:title), default_order: :desc)
-      %th= model_class.human_attribute_name(:author)
-      %th= model_class.human_attribute_name(:category)
-      %th= model_class.human_attribute_name(:city)
-      %th= model_class.human_attribute_name(:language)
+      %th= sort_link(@q, :author_name, model_class.human_attribute_name(:author), default_order: :desc)
+      %th= sort_link(@q, :category_name, model_class.human_attribute_name(:category), default_order: :desc)
+      %th= sort_link(@q, :account_city, model_class.human_attribute_name(:city), default_order: :desc)
+      %th= sort_link(@q, :language, model_class.human_attribute_name(:language), default_order: :desc)
       %th= model_class.human_attribute_name(:request)
   %tbody
     - @books.each do |book|
