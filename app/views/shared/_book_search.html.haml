@@ -1,0 +1,17 @@
+.panel.panel-default
+  .panel-body
+    = search_form_for @q, url: search_books_path, :class => 'form-horizontal' , method: :post do |f|
+      .row
+        .col-sm-9
+          .row
+            .col-sm-3
+              = f.search_field :category_name_cont, class: "form-control input", placeholder: I18n.t('book.category')
+            .col-sm-2
+              = f.search_field :account_city_cont, class: "form-control input", placeholder: I18n.t('city')
+            .col-sm-7
+              = f.search_field :title_or_author_name_cont, class: "form-control input", placeholder: I18n.t('default_search')
+        .col-sm-3
+          = f.button :search, :class => 'btn btn-primary'
+          -if user_signed_in?
+            = link_to I18n.t('books.add_new_book_btn'), new_account_book_path(account_id: current_user.account.id, anchor: "/form_book"),
+              {class: "btn btn btn-success",role: "button"}
