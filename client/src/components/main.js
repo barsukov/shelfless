@@ -5,13 +5,12 @@ var Backbone = require('backbone')
 require('../styles/select.less');
 $(document).ready(function(){
   new Router();
-  Backbone.history.start();
+  Backbone.history.start({ pushState: true });
 });
 if (module.hot) {
   require('react-hot-loader/Injection').RootInstanceProvider.injectProvider({
     getRootInstances: function () {
-      // Help React Hot Loader figure out the root component instances on the page:
-      return [rootInstance];
+
     }
   });
 }

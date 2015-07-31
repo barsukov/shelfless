@@ -1,7 +1,7 @@
 - model_class = Book
 .page-header
   %h2=t 'books.own'
-  = link_to I18n.t('books.add_new_book_btn'), new_account_book_path(@account.id, anchor: "/form_book"),
+  = link_to I18n.t('books.add_new_book_btn'), new_account_book_path(@account.id),
     {class: "btn-sm btn-success",role: "button"}
 %table.table.table-striped.table-hover
   %thead
@@ -14,7 +14,7 @@
   %tbody
     - @books.each do |book|
       %tr
-        %td.col-md-3= link_to(book.title, edit_account_book_path(@account,book, anchor: "/form_book"))
+        %td.col-md-3= link_to(book.title, edit_account_book_path(@account, book))
         %td.col-md-2= book.author.try(:name)
         %td.col-md-2= book.category.try(:name)
         %td.col-md-1

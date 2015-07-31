@@ -2,6 +2,9 @@ var gulp = require("gulp");
 var gutil = require("gulp-util");
 var webpack = require("webpack");
 var WebpackDevServer = require("webpack-dev-server");
+var paths = {
+  src: ['src/components/**/*.js', '!client/**/*.js'],
+};
 
 
 // The development server (the recommended option for development)
@@ -36,6 +39,10 @@ gulp.task("build_test", function(callback) {
     }));
     callback();
   });
+});
+
+gulp.task('watch', function() {
+  gulp.watch(paths.src, ['build']);
 });
 
 gulp.task("webpack-dev-server", function(callback) {
