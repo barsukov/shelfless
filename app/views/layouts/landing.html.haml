@@ -35,7 +35,7 @@
         #bs-example-navbar-collapse-1.collapse.navbar-collapse
           %ul.nav.navbar-nav.navbar-right
             %li
-              %a{:href => "#about"} About
+              %a{:href => "#"} About
             %li
               %a{:href => "#services"} Sharing
             %li
@@ -54,9 +54,10 @@
               %hr.intro-divider
                 %ul.list-inline.intro-social-buttons
                   %li
-                    %a.btn.btn-default.btn-lg{:href => books_path}
+                    %a.btn.btn-default.btn-lg{:href => "#services"}
                       %i.fa.fa-book.fa-fw
-                      %span.network-name Try it
+                      %span.network-name
+                        = I18n.t("landing_text.read_about")
                   %li
                     %a.btn.btn-default.btn-lg{:href => get_user_login_path}
                       %i.fa.fa-facebook.fa-fw
@@ -106,7 +107,8 @@
     %aside.bg-dark.content-section-b
       .container.text-center
         .call-to-action
-          %h2 Start sharing
+          %h2
+            = I18n.t('landing_text.search_book')
           %a.btn.btn-default.btn-lg{:href => books_path}
             %i.fa.fa-book.fa-fw
             %span.network-name Try it
