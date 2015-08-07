@@ -79,6 +79,15 @@ describe BookRequest, type: :model do
       end
     end
 
+    context "cancel request" do
+      it "returns book" do
+        expect(mailer).to receive(:new_request_notify_holder)
+        expect(mailer).to receive(:canceled_request)
+        expect(BookRequestMailer).to receive(:delay).at_most(:twice).and_return(mailer)
+        request.cancel
+      end
+    end
+
     context "accepted request" do
       it "returns book" do
         request.accept!

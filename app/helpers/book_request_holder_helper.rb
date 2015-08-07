@@ -37,6 +37,9 @@ module BookRequestHolderHelper
     elsif request.declined?
       button_icon += "btn-warning"
       content_tag(:a, I18n.t('book_request.declined'), class: button_icon)
+    elsif request.canceled?
+      button_icon += "btn-warning"
+      content_tag(:a, I18n.t('book_request.canceled'), class: button_icon)
     else
       button_icon += "btn-success"
       content_tag(:a, I18n.t('book_request.mail.returned'), class:  button_icon)

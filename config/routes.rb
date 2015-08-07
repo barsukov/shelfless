@@ -20,6 +20,7 @@ Rails.application.routes.draw do
        resources :reader_book_requests do
          collection do
            get 'ask_extend'
+           get 'cancel'
          end
        end
        resources :holder_book_requests do

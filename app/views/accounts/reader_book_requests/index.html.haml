@@ -18,7 +18,6 @@
         %td= request.category_name
         %td= request.holder_full_name
         %td.col-md-1= request.holder_city
-        %td.col-md-1= get_reader_request_status_button(request)
+        %td.col-md-2= get_reader_request_status_button(request)
 - unless @reader_requests.empty?
   =will_paginate @reader_requests,renderer: BootstrapPagination::Rails
-

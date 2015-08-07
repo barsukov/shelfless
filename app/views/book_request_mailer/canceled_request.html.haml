@@ -1,0 +1,9 @@
+%h4
+  =I18n.t('book_request.mail.user_welcome',name: @holder.full_name)
+.row
+  %p
+    =I18n.t('book_request.mail.cancel',reader: @reader.full_name, book: @book.title)
+  %p
+    =I18n.t('book_request.mail.contact_form')
+%p
+  =I18n.t('mail.slogan')

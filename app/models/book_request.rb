@@ -44,12 +44,20 @@ class BookRequest < ActiveRecord::Base
       book_request.destroy_holder_notification
     end
 
+    after_transition any => :canceled do |book_request, transition, block|
+      BookRequestMailer.delay.canceled_request(book_request)
+    end
+
     after_transition :pending => :declined do |book_request, transition, block|
       BookRequestMailer.delay.declined(book_request)
     end
 
     event :accept do
       transition :pending => :accepted
+    end
+
+    event :cancel do
+      transition all => :canceled
     end
 
     event :mark_returned do
@@ -64,8 +72,9 @@ class BookRequest < ActiveRecord::Base
       transition :pending => :accepted
     end
 
+    state :canceled, :value => 5
     state :returned, :value => 3
-    state :gifted, :value => 3
+    state :gifted, :value => 4
     state :declined, :value => 2
     state :accepted, :value => 1
     state :pending, :value => 0

@@ -40,12 +40,16 @@ en:
     decline: "Decline"
     accept: 'Accept'
     pending: 'Pending'
+    cancel: 'Cancel'
     returned: "Returned"
+    ask_extension_notice: 'You asked extension.'
+    cancel_notice: 'You canceled your book request '
     pending_extension: 'Pending extension'
     decline_extension: 'Decline extension'
     expired_extension: 'Expired extension'
     accepted: 'Accepted'
     declined: 'Declined'
+    canceled: 'Canceled'
     ask_extend: "Ask extend"
     extend: "Extend"
     ask_return: "Ask return"
@@ -62,6 +66,8 @@ en:
       declined_subj: "Request declined: find an alternative"
       accepted_subj: "Request accepted: contact the holder"
       user_welcome : "Hey %{name}"
+      cancel_subj: "Request has been calceled by reader"
+      cancel:  "%{reader} has canceled own request for the %{book} book"
       rejected: "%{holder} has rejected your request."
       rejected_message: "To feed your curiosity, find an alternative in your %{href}"
       link_to_lib: "Library"

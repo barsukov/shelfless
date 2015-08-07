@@ -18,10 +18,16 @@ class Accounts::ReaderBookRequestsController < ApplicationController
     @book_request = BookRequest.new(book: @book, reader: @account, holder: @book.account)
   end
 
+  def cancel
+    book_request = BookRequest.find(params[:id])
+    book_request.cancel
+    redirect_to account_reader_book_requests_path, notice: I18n.t('book_request.cancel_notice')
+  end
+
   def ask_extend
     book_request = BookRequest.find(params[:id])
     book_request.ask_extend_book
-    redirect_to account_reader_book_requests_path, notice: 'You asked extension.'
+    redirect_to account_reader_book_requests_path, notice: I18n.t('book_request.ask_extension_notice')
   end
 
   # GET /books/1/edit
