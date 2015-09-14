@@ -1,23 +1,24 @@
 'use strict';
 var React = require('react')
-var Router = require('./router')
-var App = require('./app')
 var Router = require('react-router'); // or var Router = ReactRouter; in browsers
 var DefaultRoute = Router.DefaultRoute;
 var Route = Router.Route;
-
-require('../styles/select.less');
+var App = require('./app')
 var rootInstance = null;
-let ReaderRequest = require('./reader_request/reader_request')
 
 var routes = (
   <Route name="app" path="/books" handler={App}>
+    <Route path="/accounts/:id">
+      <Route path="books"/>
+      <Route path="reader_book_requests"/>
+      <Route path="holder_book_requests"/>
+   </Route>
   </Route>
 );
 
 $(document).ready(function(){
-  Router.run(routes, Router.HistoryLocation, function (Handler) {
-    rootInstance = React.render(<App />, document.getElementById('react-content'))
+  Router.run(routes, Router.HistoryLocation, function (Root) {
+    rootInstance = React.render(<Root />, document.getElementById('react-content'))
   });
 })
 
@@ -28,4 +29,5 @@ if (module.hot) {
       return [rootInstance];
     }
   });
+
 }
