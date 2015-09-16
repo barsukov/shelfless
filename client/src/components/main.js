@@ -7,12 +7,14 @@ var App = require('./app')
 var rootInstance = null;
 
 var routes = (
-  <Route name="app" path="/books" handler={App}>
-    <Route path="/accounts/:id">
-      <Route path="books"/>
+  <Route name="app" path="/new_interface" handler={App}>
+    <Route path="books"/>
+    <Route path="/accounts/:id/">
+      <Route path="my_books"/>
       <Route path="reader_book_requests"/>
       <Route path="holder_book_requests"/>
    </Route>
+   <Route path="login"/>
   </Route>
 );
 
@@ -29,5 +31,4 @@ if (module.hot) {
       return [rootInstance];
     }
   });
-
 }
