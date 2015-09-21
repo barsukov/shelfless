@@ -4,11 +4,12 @@ var Router = require('react-router'); // or var Router = ReactRouter; in browser
 var DefaultRoute = Router.DefaultRoute;
 var Route = Router.Route;
 var App = require('./app')
+var BookListHandler = require('./book_list_handler')
 var rootInstance = null;
 
 var routes = (
   <Route name="app" path="/new_interface" handler={App}>
-    <Route path="books"/>
+    <Route path="/books_list" handler={BookListHandler}/>
     <Route path="/accounts/:id/">
       <Route path="my_books"/>
       <Route path="reader_book_requests"/>
