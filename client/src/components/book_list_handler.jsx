@@ -6,7 +6,12 @@ var BookListHandler = React.createClass({
   render: function () {
     return (
       <div className="container">
-        <BasicTable />
+        <div className="row">
+          <div className="page-header">
+            <h2>Book list</h2>
+          </div>
+          <BasicTable />
+        </div>
       </div>
     );
   }
