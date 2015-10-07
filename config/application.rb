@@ -20,7 +20,7 @@ module Shelfless
       :address        => ENV['MAILGUN_SMTP_SERVER'],
       :user_name      => ENV['MAILGUN_SMTP_LOGIN'],
       :password       => ENV['MAILGUN_SMTP_PASSWORD'],
-      :domain         => 'appc5dcab1996494ffda51e1b6e4a7385ae.mailgun.org',
+      :domain         => ENV['MAILGUN_DOMAIN'],
       :authentication => :plain,
     }
      # Add client/assets/stylesheets to asset pipeline's search path.
