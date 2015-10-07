@@ -1,16 +1,21 @@
 class Users::RegistrationsController < Devise::RegistrationsController
 
+  def new
+    build_resource({})
+    self.resource.account = Account.new
+    respond_with self.resource
+  end
+
   def create
     super
-    unless resource.account
-      city = params["user"]["city"] || Settings.default_city
-      account = Account.new(name: params["user"]["name"] ,
-        surname: params["user"]["surname"], city: city)
-      resource.build_account
-      resource.account = account
-      resource.save
-    end
   end
+
+   private
+     def sign_up_params
+       allow = [:email, :password, :password_confirmation, :account,
+         [account_attributes: [:city, :name, :surname]]]
+       params.require(resource_name).permit(allow)
+     end
 
   protected
     def after_sign_up_path_for(resource)
