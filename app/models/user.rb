@@ -7,7 +7,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable,:recoverable, :rememberable, :registerable , :trackable,
     :validatable, :omniauthable, :confirmable, :omniauth_providers => [:facebook]
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :account_id,:password_confirmation, :remember_me, :role, :books_ids
+  attr_accessible :email, :password, :account_attributes,
+    :password_confirmation, :remember_me, :role, :books_ids
   # attr_accessible :title, :body
 
   ROLES = [ :admin, :user, :guest].freeze
@@ -19,7 +20,7 @@ class User < ActiveRecord::Base
   delegate :city, to: :account, allow_nil: true
   delegate :id, to: :account, allow_nil: true, prefix: true
   delegate :surname, to: :account, allow_nil: true
-
+  accepts_nested_attributes_for :account
 
   def self.from_omniauth(auth)
     # Get the identity and user if they exist

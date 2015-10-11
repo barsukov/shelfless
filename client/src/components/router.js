@@ -8,7 +8,8 @@ var Router = Backbone.Router.extend({
     "accounts/:account/books/:book_param/edit" : "form_book",
     "accounts/:account/edit" : "form_account",
     "users/sign_up" : "form_new_user",
-    "new_interface" : "new_interface"
+    "new_interface" : "new_interface",
+    "users" : "form_new_user"
   },
   new_interface: function(){
     newInterFaceMain()
@@ -24,7 +25,7 @@ var Router = Backbone.Router.extend({
   },
   form_new_user : function() {
     var url = window.location.origin + "/users/sign_up"
-    selectizeInput('#user_city', false)
+    selectizeInput('#user_account_attributes_city', false)
   }
 });
 

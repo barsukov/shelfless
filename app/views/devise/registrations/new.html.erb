@@ -7,18 +7,17 @@
     <div class="field">
       <%= f.input :email, placeholder: 'Email' %>
     </div>
-
-    <div class="field">
-      <%= f.input :city, collection: CityFinder.cities, placeholder: 'City' %>
-    </div>
-
-    <div class="field">
-      <%= f.input :name, placeholder: 'Name' %>
-    </div>
-
-    <div class="field">
-      <%= f.input :surname, placeholder: 'Surname' %>
-    </div>
+    <%= f.simple_fields_for :account do |part| %>
+        <div class="field">
+          <%= part.input :city, collection: CityFinder.cities, placeholder: 'City' %>
+        </div>
+        <div class="field">
+          <%= part.input :name, placeholder: 'Name' %>
+        </div>
+        <div class="field">
+          <%= part.input :surname, placeholder: 'Surname' %>
+        </div>
+    <% end %>
 
     <div class="field">
       <%= f.input :password,  autocomplete: "off" , placeholder: 'Password' %>

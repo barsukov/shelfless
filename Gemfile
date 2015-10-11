@@ -22,6 +22,7 @@ gem 'sidekiq'
 gem "rails_config"
 gem 'active_model_serializers'
 gem 'redis'
+gem "i18n-js", ">= 3.0.0.rc11"
 gem 'will_paginate-bootstrap'
 gem 'analytics-ruby', '~> 2.0.0', :require => 'segment/analytics'
 # Use SCSS for stylesheets
