@@ -7,6 +7,7 @@ var NavigationLinks = React.createClass({
     { name: "Reading list", path:`/reader_book_requests`},
     { name: "Incoming request", path: `/holder_book_requests`}
   ],
+
   getNavigationLinks(accountId) {
     var navigationLinks = [];
     var rootPath = `/new_interface/accounts/${accountId}`;

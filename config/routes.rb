@@ -37,6 +37,7 @@ Rails.application.routes.draw do
   end
 
   root "main#index"
+  resources :new_books, only: [:index]
   get "/new_interface", to: 'new_books#index'
   get "/books_list", to: 'new_books#index'
   get '/about', :to => 'main#about'

@@ -18,7 +18,6 @@ var BasicTable = React.createClass({
     return this.rows[rowIndex];
   },
   render: function () {
-    debugger
     return (
       <Table
         rowHeight={50}
@@ -28,32 +27,32 @@ var BasicTable = React.createClass({
         height={500}
         headerHeight={50}>
         <Column
-          label="Col 1"
+          label="Title"
           width={100}
           dataKey={0}
         />
         <Column
-          label="Col 2"
+          label="Author"
           width={100}
           dataKey={1}
         />
         <Column
-          label="Col 3"
+          label="Category"
           width={100}
           dataKey={2}
         />
         <Column
-          label="Col 4"
+          label="City"
           width={200}
           dataKey={3}
         />
         <Column
-          label="Col 5"
+          label="Language"
           width={200}
           dataKey={4}
         />
         <Column
-          label="Col 6"
+          label="Request"
           width={200}
           dataKey={5}
         />

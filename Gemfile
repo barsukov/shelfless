@@ -20,6 +20,7 @@ gem 'rails_12factor', group: :production
 gem 'puma'
 gem 'sidekiq'
 gem "rails_config"
+gem 'active_model_serializers'
 gem 'redis'
 gem 'will_paginate-bootstrap'
 gem 'analytics-ruby', '~> 2.0.0', :require => 'segment/analytics'
@@ -63,4 +64,3 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-
