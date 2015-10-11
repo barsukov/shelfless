@@ -2,6 +2,7 @@
 var React = require('react')
 var Router = require('./router')
 var Backbone = require('backbone')
+
 require('../styles/select.less');
 $(document).ready(function(){
   new Router();
