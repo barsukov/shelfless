@@ -3,12 +3,13 @@ var webpack = require('webpack')
 var RewirePlugin = require("rewire-webpack");
 module.exports = {
   context: __dirname,
-  entry: "./spec/test.webpack",
+  output: 'spec/dist/s.js',
+  entry: "./spec/test_entry",
   resolve: {
     alias: {
-      'react': nodeDir +'/react/react-with-addons.js',
+      'react': nodeDir +'/react/',
       'underscore': nodeDir +'/underscore/underscore-min.js',
-      'jquery': nodeDir +'/jquery/jquery.js'
+      'jquery': nodeDir +'/jquery/dist/jquery.js'
     },
     extensions: ["", ".jsx", ".cjsx", ".coffee", ".js"],
     modulesDirectories: ["js", "node_modules"]
@@ -18,20 +19,22 @@ module.exports = {
     new webpack.NoErrorsPlugin(),
     new RewirePlugin(),
     new webpack.ProvidePlugin({
+      'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch',
       "_": "underscore",
       "React": 'react',
       "$": "jquery",
       "moment": "moment"
     })
   ],
+
   module: {
     noParse: [
-      nodeDir + '/react/react-with-addons.js',
+       /node_modules\/sinon/,
     ],
     loaders: [
-      {test: /\.jsx$/, loader: ["jsx-loader", "babel"]},
-      {test: /\.cjsx$/, loaders: ["coffee", "cjsx"]},
-      {test: /\.coffee$/, loader: "coffee"}
+        {test: /\.css$/, loader: 'style-loader!css-loader'},
+        {test: /\.jsx$/, exclude: /node_modules/, loader: 'babel' },
+        {test: /\.js$/, exclude: /node_modules/, loader: 'babel' }
     ]
   }
 };

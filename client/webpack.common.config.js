@@ -14,6 +14,7 @@ module.exports = {
   resolve: {
     alias: {
       'react': nodeDir + '/react/',
+      'fetch': nodeDir + '/whatwg-fetch/', 
       'jquery': nodeDir +'/jquery/dist/jquery.min.js',
       'selectize': __dirname + '/selectize/selectize.min.js',
       'selectize-css': __dirname  +'/selectize/selectize.bootstrap3.css',

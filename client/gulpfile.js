@@ -13,6 +13,13 @@ gulp.task("default", ["webpack-dev-server"]);
 // Production build
 gulp.task("build", ["webpack:build"]);
 
+var mochaPhantomJS = require('gulp-mocha-phantomjs');
+gulp.task('test_mocha', ['build_test'],function () {
+    return gulp
+    .src('spec/runner.html')
+    .pipe(mochaPhantomJS({reporter: 'spec'}));
+});
+
 gulp.task("webpack:build", function(callback) {
   var webpackConfig = require("./webpack.rails.config.js");
   // run webpack
@@ -26,11 +33,11 @@ gulp.task("webpack:build", function(callback) {
 });
 
 gulp.task("build_test", function(callback) {
-  var webpackConfig = require("./webpack.karma.config.js");
+  var webpackConfig = require("./webpack.mocha.config.js");
   var myConfig = Object.create(webpackConfig);
   myConfig.devtool = "eval";
   myConfig.debug = true;
-  myConfig.entry = ['./spec/test.webpack'],
+  myConfig.entry = ['./spec/test_entry'],
   // run webpack
   webpack(myConfig, function(err, stats) {
     if(err) throw new gutil.PluginError("build_test", err);
@@ -41,8 +48,11 @@ gulp.task("build_test", function(callback) {
   });
 });
 
-gulp.task('watch', function() {
-  gulp.watch(paths.src, ['build']);
+const mocha = require('gulp-mocha');
+gulp.task('mocha', function () {
+    return gulp.src('bundle.js', {read: false})
+        // gulp-mocha needs filepaths so you can't have any plugins before it
+        .pipe(mocha({reporter: 'nyan'}));
 });
 
 gulp.task("webpack-dev-server", function(callback) {

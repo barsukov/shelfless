@@ -11,7 +11,7 @@ var NavigationLinks = React.createClass({
   getNavigationLinks(accountId) {
     var navigationLinks = [];
     var rootPath = `/new_interface/accounts/${accountId}`;
-    navigationLinks.push(<NavigationLink name={"Books"} path={"/books_list"} />)
+    navigationLinks.push(<NavigationLink key={'books'}  name={"Books"} path={"/books_list"} />)
     this.linkObjs.map(link => {
       navigationLinks.push(<NavigationLink key={link.name} name={link.name} path={rootPath + link.path} />)
     })
