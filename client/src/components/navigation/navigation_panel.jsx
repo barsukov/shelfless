@@ -1,5 +1,5 @@
 var React = require('react')
-var NavigationLinks = require('./navigation_links')
+import NavigationLinks from './navigation_links'
 import NavigationLink from './navigation_link'
 var NavigationPanel = React.createClass({
 

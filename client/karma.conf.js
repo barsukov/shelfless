@@ -1,24 +1,32 @@
 'use strict';
-
 var path = require('path');
+var webpack = require('webpack')
+var nodeDir = path.join(__dirname, 'node_modules');
 
 module.exports = function (config) {
   config.set({
-    basePath: '',
     frameworks: ['jasmine'],
     files: [
-      'spec/test.webpack.js',
+      'spec/test_entry.js'
     ],
     preprocessors: {
-      'spec/test.webpack.js': ['webpack'],
+      'spec/test_entry.js': ['webpack']
     },
-    webpack: require('./webpack.karma.config.js'),
+    webpack: { //kind of a copy of your webpack config
+      module: {
+        loaders: [
+          {
+            test: /(js|jsx)?$/,
+            exclude: /(node_modules)/,
+            loader: "babel"
+          }
+        ]
+      }
+    },
     webpackServer: {
-      quiet: true,
-      stats: true
+      noInfo: true //please don't spam the console when running in karma!
     },
-    exclude: [],
-    port: 8080,
+    port: 8081,
     plugins: [
       require('rewire-webpack'),
       require('karma-jasmine'),
@@ -28,6 +36,6 @@ module.exports = function (config) {
     browsers: ['PhantomJS2'],
     reporters: ['dots'],
     captureTimeout: 60000,
-    singleRun: true
+    singleRun: false
   });
 };

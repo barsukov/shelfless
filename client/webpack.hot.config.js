@@ -19,6 +19,7 @@ config.output = {
 
 config.plugins.push(new webpack.HotModuleReplacementPlugin())
 config.plugins.push(new webpack.ProvidePlugin({
+  'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch',
   "React": 'react',
   "$": 'jquery'
 }))

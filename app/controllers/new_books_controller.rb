@@ -4,6 +4,10 @@ class NewBooksController < ApplicationController
 
   def index
     @books = Book.all
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render json: @books }
+    end
   end
 
   def admin_authenticate

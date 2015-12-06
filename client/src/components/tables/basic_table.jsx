@@ -1,64 +1,66 @@
-var React = require('react');
-var FixedDataTable = require('fixed-data-table');
+import React, { Component, PropTypes } from 'react'
+const {Table, Column, Cell} = require('fixed-data-table');
 require('../../styles/fixed-data-table.css')
-var Table = FixedDataTable.Table;
-var Column = FixedDataTable.Column;
 
-var BasicTable = React.createClass({
+class CusetomCell extends React.Component {
+  render() {
+    var {rowIndex, data, field} = this.props
+    return (
+      <Cell className="my-class" {...this.props}>
+        {data[rowIndex][field]}
+      </Cell>
+    );
+  }
+}
 
-  // Table data as a list of array.
-  rows:
-    [
-      ['a1', 'b1'],
-      ['a2', 'b2'],
-      ['a3', 'b3'],
-    ],
-
+class BasicTable extends Component {
+  constructor(props){
+    super(props)
+    this.rowClick = this.rowClick.bind(this)
+    this.rowGetter = this.rowGetter.bind(this)
+  }
+  rowClick(e, el){
+    this.props.handleBookClick(this.rowGetter(el))
+  }
   rowGetter(rowIndex) {
-    return this.rows[rowIndex];
-  },
-  render: function () {
+    return this.props.books[rowIndex];
+  }
+  render() {
     return (
       <Table
         rowHeight={50}
-        rowGetter={this.rowGetter}
-        rowsCount={this.rows.length}
-        width={1000}
-        height={500}
+        onRowClick={this.rowClick}
+        rowsCount={this.props.books.length}
+        width={750}
+        height={3000}
         headerHeight={50}>
-        <Column
-          label="Title"
-          width={100}
-          dataKey={0}
-        />
-        <Column
-          label="Author"
-          width={100}
-          dataKey={1}
-        />
-        <Column
-          label="Category"
-          width={100}
-          dataKey={2}
-        />
-        <Column
-          label="City"
-          width={200}
-          dataKey={3}
-        />
-        <Column
-          label="Language"
-          width={200}
-          dataKey={4}
-        />
-        <Column
-          label="Request"
-          width={200}
-          dataKey={5}
-        />
+          <Column
+            header={<Cell>Title</Cell>}
+            cell={<CusetomCell data={this.props.books} field="title" />}
+            width={200}
+          />
+          <Column
+            header={<Cell>Author</Cell>}
+            cell={<CusetomCell data={this.props.books} field="author_name" />}
+            width={200}
+          />
+          <Column
+            header={<Cell>Category</Cell>}
+            cell={<CusetomCell data={this.props.books} field="category_name" />}
+            width={200}
+          />
+          <Column
+            header={<Cell>City</Cell>}
+            cell={<CusetomCell data={this.props.books} field="account_city" />}
+            width={200}
+          />
+          <Column
+            header={<Cell>Language</Cell>}
+            cell={<CusetomCell data={this.props.books} field="language" />}
+            width={200}
+          />
       </Table>
-    )
+    );
   }
-});
-
+}
 module.exports = BasicTable

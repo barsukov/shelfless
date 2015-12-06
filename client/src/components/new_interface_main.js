@@ -1,18 +1,18 @@
 'use strict';
-var React = require('react');
-var Router = require('react-router');
-import { createStore } from 'redux';
-import { Provider } from 'react-redux';
-var App = require('./app');
-var BookListHandler = require('./book_list_handler');
-let reducer = require('../reducers/add_table_item')
-var DefaultRoute = Router.DefaultRoute;
-var Route = Router.Route;
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Router, Route } from 'react-router';
+import { Provider } from 'react-redux'
+import configureStore from '../store/book'
+import createBrowserHistory from 'history/lib/createBrowserHistory'
+let history = createBrowserHistory()
+import App from './app'
+import BookList from './book_list'
 var rootInstance = null;
 
 var routes = (
-  <Route name="app" path="/new_interface" handler={App}>
-    <Route path="/books_list" handler={BookListHandler}/>
+  <Route path="/new_interface" component={App} >
+    <Route path="/books_list" component={BookList}/>
     <Route path="/accounts/:id/">
       <Route path="my_books"/>
       <Route path="reader_book_requests"/>
@@ -21,17 +21,19 @@ var routes = (
    <Route path="login"/>
   </Route>
 );
+
 function newMainStart(){
   $(document).ready(function(){
-    Router.run(routes, Router.HistoryLocation, function (Root) {
-      let store = createStore(reducer);
-      rootInstance = React.render(
-          <Provider store={store}>
-            {() => <Root />}
-          </Provider>,
-          document.getElementById('react-content')
-        )
-    });
+    ReactDOM.render(
+        <Provider store={configureStore()}>
+            {() =>
+              <Router history={history}>
+              {routes}
+              </Router>
+            }
+        </Provider>,
+        document.getElementById('react-content')
+    );
   })
 }
 

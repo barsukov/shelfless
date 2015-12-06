@@ -11,6 +11,7 @@ config.externals = {jquery: 'var jQuery'};
 // You can add entry points specific to rails here
 config.entry.push('./src/components/main');
 config.plugins.push(new webpack.ProvidePlugin({
+  'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch',
   "React": 'react',
   "$": 'jquery'
 }))
