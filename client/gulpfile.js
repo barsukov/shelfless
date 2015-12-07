@@ -13,8 +13,8 @@ gulp.task("default", ["webpack-dev-server"]);
 // Production build
 gulp.task("build", ["webpack:build"]);
 
-var mochaPhantomJS = require('gulp-mocha-phantomjs');
 gulp.task('test_mocha', ['build_test'],function () {
+    var mochaPhantomJS = require('gulp-mocha-phantomjs');
     return gulp
     .src('spec/runner.html')
     .pipe(mochaPhantomJS({reporter: 'spec'}));
