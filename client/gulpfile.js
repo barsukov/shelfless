@@ -48,13 +48,6 @@ gulp.task("build_test", function(callback) {
   });
 });
 
-const mocha = require('gulp-mocha');
-gulp.task('mocha', function () {
-    return gulp.src('bundle.js', {read: false})
-        // gulp-mocha needs filepaths so you can't have any plugins before it
-        .pipe(mocha({reporter: 'nyan'}));
-});
-
 gulp.task("webpack-dev-server", function(callback) {
   // modify some webpack config options
   var webpackHotConfig = require("./webpack.hot.config.js");
