@@ -31,15 +31,17 @@
             Shelfless
             %sub
               &beta;
-        / Collect the nav links, forms, and other content for toggling
-        #bs-example-navbar-collapse-1.collapse.navbar-collapse
-          %ul.nav.navbar-nav.navbar-right
-            %li
-              %a{:href => "#"} About
-            %li
-              %a{:href => "#services"} Sharing
-            %li
-              %a{:href => "#contact"} Contact
+        -if user_signed_in?
+          = render partial: 'shared/navigation'
+        -else
+          #bs-example-navbar-collapse-1.collapse.navbar-collapse
+            %ul.nav.navbar-nav.navbar-right
+              %li
+                %a{:href => "#"} About
+              %li
+                %a{:href => "#services"} Sharing
+              %li
+                %a{:href => "#contact"} Contact
         / /.navbar-collapse
       / /.container
     / Header

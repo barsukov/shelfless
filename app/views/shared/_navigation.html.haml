@@ -1,0 +1,9 @@
+.navbar-collapse.collapse.navbar-responsive-collapse
+  %ul.nav.navbar-nav
+    %li= link_to t('book.books'), books_path
+    -if user_signed_in?
+      %li= link_to t('book.my_books'), account_books_path(current_user.account.id)
+      %li= link_to I18n.t('reading_list.nav_title'), account_reader_book_requests_path(current_user.account.id)
+      %li= link_to I18n.t('holder_list.nav_title'), account_holder_book_requests_path(current_user.account.id)
+  %ul.nav.navbar-nav.pull-right
+    =render :partial => 'shared/login_form'
