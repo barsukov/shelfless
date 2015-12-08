@@ -46,6 +46,7 @@ class User < ActiveRecord::Base
         )
         user.build_account
         user.account = account
+        user.skip_confirmation!
         user.save!
       end
     end
