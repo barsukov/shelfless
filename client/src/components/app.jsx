@@ -8,6 +8,8 @@ import { connect } from 'react-redux'
 import { fetchBooksIfNeeded } from '../actions/book'
 import { selectBook } from '../actions/select_book'
 import fetcher from '../lib/fetcher'
+import Thumbnails from './thumbnails'
+import SearchBar from './search_bar'
 
 class App extends Component {
   contextTypes: {
@@ -27,6 +29,18 @@ class App extends Component {
     const { dispatch } = this.props
     dispatch(selectBook(book))
   }
+  getTable() {
+    return (
+      <div>
+      <div className="col-md-8">
+        <BasicTable books={books} handleBookClick={this.handleBookClick} />
+      </div>
+      <div className="col-md-4">
+        <BookForm book={this.props.book} />
+      </div>
+    </div>
+    )
+  }
 
   render() {
     const { books, isFetching } = this.props
@@ -42,17 +56,11 @@ class App extends Component {
         {books.length > 0 &&
           <div className="container">
             <div style={{ opacity: isFetching ? 0.5 : 1 }}>
-              <div className="page-header">
+              <div className="search page-header">
                 <h2>Books</h2>
+                <SearchBar />
               </div>
-              <div className="row">
-                <div className="col-md-8">
-                  <BasicTable books={books} handleBookClick={this.handleBookClick} />
-                </div>
-                <div className="col-md-4">
-                  <BookForm book={this.props.book} />
-                </div>
-              </div>
+                  <Thumbnails books={books} />
             </div>
           </div>
         }
