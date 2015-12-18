@@ -34,7 +34,8 @@ module.exports = {
     loaders: [
         {test: /\.css$/, loader: 'style-loader!css-loader'},
         {test: /\.jsx$/, exclude: /node_modules/, loader: 'babel' },
-        {test: /\.js$/, exclude: /node_modules/, loader: 'babel' }
+        {test: /\.js$/, exclude: /node_modules/, loader: 'babel' },
+        {test: require.resolve('babel-polyfill'), loader: 'babel'}
     ]
   }
 };
