@@ -48,6 +48,10 @@ gulp.task("build_test", function(callback) {
   });
 });
 
+gulp.task('watcher_build_test',function () {
+  gulp.watch('spec/**/*.js', ['test_mocha'])
+});
+
 gulp.task("webpack-dev-server", function(callback) {
   // modify some webpack config options
   var webpackHotConfig = require("./webpack.hot.config.js");

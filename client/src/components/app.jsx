@@ -54,7 +54,7 @@ class App extends Component {
           <h2>Empty.</h2>
         }
         {books.length > 0 &&
-          <div className="container">
+          <div className="container container-xs-height">
             <div style={{ opacity: isFetching ? 0.5 : 1 }}>
               <div className="search page-header">
                 <h2>Books</h2>
