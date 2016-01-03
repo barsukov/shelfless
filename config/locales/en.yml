@@ -113,9 +113,9 @@ en:
     extended: "Book was successfully extended"
     unshared: "Unshared"
   devise:
-    sign_in: "Sign in"
+    sign_in: "Sign In"
     resend: "Resend confirmation instructions"
-    sign_up: "Sign up"
+    sign_up: "Create Free Account"
     forgot_password: "Forgot your password?"
     instructions: "Reset password"
   landing_text:
