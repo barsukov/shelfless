@@ -17,7 +17,16 @@ gulp.task('test_mocha', ['build_test'],function () {
     var mochaPhantomJS = require('gulp-mocha-phantomjs');
     return gulp
     .src('spec/runner.html')
-    .pipe(mochaPhantomJS({reporter: 'tap', useColors: true}));
+    .pipe(mochaPhantomJS({
+        reporter:'spec',
+        phantomjs: {
+            viewportSize: {
+                width: 1024,
+                height: 768
+            },
+            useColors:true
+        }
+    }));
 });
 
 gulp.task("webpack:build", function(callback) {
