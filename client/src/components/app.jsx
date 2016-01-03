@@ -18,17 +18,24 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.handleBookClick = this.handleBookClick.bind(this)
+    this.loadAdditional = this.loadAdditional.bind(this)
   }
 
   componentDidMount() {
-    const { dispatch } = this.props
-    dispatch(fetchBooksIfNeeded(fetcher))
+    const { dispatch, page } = this.props
+    dispatch(fetchBooksIfNeeded(fetcher, page))
   }
 
   handleBookClick(book){
     const { dispatch } = this.props
     dispatch(selectBook(book))
   }
+
+  loadAdditional(page){
+    const { dispatch } = this.props
+    dispatch(fetchBooksIfNeeded(fetcher, page))
+  }
+
   getTable() {
     return (
       <div>
@@ -43,7 +50,7 @@ class App extends Component {
   }
 
   render() {
-    const { books, isFetching } = this.props
+    const { books, isFetching, page } = this.props
     return (
       <div>
         <NavigationPanel />
@@ -57,10 +64,10 @@ class App extends Component {
           <div className="container container-xs-height">
             <div style={{ opacity: isFetching ? 0.5 : 1 }}>
               <div className="search page-header">
-                <h2>Books</h2>
+                <h3>Books</h3>
                 <SearchBar />
               </div>
-                  <Thumbnails books={books} />
+                <Thumbnails loadAdditional={this.loadAdditional} page={page} books={books} />
             </div>
           </div>
         }
@@ -77,10 +84,12 @@ App.propTypes = {
 
 function mapStateToProps(state) {
   var books = state.books.items || []
+  var page = state.books.page
   var book = state.selectedBook.book
   var isFetching = state.books.isFetching
   return {
     book,
+    page,
     books,
     isFetching
   }

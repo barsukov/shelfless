@@ -3,7 +3,7 @@ function parseJSON(response) {
 }
 
 function fetchData(url) {
-  return fetch(url, {credentials: 'same-origin'}).then(parseJSON)
+  return fetch(url, {credentials: 'include'}).then(parseJSON)
     .then(function(json) {
       return json
     }).catch(function(ex) {

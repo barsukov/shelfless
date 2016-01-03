@@ -3,11 +3,15 @@ class NewBooksController < ApplicationController
   before_action :admin_authenticate
 
   def index
-    @page = params[:page]
-    @books = Book.all.paginate(:page => params[:page], :per_page => 30)
+    @books = Book.all.paginate(:page => params[:page], :per_page => 10)
     respond_to do |format|
       format.html { render :index }
-      format.json { render json: @books }
+      format.json do
+        render json: {
+          books: @books.map{|b| BookSerializer.new(b,root: false)}.as_json,
+          page: params[:page]
+        }
+      end
     end
   end
 

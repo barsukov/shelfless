@@ -17,7 +17,7 @@ gulp.task('test_mocha', ['build_test'],function () {
     var mochaPhantomJS = require('gulp-mocha-phantomjs');
     return gulp
     .src('spec/runner.html')
-    .pipe(mochaPhantomJS({reporter: 'tap'}));
+    .pipe(mochaPhantomJS({reporter: 'tap', useColors: true}));
 });
 
 gulp.task("webpack:build", function(callback) {

@@ -2,9 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 export var InfiniteScroll = ComposedComponent => class extends React.Component {
-
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
     this.hasMoreItems = this.hasMoreItems.bind(this)
     this.getElementDOMNode = this.getElementDOMNode.bind(this)
   }
@@ -14,7 +13,7 @@ export var InfiniteScroll = ComposedComponent => class extends React.Component {
   }
 
   loadingAdditionalItems() {
-    //loadNext
+    this.props.loadAdditional(this.props.page + 1)
   }
 
   hasMoreItems() {
@@ -31,34 +30,29 @@ export var InfiniteScroll = ComposedComponent => class extends React.Component {
 
   componentDidUpdate() {
     this.attachScrollListener()
-    if(this.isViewportNotFullFilled())
-      this.fillViewPort()
   }
 
   scrollListener() {
     let node = this.getElementDOMNode()
     let isViewportAtBottom = node.scrollTop + node.offsetHeight >= node.scrollHeight - 20
-    debugger
-    if(isViewportAtBottom)
-      console.log('wokr')
+    if(isViewportAtBottom){
       this.detachScrollListener()
       this.loadingAdditionalItems()
+    }
     return
   }
 
   attachScrollListener() {
-    console.log('attached')
-    debugger
     if(!this.hasMoreItems()) {return}
     let node = this.getElementDOMNode()
-    debugger
-    node.addEventListener("scroll", this.scrollListener)
+    node.addEventListener("scroll", () => this.scrollListener())
     this.scrollListener()
   }
 
   fillViewPort() {
-    unless(this._isFullViewPort())
+    if(!this._isFullViewPort()) {
       this.loadingAdditionalItems()
+    }
   }
 
   _isFullViewPort() {
@@ -67,7 +61,7 @@ export var InfiniteScroll = ComposedComponent => class extends React.Component {
 
   detachScrollListener() {
     let node = this.getElementDOMNode()
-    node.removeEventListener("scroll", this.scrollListener)
+    node.removeEventListener("scroll", () => this.scrollListener())
   }
 
   render() {

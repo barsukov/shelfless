@@ -3,7 +3,8 @@ import { REQUEST_BOOKS, RECEIVE_BOOKS } from '../actions/book'
 export function books(state = {
   isFetching: false,
   didInvalidate: false,
-  items: []
+  items: [],
+  page: 1
 }, action) {
   switch (action.type) {
   case REQUEST_BOOKS:
@@ -16,6 +17,7 @@ export function books(state = {
       isFetching: false,
       didInvalidate: false,
       items: action.books,
+      page: action.page,
     })
   default:
     return state
