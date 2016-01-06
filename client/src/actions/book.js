@@ -18,7 +18,7 @@ export function fetchBooks(fetcher, page, booksState) {
   return function (dispatch) {
     let books = booksState.items
     dispatch(requestBooks())
-    return fetcher(`/new_books.json?page=${page}`)
+    return fetcher(`api/v1/books.json?page=${page}`)
       .then(json =>
         dispatch(receiveBooks(json, books))
       )
