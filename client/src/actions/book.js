@@ -6,38 +6,42 @@ function requestBooks() {
 }
 
 export const RECEIVE_BOOKS = 'RECEIVE_BOOKS'
-function receiveBooks(json) {
+function receiveBooks(json, books) {
   return {
     type: RECEIVE_BOOKS,
-    books: json.new_books
+    books: books.concat(json.books),
+    page: parseInt(json.page)
   }
 }
 
-export function fetchBooks(fetcher) {
+export function fetchBooks(fetcher, page, booksState) {
   return function (dispatch) {
+    let books = booksState.items
     dispatch(requestBooks())
-    return fetcher(`/new_books.json`)
+    return fetcher(`api/v1/books.json?page=${page}`)
       .then(json =>
-        dispatch(receiveBooks(json))
+        dispatch(receiveBooks(json, books))
       )
   }
 }
 
-function shouldFetchBooks(state) {
-  const books = state.books
+function shouldFetchBooks(books, page) {
   if (books.items.length == 0) {
     return true
   } else if (books.isFetching) {
     return false
+  } else if (books.page != page) {
+    return true
   } else {
     return books.didInvalidate
   }
 }
 
-export function fetchBooksIfNeeded(fetcher) {
+export function fetchBooksIfNeeded(fetcher, page) {
   return (dispatch, getState) => {
-    if (shouldFetchBooks(getState())) {
-      return dispatch(fetchBooks(fetcher))
+    let booksState = getState().books
+    if (shouldFetchBooks(booksState, page)) {
+      return dispatch(fetchBooks(fetcher, page, booksState))
     }
   }
 }

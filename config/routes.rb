@@ -14,6 +14,12 @@ Rails.application.routes.draw do
   resources :categories, only: [:index]
   resources :authors, only: [:index]
 
+  namespace :api do
+    namespace :v1 do
+      resources :books, only: [:index], format: :json
+    end
+  end
+
   resources :accounts do
     scope module: :accounts do
        resources :books
@@ -37,8 +43,7 @@ Rails.application.routes.draw do
   end
 
   root "main#index"
-  resources :new_books, only: [:index]
-  get "/new_interface", to: 'new_books#index'
+  get "/new_interface", to: 'single_page_application#index'
   get "/books_list", to: 'new_books#index'
   get '/about', :to => 'main#about'
   get '/privacy', :to => 'main#privacy'

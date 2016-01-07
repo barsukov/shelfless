@@ -6,9 +6,11 @@ class CusetomCell extends React.Component {
   render() {
     var {rowIndex, data, field} = this.props
     return (
-      <Cell className="my-class" {...this.props}>
-        {data[rowIndex][field]}
-      </Cell>
+      <a href="#" >
+        <Cell className="my-class" {...this.props}>
+          {data[rowIndex][field]}
+        </Cell>
+      </a>
     );
   }
 }
@@ -18,6 +20,13 @@ class BasicTable extends Component {
     super(props)
     this.rowClick = this.rowClick.bind(this)
     this.rowGetter = this.rowGetter.bind(this)
+    this.rowClassNameGetter = this.rowClassNameGetter.bind(this)
+  }
+  rowClassNameGetter(e, sel){
+    return "list-group"
+  }
+  scrollEnd(e, sel){
+    console.log("end")
   }
   rowClick(e, el){
     this.props.handleBookClick(this.rowGetter(el))
@@ -32,7 +41,9 @@ class BasicTable extends Component {
         onRowClick={this.rowClick}
         rowsCount={this.props.books.length}
         width={750}
-        height={3000}
+        onScrollEnd={this.scrollEnd}
+        height={800}
+        rowClassNameGetter={this.rowClassNameGetter}
         headerHeight={50}>
           <Column
             header={<Cell>Title</Cell>}

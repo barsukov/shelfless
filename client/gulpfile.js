@@ -17,7 +17,16 @@ gulp.task('test_mocha', ['build_test'],function () {
     var mochaPhantomJS = require('gulp-mocha-phantomjs');
     return gulp
     .src('spec/runner.html')
-    .pipe(mochaPhantomJS({reporter: 'tap'}));
+    .pipe(mochaPhantomJS({
+        reporter:'spec',
+        phantomjs: {
+            viewportSize: {
+                width: 1024,
+                height: 768
+            },
+            useColors:true
+        }
+    }));
 });
 
 gulp.task("webpack:build", function(callback) {
@@ -46,6 +55,10 @@ gulp.task("build_test", function(callback) {
     }));
     callback();
   });
+});
+
+gulp.task('watcher_build_test',function () {
+  gulp.watch('spec/**/*.js', ['test_mocha'])
 });
 
 gulp.task("webpack-dev-server", function(callback) {

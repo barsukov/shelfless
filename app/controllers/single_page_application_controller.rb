@@ -1,12 +1,10 @@
-class NewBooksController < ApplicationController
-  layout 'new_interface'
+class SinglePageApplicationController < ApplicationController
+  layout 'single_page_application'
   before_action :admin_authenticate
 
   def index
-    @books = Book.all
     respond_to do |format|
       format.html { render :index }
-      format.json { render json: @books }
     end
   end
 

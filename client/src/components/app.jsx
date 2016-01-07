@@ -8,6 +8,8 @@ import { connect } from 'react-redux'
 import { fetchBooksIfNeeded } from '../actions/book'
 import { selectBook } from '../actions/select_book'
 import fetcher from '../lib/fetcher'
+import Thumbnails from './thumbnails'
+import SearchBar from './search_bar'
 
 class App extends Component {
   contextTypes: {
@@ -16,11 +18,12 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.handleBookClick = this.handleBookClick.bind(this)
+    this.loadAdditional = this.loadAdditional.bind(this)
   }
 
   componentDidMount() {
-    const { dispatch } = this.props
-    dispatch(fetchBooksIfNeeded(fetcher))
+    const { dispatch, page } = this.props
+    dispatch(fetchBooksIfNeeded(fetcher, page))
   }
 
   handleBookClick(book){
@@ -28,8 +31,26 @@ class App extends Component {
     dispatch(selectBook(book))
   }
 
+  loadAdditional(page){
+    const { dispatch } = this.props
+    dispatch(fetchBooksIfNeeded(fetcher, page))
+  }
+
+  getTable() {
+    return (
+      <div>
+      <div className="col-md-8">
+        <BasicTable books={books} handleBookClick={this.handleBookClick} />
+      </div>
+      <div className="col-md-4">
+        <BookForm book={this.props.book} />
+      </div>
+    </div>
+    )
+  }
+
   render() {
-    const { books, isFetching } = this.props
+    const { books, isFetching, page } = this.props
     return (
       <div>
         <NavigationPanel />
@@ -40,19 +61,13 @@ class App extends Component {
           <h2>Empty.</h2>
         }
         {books.length > 0 &&
-          <div className="container">
+          <div className="container container-xs-height">
             <div style={{ opacity: isFetching ? 0.5 : 1 }}>
-              <div className="page-header">
-                <h2>Books</h2>
+              <div className="search page-header">
+                <h3>Books</h3>
+                <SearchBar />
               </div>
-              <div className="row">
-                <div className="col-md-8">
-                  <BasicTable books={books} handleBookClick={this.handleBookClick} />
-                </div>
-                <div className="col-md-4">
-                  <BookForm book={this.props.book} />
-                </div>
-              </div>
+                <Thumbnails loadAdditional={this.loadAdditional} page={page} books={books} />
             </div>
           </div>
         }
@@ -69,10 +84,12 @@ App.propTypes = {
 
 function mapStateToProps(state) {
   var books = state.books.items || []
+  var page = state.books.page
   var book = state.selectedBook.book
   var isFetching = state.books.isFetching
   return {
     book,
+    page,
     books,
     isFetching
   }

@@ -48,12 +48,13 @@ function mockStore(getState, expectedActions, done) {
 
 describe('async actions', () => {
   it('creates RECEIVE_BOOKS when fetching books has been done', (done) => {
+    const page = 1
     const expectedActions = [
       { type: actions.REQUEST_BOOKS },
-      { type: actions.RECEIVE_BOOKS, books: ['do something'] }
+      { type: actions.RECEIVE_BOOKS, books: ['do something'], page: page}
     ]
-    let fetcher = () => { return $.Deferred().resolve({new_books: ['do something'] }) }
-    const store = mockStore({ books: [] }, expectedActions, done)
-    store.dispatch(actions.fetchBooks(fetcher))
+    let fetcher = () => { return $.Deferred().resolve({books: ['do something'], page: page}) }
+    const store = mockStore({ books: {items: []} }, expectedActions, done)
+    store.dispatch(actions.fetchBooksIfNeeded(fetcher, page))
   })
 })

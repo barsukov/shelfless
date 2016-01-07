@@ -13,6 +13,21 @@
 
 // Font Awesome
 @import "fontawesome/font-awesome";
+/*
+ * Row with equal height columns
+ * --------------------------------------------------
+ */
+.row-eq-height {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display:         flex;
+}
+
+.new-interface.col-sm-4 {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
 
 // Glyphicons
 //@import "twitter/bootstrap/glyphicons.less";
@@ -44,9 +59,16 @@ body {
 .panel {
   margin-top: 40px;
 }
+.panel.clearfix {
+   min-height:500px;
+   height: 100%;
+}
 
 .panel.new-interface {
   margin-top: 00px;
+}
+.footer.stick-panel {
+  margin: 20px;
 }
 .footer {
   position: absolute;
