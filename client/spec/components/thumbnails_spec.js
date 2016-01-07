@@ -17,4 +17,13 @@ describe('Thumbnails', function () {
   it('should create a new instance of Thumbnails', function () {
     expect(component).to.exist;
   });
+
+  describe('infinite scroll behaviour', () => {
+    describe('#loadingAdditionalItems', () => {
+      it('calls new page when scroll in the bootom', () => {
+        component.attachScrollListener()
+        sinon.assert.called(loadAdditional);
+      });
+    });
+  });
 });
