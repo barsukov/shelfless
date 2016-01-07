@@ -3,7 +3,7 @@
   "version": "1.1.1",
   "description": "Shelfless frontend client",
   "engines": {
-    "node": "4.1.0"
+    "node": "5.1.0"
   },
   "scripts": {
     "postinstall": "cd ./client && npm install && node_modules/gulp/bin/gulp.js build",
