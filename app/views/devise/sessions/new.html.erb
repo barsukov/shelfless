@@ -21,15 +21,15 @@
        </div>
        <div class="form-group">
           <div class="btn-group btn-group-justified form-control-static">
-          <%= link_to "Sign up", new_user_registration_path, class: "btn btn-link btn-xs ellipsis" %><br />
-
           <%= link_to "Forgot your password?", new_user_password_path, class: "btn btn-link btn-xs ellipsis" %><br />
           </div>
         </div>
   <% end %>
   <legend class="text-muted text-center">or</legend>
+  <%= link_to I18n.t('devise.sign_up'), new_user_registration_path,
+    class: "btn btn-block btn-lg btn-success" %><br />
   <%= link_to user_omniauth_authorize_path(:facebook),
-    class: "btn btn-block btn-social btn-facebook" do %>
+    class: "btn btn-block btn-lg btn-social btn-facebook" do %>
     <i class="fa fa-facebook"></i> Sign in with Facebook
   <% end %>
 <% end %>
