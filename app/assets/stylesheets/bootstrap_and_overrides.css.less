@@ -22,8 +22,11 @@
   display: -webkit-flex;
   display: -ms-flexbox;
   display:         flex;
+  margin: 0;
 }
-
+li.thumbnail.list-group-item {
+  padding: 7px;
+}
 .new-interface.col-sm-4 {
   padding-top: 15px;
   padding-bottom: 15px;
@@ -60,10 +63,25 @@ body {
   margin-top: 40px;
 }
 .panel.clearfix {
-   min-height:500px;
+   min-height: 340px;
    height: 100%;
+   position:relative;
+}
+.thumbnails-scrollable .panel-default > .panel-heading {
+  color: #FFFFFF;
+  background-color: #3F7AAF;
+  border-color: #dddddd;
 }
 
+.thumbnails-scrollable .panel-footer{
+  position:absolute;
+  width: 100%;
+  bottom:0;
+}
+
+h5.thumbnail-heading {
+  font-weight: 200;
+}
 .panel.new-interface {
   margin-top: 00px;
 }
