@@ -11,7 +11,19 @@ describe('Thumbnail', function () {
     component = ReactTestUtils.renderIntoDocument(<Thumbnail book={{}} />);
   });
 
+  describe('#getElementItem', () => {
+    it('returns string with special class', () => {
+      expect(component.getElementItem("Title")).to.exist;
+    });
+
+    it('returns nothing when value is undefined', () => {
+      expect(component.getElementItem(undefined)).not.to.exist;
+    });
+  });
+
   it('should create a new instance of Thumbnails', function () {
-    expect(component).to.exist;
+    let element = ReactTestUtils.findRenderedDOMComponentWithClass(component,
+      "thumbnail-heading")
+    expect(element).to.exist;
   });
 });
