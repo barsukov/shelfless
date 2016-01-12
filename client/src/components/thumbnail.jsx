@@ -25,7 +25,7 @@ class Thumbnail extends Component {
                 <div className="panel-heading text-center">
                   <h5 className="thumbnail-heading">{ book.title } </h5>
                 </div>
-                <div className="panel-body vcenter">
+                <div className="panel-body">
                   <div className="list-group">
                     { this.getElementItem(book.language) }
                     { this.getElementItem(book.category_name) }
