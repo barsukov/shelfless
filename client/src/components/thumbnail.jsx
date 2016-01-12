@@ -4,11 +4,6 @@ class Thumbnail extends Component {
     super(props)
   }
 
-  getBookInformationString(book){
-    return book.author_name + book.author_name +
-      book.cate + book.account_city
-
-  }
   getElementItem(item){
     if (item) {
       return <li className="thumbnail list-group-item text-center">
