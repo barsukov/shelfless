@@ -47,7 +47,13 @@ Devise.setup do |config|
   # These keys will have whitespace before and after removed upon creating or
   # modifying a user and when used to authenticate or find a user. Default is :email.
   config.strip_whitespace_keys = [ :email ]
+  Warden::Manager.after_set_user do |user, auth, opts|
+    auth.cookies[:account_id] = user.account_id
+  end
 
+  Warden::Manager.before_logout do |user,auth,opts|
+    auth.cookies.delete :account_id
+  end
   # Tell if authentication through request.params is enabled. True by default.
   # It can be set to an array that will enable params authentication only for the
   # given strategies, for example, `config.params_authenticatable = [:database]` will

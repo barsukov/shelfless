@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 class Thumbnail extends Component {
   constructor(props){
     super(props)
+    this.handleBookRequestClick = this.handleBookRequestClick.bind(this)
   }
 
   getElementItem(item){
@@ -11,6 +12,21 @@ class Thumbnail extends Component {
       </li>
     }
   }
+
+  requestButtonClass(book){
+    let className = "btn btn-default"
+    let bookState = this.props.bookState
+    if(bookState &&
+        bookState.state == "pending" && bookState.book_id == book.id ) {
+      className = "btn btn-warning"
+    }
+    return className
+  }
+
+  handleBookRequestClick() {
+    this.props.requestBook(this.props.book)
+  }
+
   render() {
     const { book } = this.props
     return (
@@ -29,7 +45,7 @@ class Thumbnail extends Component {
                   </div>
                 </div>
                 <div className="panel-footer stick-panel text-right">
-                  <a href="#" className="btn btn-default" role="button">Request</a>
+                  <a href="#" className={this.requestButtonClass(book)} onClick={this.handleBookRequestClick} role="button">Request</a>
                 </div>
             </div>
         }
