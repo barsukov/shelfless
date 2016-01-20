@@ -13,14 +13,22 @@ class Thumbnail extends Component {
     }
   }
 
-  requestButtonClass(book){
-    let className = "btn btn-default"
+  _getStateClassForElement(book, baseClass) {
     let bookState = this.props.bookState
-    if(bookState &&
-        bookState.state == "pending" && bookState.book_id == book.id ) {
-      className = "btn btn-warning"
+    if(this.props.requested) {
+      baseClass += "disabled"
     }
-    return className
+    return baseClass
+  }
+
+  panelThumbClass(book){
+    let className = "panel panel-default clearfix "
+    return this._getStateClassForElement(book, className)
+  }
+
+  requestButtonClass(book){
+    let className = "btn btn-default "
+    return this._getStateClassForElement(book, className)
   }
 
   handleBookRequestClick() {
@@ -32,7 +40,7 @@ class Thumbnail extends Component {
     return (
       <div className="col-sm-4">
           { book != undefined &&
-            <div className="panel panel-default clearfix ">
+            <div className={this.panelThumbClass(book)}>
                 <div className="panel-heading text-center">
                   <h5 className="thumbnail-heading">{ book.title } </h5>
                 </div>

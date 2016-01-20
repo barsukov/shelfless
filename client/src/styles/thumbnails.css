@@ -2,7 +2,10 @@
   overflow: auto;
   max-height: 100vh;
 }
-
+.panel.disabled {
+  opacity: .5;
+  pointer-events: none;
+}
 .thumbnails-scrollable .panel-default > .panel-body {
   display: inline-flex;
   width: 100%;

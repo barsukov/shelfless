@@ -19,7 +19,8 @@ class Thumbnails extends Component {
   getThumbs(books, id){
     var bookThumbs = []
     for (var book of books) {
-      bookThumbs.push(<Thumbnail bookState={this.props.bookState} requestBook={this.requestBook} key={book.id} book={book} />)
+      let requested = this.props.requestedBooks.includes(book.id)
+      bookThumbs.push(<Thumbnail requested={requested} requestBook={this.requestBook} key={book.id} book={book} />)
     }
     return React.DOM.div({className:"row row-eq-height", key: id}, bookThumbs)
   }
@@ -57,9 +58,11 @@ Thumbnails.propTypes = {
 function mapStateToProps(state) {
   var bookState = state.requestBook.status
   var isRequesting = state.requestBook.isRequesting
+  var requestedBooks = state.requestBook.requestedBooks
   return {
     bookState,
-    isRequesting
+    isRequesting,
+    requestedBooks
   }
 }
 

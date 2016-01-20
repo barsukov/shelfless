@@ -1,15 +1,8 @@
 import { START_REQUEST_BOOK, COMPLETE_REQUEST_BOOK } from '../actions/request_book'
-export function requestBook(state = {}, action){
-  switch (action.type) {
-  case START_REQUEST_BOOK:
-    return Object.assign({}, state, { status: "loading" })
-  default:
-    return state
-  }
-}
 
 export function requestBook(state = {
   isRequesting: false,
+  requestedBooks: []
 }, action) {
   switch (action.type) {
   case START_REQUEST_BOOK:
@@ -19,7 +12,8 @@ export function requestBook(state = {
   case COMPLETE_REQUEST_BOOK:
     return Object.assign({}, state, {
       isRequesting: false,
-      status: action.status
+      status: action.status,
+      requestedBooks: action.requestedBooks
     })
   default:
     return state

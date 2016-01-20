@@ -9,9 +9,10 @@ export function startRequestBook(book) {
 }
 
 export const COMPLETE_REQUEST_BOOK = 'COMPLETE_REQUEST_BOOK'
-function requestBookComplete(json) {
+function requestBookComplete(json, requestedBooks) {
   return {
     type: COMPLETE_REQUEST_BOOK,
+    requestedBooks: requestedBooks.concat(json.book_id),
     status: {book_id: json.book_id, state: json.book_request_state}
   }
 }
@@ -21,14 +22,14 @@ function serializeBodyParams(book) {
 }
 
 export function requestBook(book_request, book) {
-  return function (dispatch) {
+  return function (dispatch, getState) {
     dispatch(startRequestBook())
-
+    let requestedBooks = getState().requestBook.requestedBooks
     let account_id = getCoockieByName("account_id")
     let url = `/api/v1/accounts/${account_id}/reader_book_requests`
     return book_request(url, serializeBodyParams(book))
       .then(json =>
-        dispatch(requestBookComplete(json))
+        dispatch(requestBookComplete(json, requestedBooks))
       )
   }
 }
