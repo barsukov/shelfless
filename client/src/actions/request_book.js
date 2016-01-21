@@ -21,13 +21,13 @@ function serializeBodyParams(book) {
   return JSON.stringify({book_id: book.id})
 }
 
-export function requestBook(book_request, book) {
+export function requestBook(requester, book) {
   return function (dispatch, getState) {
-    dispatch(startRequestBook())
+    dispatch(startRequestBook(book))
     let requestedBooks = getState().requestBook.requestedBooks
     let account_id = getCoockieByName("account_id")
     let url = `/api/v1/accounts/${account_id}/reader_book_requests`
-    return book_request(url, serializeBodyParams(book))
+    return requester(url, serializeBodyParams(book))
       .then(json =>
         dispatch(requestBookComplete(json, requestedBooks))
       )

@@ -66,4 +66,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(InfiniteScroll(Thumbnails));
+export default connect(mapStateToProps, null, null, {withRef: true})(InfiniteScroll(Thumbnails));

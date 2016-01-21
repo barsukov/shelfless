@@ -1,9 +1,11 @@
-'use strict';
-import Ract from 'react'
-import ReactTestUtils from 'react-addons-test-utils'
 import Thumbnails from '../../src/components/thumbnails'
+import { InfiniteScroll } from "../../src/lib/infinite_scroll"
 import { expect } from 'chai'
 import sinon from 'sinon/pkg/sinon';
+import requestBook from '../../src/reducers/combined_reducers'
+import { wrapInProvider } from '../helpers/test_helper'
+import { createStore } from 'redux'
+import ReactTestUtils from 'react-addons-test-utils'
 
 describe('Thumbnails', function () {
   var component;
@@ -11,7 +13,8 @@ describe('Thumbnails', function () {
 
   beforeEach(function () {
     loadAdditional = sinon.spy()
-    component = ReactTestUtils.renderIntoDocument(<Thumbnails loadAdditional={loadAdditional} books={[]} />);
+    let store = createStore(requestBook)
+    component = wrapInProvider(<Thumbnails loadAdditional={loadAdditional} books={[]} />, store);
   });
 
   it('should create a new instance of Thumbnails', function () {
@@ -21,7 +24,9 @@ describe('Thumbnails', function () {
   describe('infinite scroll behaviour', () => {
     describe('#loadingAdditionalItems', () => {
       it('calls new page when scroll in the bootom', () => {
-        component.attachScrollListener()
+        let connect = ReactTestUtils.findRenderedComponentWithType(component, Thumbnails);
+        let wrappedInstance = connect.refs.wrappedInstance
+        wrappedInstance.attachScrollListener()
         sinon.assert.called(loadAdditional);
       });
     });

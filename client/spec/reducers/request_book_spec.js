@@ -1,12 +1,12 @@
 import { expect } from 'chai'
 import { requestBook } from '../../src/reducers/request_book'
-import { START_REQUEST_BOOK } from '../../src/actions/request_book'
+import { START_REQUEST_BOOK, COMPLETE_REQUEST_BOOK } from '../../src/actions/request_book'
 
 describe('request book reducer', () => {
   it('returns the initial state', () => {
     expect(
       requestBook(undefined, {})
-    ).to.deep.equal({ })
+    ).to.deep.equal({isRequesting: false , requestedBooks: [] })
   })
 
   it('should handle START_REQUEST_BOOK', () => {
@@ -16,15 +16,21 @@ describe('request book reducer', () => {
     }
     expect(requestBook({id: "1"}, action)).to.deep.equal({
       id: "1",
-      book: 'test'
+      isRequesting: true
     })
-    expect(requestBook(
-      { text: 'Use Redux', books: [] }, action)).to.deep.equal(
-        {
-          text: 'Use Redux',
-          books: [],
-          book: "test"
-        }
-    )
+  })
+  it('should handle START_REQUEST_BOOK', () => {
+    var action = {
+      type: COMPLETE_REQUEST_BOOK,
+      status: "pending",
+      requestedBooks: [1]
+    }
+
+    expect(requestBook({book_id: "1", status: "pending"}, action)).to.deep.equal({
+      book_id: "1",
+      isRequesting: false,
+      requestedBooks: [1],
+      status: "pending"
+    })
   })
 })

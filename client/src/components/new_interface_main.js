@@ -26,7 +26,7 @@ function newMainStart(){
   $(document).ready(function(){
     ReactDOM.render(
         <Provider store={configureStore()}>
-            {() =>
+            {
               <Router history={history}>
               {routes}
               </Router>
