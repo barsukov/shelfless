@@ -148,6 +148,10 @@ GEM
       omniauth (~> 1.2)
     orm_adapter (0.5.0)
     pg (0.18.1)
+    pg_search (1.0.5)
+      activerecord (>= 3.1)
+      activesupport (>= 3.1)
+      arel
     polyamorous (1.2.0)
       activerecord (>= 3.0)
     protected_attributes (1.0.9)
@@ -326,6 +330,7 @@ DEPENDENCIES
   omniauth
   omniauth-facebook
   pg
+  pg_search
   protected_attributes
   pry
   puma

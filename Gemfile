@@ -14,6 +14,7 @@ gem "pry", group: [:development, :test]
 gem "devise"
 gem "cancan"
 gem "pg"
+gem "pg_search"
 gem "ransack"
 gem 'protected_attributes'
 gem 'rails_12factor', group: :production
