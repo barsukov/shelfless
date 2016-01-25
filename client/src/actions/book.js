@@ -14,7 +14,7 @@ function receiveBooks(json, books) {
   }
 }
 
-export function fetchBooks(fetcher, page, booksState) {
+function fetchBooks(fetcher, page, booksState) {
   return function (dispatch) {
     let books = booksState.items
     dispatch(requestBooks())

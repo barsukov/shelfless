@@ -17,6 +17,11 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :books, only: [:index], format: :json
+      resources :accounts do
+        scope module: :accounts do
+          resources :reader_book_requests, only: [:create], format: :json
+        end
+      end
     end
   end
 
