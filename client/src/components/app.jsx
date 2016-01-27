@@ -63,10 +63,7 @@ class App extends Component {
         {books.length > 0 &&
           <div className="container container-xs-height">
             <div style={{ opacity: isFetching ? 0.5 : 1 }}>
-              <div className="search page-header">
-                <h3>Books</h3>
                 <SearchBar />
-              </div>
                 <Thumbnails loadAdditional={this.loadAdditional} page={page} books={books} />
             </div>
           </div>
