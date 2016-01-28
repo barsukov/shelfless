@@ -6,8 +6,8 @@ var Link = Router.Link;
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { fetchBooksIfNeeded } from '../actions/book'
-import { selectBook } from '../actions/select_book'
-import fetcher from '../lib/fetcher'
+import { searchBook } from '../actions/search_book'
+import { fetchData as fetcher }  from '../lib/fetcher'
 import Thumbnails from './thumbnails'
 import SearchBar from './search_bar'
 
@@ -17,8 +17,8 @@ class App extends Component {
   }
   constructor(props) {
     super(props)
-    this.handleBookClick = this.handleBookClick.bind(this)
     this.loadAdditional = this.loadAdditional.bind(this)
+    this.handleSearchClick = this.handleSearchClick.bind(this)
   }
 
   componentDidMount() {
@@ -26,9 +26,9 @@ class App extends Component {
     dispatch(fetchBooksIfNeeded(fetcher, page))
   }
 
-  handleBookClick(book){
+  handleSearchClick(form){
     const { dispatch } = this.props
-    dispatch(selectBook(book))
+    dispatch(searchBook(form.searchTerm))
   }
 
   loadAdditional(page){
@@ -36,21 +36,29 @@ class App extends Component {
     dispatch(fetchBooksIfNeeded(fetcher, page))
   }
 
-  getTable() {
+  getBookContainer(books, loading, page) {
     return (
-      <div>
-      <div className="col-md-8">
-        <BasicTable books={books} handleBookClick={this.handleBookClick} />
+      <div className="container container-xs-height">
+        <div style={{ opacity: loading ? 0.5 : 1 }}>
+            <SearchBar submitSearch={this.handleSearchClick}/>
+            <Thumbnails loadAdditional={this.loadAdditional} page={page} books={books} />
+        </div>
       </div>
-      <div className="col-md-4">
-        <BookForm book={this.props.book} />
-      </div>
-    </div>
     )
   }
 
+  renderBooks(){
+    if(!this.props.isSearching && this.props.searchedBooks.length > 0) {
+      return this.getBookContainer(this.props.searchedBooks, this.props.isSearching)
+    }
+    if(this.props.books.length > 0) {
+      return this.getBookContainer(this.props.books, this.props.isFetching, this.props.page)
+    }
+  }
+
+
   render() {
-    const { books, isFetching, page } = this.props
+    const { books, isFetching, isSearching, page } = this.props
     return (
       <div>
         <NavigationPanel />
@@ -60,15 +68,8 @@ class App extends Component {
         {!isFetching && books.length === 0 &&
           <h2>Empty.</h2>
         }
-        {books.length > 0 &&
-          <div className="container container-xs-height">
-            <div style={{ opacity: isFetching ? 0.5 : 1 }}>
-                <SearchBar />
-                <Thumbnails loadAdditional={this.loadAdditional} page={page} books={books} />
-            </div>
-          </div>
-        }
-      </div>
+        {this.renderBooks()}
+        </div>
     );
   }
 };
@@ -76,19 +77,22 @@ class App extends Component {
 App.propTypes = {
   books: PropTypes.array.isRequired,
   isFetching: PropTypes.bool.isRequired,
+  isSearching: PropTypes.bool.isRequired,
   dispatch: PropTypes.func.isRequired
 }
 
 function mapStateToProps(state) {
   var books = state.books.items || []
+  var searchedBooks = state.searchBook.books || []
+  var isSearching = state.searchBook.isSearching
   var page = state.books.page
-  var book = state.selectedBook.book
   var isFetching = state.books.isFetching
   return {
-    book,
     page,
     books,
-    isFetching
+    isFetching,
+    searchedBooks,
+    isSearching
   }
 }
 

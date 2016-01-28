@@ -1,8 +1,9 @@
 class Book < ActiveRecord::Base
   include PgSearch
 
-  pg_search_scope :search_book, against: [:title, :language],
-    associated_against: {author: [:name], category: [:name], account: [:city] }
+  pg_search_scope :search_book, against: [:title, :language], :using => {
+    :tsearch => {:prefix => true}
+  }, associated_against: {author: [:name], category: [:name], account: [:city] }
 
   attr_accessible :title, :author, :category, :state, :state_event, :language,
     :account_id, :category_id, :author_id, :category_attributes, :author_attributes

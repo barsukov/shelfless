@@ -1,13 +1,11 @@
-function parseJSON(response) {
-  return response.json()
+import { getRequest, postRequest } from './api_request_layer'
+
+export function fetchData(url) {
+  return getRequest(url)
 }
 
-function fetchData(url) {
-  return fetch(url, {credentials: 'include'}).then(parseJSON)
-    .then(function(json) {
-      return json
-    }).catch(function(ex) {
-      console.log('parsing failed', ex)
-    })
+export function searchRequest(searchTerm) {
+  let body = JSON.stringify({search_term: searchTerm})
+  let url = `/api/v1/books/search`
+  return postRequest(url, body)
 }
-module.exports = fetchData
