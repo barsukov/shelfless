@@ -1,26 +1,27 @@
 class Api::V1::BooksController < SinglePageApplicationController
   skip_before_filter :verify_authenticity_token, only: :search
-  def index
-    @books = Book.all.paginate(:page => params[:page], :per_page => 10)
-    respond_to do |format|
-      format.json do
-        render json: {
-          books: @books.map{|b| BookSerializer.new(b,root: false)}.as_json,
-          page: params[:page]
-        }
-    end
-    end
-  end
 
-  def search
-    @books = Book.search_book(params[:search_term])
+  def render_books(books, page)
     respond_to do |format|
       format.json do
         render json: {
-          books: @books.map{|b| BookSerializer.new(b,root: false)}.as_json,
-          page: params[:page]
+          books: books.map{|b| BookSerializer.new(b, root: false)}.as_json,
+          page: page,
+          hasMoreItems: books.current_page < books.total_pages
         }
       end
     end
+  end
+
+  def index
+    page = params[:page] || 1
+    books = Book.all.paginate(:page => page, :per_page => 10)
+    render_books books, page
+  end
+
+  def search
+    page = params[:page] || 1
+    books = Book.search_book(params[:search_term]).paginate(:page => page, :per_page => 10)
+    render_books books, page
   end
 end

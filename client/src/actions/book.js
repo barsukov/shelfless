@@ -10,7 +10,8 @@ function receiveBooks(json, books) {
   return {
     type: RECEIVE_BOOKS,
     books: books.concat(json.books),
-    page: parseInt(json.page)
+    page: parseInt(json.page),
+    hasMoreItems: Boolean(json.hasMoreItems)
   }
 }
 

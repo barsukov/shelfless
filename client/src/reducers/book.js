@@ -17,6 +17,7 @@ export function books(state = {
       isFetching: false,
       didInvalidate: false,
       items: action.books,
+      hasMoreItems: action.hasMoreItems,
       page: action.page,
     })
   default:

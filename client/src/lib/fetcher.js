@@ -4,8 +4,8 @@ export function fetchData(url) {
   return getRequest(url)
 }
 
-export function searchRequest(searchTerm) {
-  let body = JSON.stringify({search_term: searchTerm})
+export function searchRequest(searchTerm, page) {
+  let body = JSON.stringify({search_term: searchTerm, page: page})
   let url = `/api/v1/books/search`
   return postRequest(url, body)
 }

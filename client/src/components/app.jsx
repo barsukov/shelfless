@@ -22,77 +22,81 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const { dispatch, page } = this.props
-    dispatch(fetchBooksIfNeeded(fetcher, page))
+    const { dispatch } = this.props
+    let firstPage = 1
+    dispatch(fetchBooksIfNeeded(fetcher, firstPage))
   }
 
   handleSearchClick(form){
     const { dispatch } = this.props
-    dispatch(searchBook(form.searchTerm))
+    if(form.searchTerm.length > 0) {
+      this.props.searchingBooks.searchTerm = ""
+      this.props.searchingBooks.items = []
+      dispatch(searchBook(form.searchTerm))
+    } else {
+      let firstPage = 1
+      this.props.searchingBooks.searchTerm = ""
+      this.props.searchingBooks.items = []
+      this.props.fetchedBooks.items = []
+      this.props.fetchedBooks.didInvalidate = true
+      dispatch(fetchBooksIfNeeded(fetcher, firstPage))
+    }
   }
 
-  loadAdditional(page){
+  loadAdditional(page) {
     const { dispatch } = this.props
-    dispatch(fetchBooksIfNeeded(fetcher, page))
+    if(this.props.searchingBooks.searchTerm.length > 0) {
+      dispatch(searchBook(this.props.searchingBooks.searchTerm, page))
+    } else {
+      dispatch(fetchBooksIfNeeded(fetcher, page))
+    }
   }
 
-  getBookContainer(books, loading, page) {
+  getBookContainer(books, loading, page, hasMoreItems, key) {
     return (
       <div className="container container-xs-height">
         <div style={{ opacity: loading ? 0.5 : 1 }}>
-            <SearchBar submitSearch={this.handleSearchClick}/>
-            <Thumbnails loadAdditional={this.loadAdditional} page={page} books={books} />
+          <SearchBar submitSearch={this.handleSearchClick}/>
+          <Thumbnails key={key} hasMoreItems={hasMoreItems} loadAdditional={this.loadAdditional} page={page} books={books} />
         </div>
       </div>
     )
   }
 
   renderBooks(){
-    if(!this.props.isSearching && this.props.searchedBooks.length > 0) {
-      return this.getBookContainer(this.props.searchedBooks, this.props.isSearching)
+    if(this.props.searchingBooks.searchTerm.length > 0) {
+      const { items, isSearching, page, hasMoreItems } = this.props.searchingBooks
+      return this.getBookContainer(items, isSearching, page, hasMoreItems, "search")
     }
-    if(this.props.books.length > 0) {
-      return this.getBookContainer(this.props.books, this.props.isFetching, this.props.page)
+    if(this.props.fetchedBooks.items.length > 0) {
+      const { items, isFetching, page, hasMoreItems } = this.props.fetchedBooks
+      return this.getBookContainer(items, isFetching, page, hasMoreItems, "fetch")
     }
   }
 
-
   render() {
-    const { books, isFetching, isSearching, page } = this.props
     return (
       <div>
         <NavigationPanel />
-        {isFetching && books.length === 0 &&
-          <h2>Loading...</h2>
-        }
-        {!isFetching && books.length === 0 &&
-          <h2>Empty.</h2>
-        }
         {this.renderBooks()}
-        </div>
+      </div>
     );
   }
 };
 
 App.propTypes = {
-  books: PropTypes.array.isRequired,
-  isFetching: PropTypes.bool.isRequired,
-  isSearching: PropTypes.bool.isRequired,
+  fetchedBooks: PropTypes.object.isRequired,
+  searchingBooks: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired
 }
 
 function mapStateToProps(state) {
-  var books = state.books.items || []
-  var searchedBooks = state.searchBook.books || []
-  var isSearching = state.searchBook.isSearching
-  var page = state.books.page
-  var isFetching = state.books.isFetching
+  var fetchedBooks = state.books
+  var searchingBooks = state.searchBook
+
   return {
-    page,
-    books,
-    isFetching,
-    searchedBooks,
-    isSearching
+    fetchedBooks,
+    searchingBooks
   }
 }
 

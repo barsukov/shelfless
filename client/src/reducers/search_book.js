@@ -2,7 +2,9 @@ import { START_SEARCH_BOOK, COMPLETE_SEARCH_BOOK } from '../actions/search_book'
 
 export function searchBook(state = {
   isSearching: false,
-  books: []
+  searchTerm: "",
+  items: [],
+  page: 1
 }, action) {
   switch (action.type) {
   case START_SEARCH_BOOK:
@@ -13,7 +15,9 @@ export function searchBook(state = {
     return Object.assign({}, state, {
       isSearching: false,
       searchTerm: action.searchTerm,
-      books: action.searchResult.books
+      items: action.items,
+      page: action.page,
+      hasMoreItems: action.hasMoreItems
     })
   default:
     return state
