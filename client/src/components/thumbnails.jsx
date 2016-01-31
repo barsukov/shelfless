@@ -16,9 +16,9 @@ class Thumbnails extends Component {
     this.props.dispatch(requestBook(requester, book))
   }
 
-  getThumbs(books, id){
+  getThumbs(items, id){
     var bookThumbs = []
-    for (var book of books) {
+    for (var book of items) {
       let requested = this.props.requestedBooks.includes(book.id)
       bookThumbs.push(<Thumbnail requested={requested} requestBook={this.requestBook} key={book.id} book={book} />)
     }
@@ -26,43 +26,67 @@ class Thumbnails extends Component {
   }
 
   formateRows(){
-    var books = []
+    var items = []
     var i,j,temparray,chunk = 3;
-    if(this.props.books.length <= chunk)
+    if(this.props.items.length <= chunk)
     {
-      books.push(this.getThumbs(this.props.books))
-      return books
+      items.push(this.getThumbs(this.props.items))
+      return items
     }
-    for (i=0,j=this.props.books.length; i<j; i+=chunk) {
-      temparray = this.props.books.slice(i,i+chunk);
-      books.push(this.getThumbs(temparray, i))
+    for (i=0,j=this.props.items.length; i<j; i+=chunk) {
+      temparray = this.props.items.slice(i,i+chunk);
+      items.push(this.getThumbs(temparray, i))
     }
-    return books
+    return items
   }
 
   render() {
     return (
-      <div className="thumbnails-scrollable">
-        {this.formateRows()}
-      </div>
+        <div className="thumbnails-scrollable">
+          <div style={{ opacity: this.props.loading ? 0.5 : 1 }}>
+            {this.props.isLoading && this.props.items.length === 0 &&
+             <h2>Loading...</h2>
+            }
+            {!this.props.isLoading && this.props.items.length === 0 &&
+              <h2>Empty.</h2>
+            }
+            { this.props.items.length > 0 &&
+              this.formateRows()
+            }
+          </div>
+        </div>
     )
   }
 }
 
 Thumbnails.propTypes = {
-  books: PropTypes.array.isRequired,
   isRequesting: PropTypes.bool.isRequired,
   dispatch: PropTypes.func.isRequired
 }
 
+function getCurrentMainItemState(state){
+  if(state.searchedBooks.searchTerm.length > 0) {
+    return state.searchedBooks
+  }
+  return state.fetchedBooks
+}
+
 function mapStateToProps(state) {
+  var mainState = getCurrentMainItemState(state)
+  var items = mainState.items
+  var page = mainState.page
+  var hasMoreItems = mainState.hasMoreItems
+  var loading = mainState.isLoading
   var bookState = state.requestBook.status
   var isRequesting = state.requestBook.isRequesting
   var requestedBooks = state.requestBook.requestedBooks
   return {
     bookState,
     isRequesting,
-    requestedBooks
+    requestedBooks,
+    items,
+    page,
+    hasMoreItems
   }
 }
 

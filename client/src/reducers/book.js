@@ -2,7 +2,7 @@ import { REQUEST_BOOKS, RECEIVE_BOOKS, CLEAR_FETCH_RESULT } from '../actions/boo
 
 function defaultState() {
   return  {
-    isFetching: false,
+    isLoading: false,
     didInvalidate: false,
     items: [],
     page: 1
@@ -15,12 +15,12 @@ export function books(state = defaultState(), action) {
     return defaultState()
   case REQUEST_BOOKS:
     return Object.assign({}, state, {
-      isFetching: true,
+      isLoading: true,
       didInvalidate: false
     })
   case RECEIVE_BOOKS:
     return Object.assign({}, state, {
-      isFetching: false,
+      isLoading: false,
       didInvalidate: false,
       items: action.books,
       hasMoreItems: action.hasMoreItems,

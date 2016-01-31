@@ -30,7 +30,7 @@ function completeSearchBook(json, searchTerm, books) {
 export function searchBook(searchTerm, page) {
   return (dispatch, getState) => {
     dispatch(startSearchBook(searchTerm, page))
-    let books = getState().searchBook.items
+    let books = getState().searchedBooks.items
     return searchRequest(searchTerm, page)
       .then(json =>
         dispatch(completeSearchBook(json, searchTerm, books))

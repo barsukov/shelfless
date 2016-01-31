@@ -2,7 +2,7 @@ import { START_SEARCH_BOOK, COMPLETE_SEARCH_BOOK, CLEAR_SEARCH_RESULT } from '..
 
 function defaultState() {
   return  {
-    isSearching: false,
+    isLoading: false,
     searchTerm: "",
     items: [],
     page: 1
@@ -19,7 +19,7 @@ export function searchBook(state = defaultState(), action) {
     })
   case COMPLETE_SEARCH_BOOK:
     return Object.assign({}, state, {
-      isSearching: false,
+      isLoading: false,
       searchTerm: action.searchTerm,
       items: action.items,
       page: action.page,

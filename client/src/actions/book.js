@@ -36,7 +36,7 @@ function fetchBooks(fetcher, page, booksState) {
 function shouldFetchBooks(books, page) {
   if (books.items.length == 0) {
     return true
-  } else if (books.isFetching) {
+  } else if (books.isLoading) {
     return false
   } else if (books.page != page) {
     return true
@@ -47,7 +47,7 @@ function shouldFetchBooks(books, page) {
 
 export function fetchBooksIfNeeded(fetcher, page) {
   return (dispatch, getState) => {
-    let booksState = getState().books
+    let booksState = getState().fetchedBooks
     if (shouldFetchBooks(booksState, page)) {
       return dispatch(fetchBooks(fetcher, page, booksState))
     }

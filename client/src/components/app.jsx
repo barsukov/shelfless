@@ -17,8 +17,8 @@ class App extends Component {
   }
   constructor(props) {
     super(props)
-    this.loadAdditional = this.loadAdditional.bind(this)
     this.handleSearchClick = this.handleSearchClick.bind(this)
+    this.loadAdditional = this.loadAdditional.bind(this)
   }
 
   componentDidMount() {
@@ -31,6 +31,7 @@ class App extends Component {
     const { dispatch } = this.props
     if(form.searchTerm.length > 0) {
       dispatch(clearSearchResult())
+      dispatch(clearFetchResult())
       dispatch(searchBook(form.searchTerm))
     } else {
       let firstPage = 1
@@ -39,35 +40,12 @@ class App extends Component {
       dispatch(fetchBooksIfNeeded(fetcher, firstPage))
     }
   }
-
   loadAdditional(page) {
     const { dispatch } = this.props
-    if(this.props.searchingBooks.searchTerm.length > 0) {
-      dispatch(searchBook(this.props.searchingBooks.searchTerm, page))
+    if(this.props.searchedBooks.searchTerm.length > 0) {
+      dispatch(searchBook(this.props.searchedBooks.searchTerm, page))
     } else {
       dispatch(fetchBooksIfNeeded(fetcher, page))
-    }
-  }
-
-  getBookContainer(books, loading, page, hasMoreItems, key) {
-    return (
-      <div className="container container-xs-height">
-        <div style={{ opacity: loading ? 0.5 : 1 }}>
-          <SearchBar submitSearch={this.handleSearchClick}/>
-          <Thumbnails key={key} hasMoreItems={hasMoreItems} loadAdditional={this.loadAdditional} page={page} books={books} />
-        </div>
-      </div>
-    )
-  }
-
-  renderBooks(){
-    if(this.props.searchingBooks.searchTerm.length > 0) {
-      const { items, isSearching, page, hasMoreItems } = this.props.searchingBooks
-      return this.getBookContainer(items, isSearching, page, hasMoreItems, "search")
-    }
-    if(this.props.fetchedBooks.items.length > 0) {
-      const { items, isFetching, page, hasMoreItems } = this.props.fetchedBooks
-      return this.getBookContainer(items, isFetching, page, hasMoreItems, "fetch")
     }
   }
 
@@ -75,26 +53,17 @@ class App extends Component {
     return (
       <div>
         <NavigationPanel />
-        {this.renderBooks()}
+        <div className="container container-xs-height">
+          <SearchBar submitSearch={this.handleSearchClick}/>
+          <Thumbnails loadAdditional={this.loadAdditional} />
+        </div>
       </div>
     );
   }
 };
 
 App.propTypes = {
-  fetchedBooks: PropTypes.object.isRequired,
-  searchingBooks: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired
 }
 
-function mapStateToProps(state) {
-  var fetchedBooks = state.books
-  var searchingBooks = state.searchBook
-
-  return {
-    fetchedBooks,
-    searchingBooks
-  }
-}
-
-export default connect(mapStateToProps)(App)
+export default connect((state) => state)(App)

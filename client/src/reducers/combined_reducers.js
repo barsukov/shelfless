@@ -5,9 +5,9 @@ import { searchBook } from './search_book'
 import { reducer as formReducer } from 'redux-form';
 
 const bookReducers = combineReducers({
-  books,
+  fetchedBooks: books,
   requestBook,
-  searchBook,
+  searchedBooks: searchBook,
   form: formReducer
 })
 
