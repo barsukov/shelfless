@@ -1,12 +1,18 @@
-import { REQUEST_BOOKS, RECEIVE_BOOKS } from '../actions/book'
+import { REQUEST_BOOKS, RECEIVE_BOOKS, CLEAR_FETCH_RESULT } from '../actions/book'
 
-export function books(state = {
-  isFetching: false,
-  didInvalidate: false,
-  items: [],
-  page: 1
-}, action) {
+function defaultState() {
+  return  {
+    isFetching: false,
+    didInvalidate: false,
+    items: [],
+    page: 1
+  }
+}
+
+export function books(state = defaultState(), action) {
   switch (action.type) {
+  case CLEAR_FETCH_RESULT:
+    return defaultState()
   case REQUEST_BOOKS:
     return Object.assign({}, state, {
       isFetching: true,

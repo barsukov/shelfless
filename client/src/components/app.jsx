@@ -5,8 +5,8 @@ var NavigationPanel = require('./navigation/navigation_panel')
 var Link = Router.Link;
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { fetchBooksIfNeeded } from '../actions/book'
-import { searchBook } from '../actions/search_book'
+import { fetchBooksIfNeeded, clearFetchResult } from '../actions/book'
+import { searchBook, clearSearchResult} from '../actions/search_book'
 import { fetchData as fetcher }  from '../lib/fetcher'
 import Thumbnails from './thumbnails'
 import SearchBar from './search_bar'
@@ -30,15 +30,12 @@ class App extends Component {
   handleSearchClick(form){
     const { dispatch } = this.props
     if(form.searchTerm.length > 0) {
-      this.props.searchingBooks.searchTerm = ""
-      this.props.searchingBooks.items = []
+      dispatch(clearSearchResult())
       dispatch(searchBook(form.searchTerm))
     } else {
       let firstPage = 1
-      this.props.searchingBooks.searchTerm = ""
-      this.props.searchingBooks.items = []
-      this.props.fetchedBooks.items = []
-      this.props.fetchedBooks.didInvalidate = true
+      dispatch(clearSearchResult())
+      dispatch(clearFetchResult())
       dispatch(fetchBooksIfNeeded(fetcher, firstPage))
     }
   }

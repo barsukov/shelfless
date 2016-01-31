@@ -5,6 +5,13 @@ function requestBooks() {
   }
 }
 
+export const CLEAR_FETCH_RESULT = 'CLEAR_FETCH_RESULT'
+export function clearFetchResult() {
+  return {
+    type: CLEAR_FETCH_RESULT
+  }
+}
+
 export const RECEIVE_BOOKS = 'RECEIVE_BOOKS'
 function receiveBooks(json, books) {
   return {
@@ -19,7 +26,7 @@ function fetchBooks(fetcher, page, booksState) {
   return function (dispatch) {
     let books = booksState.items
     dispatch(requestBooks())
-    return fetcher(`api/v1/books.json?page=${page}`)
+    return fetcher(page)
       .then(json =>
         dispatch(receiveBooks(json, books))
       )

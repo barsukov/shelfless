@@ -1,12 +1,18 @@
-import { START_SEARCH_BOOK, COMPLETE_SEARCH_BOOK } from '../actions/search_book'
+import { START_SEARCH_BOOK, COMPLETE_SEARCH_BOOK, CLEAR_SEARCH_RESULT } from '../actions/search_book'
 
-export function searchBook(state = {
-  isSearching: false,
-  searchTerm: "",
-  items: [],
-  page: 1
-}, action) {
+function defaultState() {
+  return  {
+    isSearching: false,
+    searchTerm: "",
+    items: [],
+    page: 1
+  }
+}
+
+export function searchBook(state = defaultState(), action) {
   switch (action.type) {
+  case CLEAR_SEARCH_RESULT:
+    return defaultState()
   case START_SEARCH_BOOK:
     return Object.assign({}, state, {
       isSearching: true,

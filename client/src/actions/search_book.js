@@ -9,6 +9,13 @@ export function startSearchBook(searchTerm, page) {
   }
 }
 
+export const CLEAR_SEARCH_RESULT = 'CLEAR_SEARCH_RESULT'
+export function clearSearchResult() {
+  return {
+    type: CLEAR_SEARCH_RESULT
+  }
+}
+
 export const COMPLETE_SEARCH_BOOK = 'COMPLETE_SEARCH_BOOK'
 function completeSearchBook(json, searchTerm, books) {
   return {
