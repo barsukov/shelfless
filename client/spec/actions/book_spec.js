@@ -7,10 +7,10 @@ describe('async actions', () => {
     const page = 1
     const expectedActions = [
       { type: actions.REQUEST_BOOKS },
-      { type: actions.RECEIVE_BOOKS, books: ['do something'], page: page}
+      { type: actions.RECEIVE_BOOKS, books: ['do something'], page: page, hasMoreItems: false}
     ]
     let fetcher = () => { return $.Deferred().resolve({books: ['do something'], page: page}) }
-    const store = mockStore({ books: {items: []} }, expectedActions, done)
+    const store = mockStore({ fetchedBooks: {items: []} }, expectedActions, done)
     store.dispatch(actions.fetchBooksIfNeeded(fetcher, page))
   })
 })

@@ -4,6 +4,7 @@ function defaultState() {
   return  {
     isLoading: false,
     didInvalidate: false,
+    hasMoreItems: false,
     items: [],
     page: 1
   }

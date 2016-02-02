@@ -44,11 +44,8 @@ class Thumbnails extends Component {
     return (
         <div className="thumbnails-scrollable">
           <div style={{ opacity: this.props.loading ? 0.5 : 1 }}>
-            {this.props.isLoading && this.props.items.length === 0 &&
+            {this.props.isLoading &&
              <h2>Loading...</h2>
-            }
-            {!this.props.isLoading && this.props.items.length === 0 &&
-              <h2>Empty.</h2>
             }
             { this.props.items.length > 0 &&
               this.formateRows()
