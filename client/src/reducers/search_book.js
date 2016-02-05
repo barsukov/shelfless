@@ -15,7 +15,7 @@ export function searchBook(state = defaultState(), action) {
     return defaultState()
   case START_SEARCH_BOOK:
     return Object.assign({}, state, {
-      isSearching: true,
+      isLoading: true,
     })
   case COMPLETE_SEARCH_BOOK:
     return Object.assign({}, state, {

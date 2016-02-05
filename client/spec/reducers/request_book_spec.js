@@ -19,7 +19,7 @@ describe('request book reducer', () => {
       isRequesting: true
     })
   })
-  it('should handle START_REQUEST_BOOK', () => {
+  it('should handle COMPLETE_REQUEST_BOOK', () => {
     var action = {
       type: COMPLETE_REQUEST_BOOK,
       status: "pending",

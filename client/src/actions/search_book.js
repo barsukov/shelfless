@@ -27,9 +27,12 @@ function completeSearchBook(json, searchTerm, books) {
   }
 }
 
-export function searchBook(searchTerm, page) {
+export function searchBook(searchTerm, page, requester) {
   return (dispatch, getState) => {
     dispatch(startSearchBook(searchTerm, page))
+    if(requester != undefined){
+      searchRequest = requester
+    }
     let books = getState().searchedBooks.items
     return searchRequest(searchTerm, page)
       .then(json =>
