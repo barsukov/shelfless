@@ -1,4 +1,5 @@
 import Thumbnails from '../../src/components/thumbnails'
+import Thumbnail from '../../src/components/thumbnail'
 import { InfiniteScroll } from "../../src/lib/infinite_scroll"
 import { expect } from 'chai'
 import sinon from 'sinon/pkg/sinon';
@@ -16,6 +17,8 @@ describe('Thumbnails', function () {
     store = createStore(combinedReducer)
     // for infinite scroll test
     store.getState().fetchedBooks.hasMoreItems = true
+    store.getState().fetchedBooks.hasMoreItems = true
+
     component = wrapInProvider(<Thumbnails loadAdditional={loadAdditional} />, store);
   });
 
@@ -23,7 +26,36 @@ describe('Thumbnails', function () {
     expect(component).to.exist;
   });
 
+  describe('showed searched book results', () => {
+    beforeEach(function () {
+      store = createStore(combinedReducer)
+    });
+
+    it('returns normal book result thumbnail', () => {
+      store.getState().fetchedBooks.items = [{id: "book", title: "book2"}]
+      component = wrapInProvider(<Thumbnails loadAdditional={loadAdditional} />, store);
+      let thumbnail = ReactTestUtils.findRenderedComponentWithType(component, Thumbnail);
+      expect(thumbnail).to.exist;
+    });
+
+    it('returns searched book thumbnail', () => {
+      store.getState().searchedBooks.searchTerm = "book"
+      store.getState().searchedBooks.items = [{id: "book", title: "book"}]
+      component = wrapInProvider(<Thumbnails loadAdditional={loadAdditional} />, store);
+      let thumbnail = ReactTestUtils.findRenderedComponentWithType(component, Thumbnail);
+      expect(thumbnail).to.exist;
+    });
+  });
+
   describe('infinite scroll behaviour', () => {
+    beforeEach(function () {
+      loadAdditional = sinon.spy()
+      store = createStore(combinedReducer)
+      // for infinite scroll test
+      store.getState().fetchedBooks.hasMoreItems = true
+      component = wrapInProvider(<Thumbnails loadAdditional={loadAdditional} />, store);
+    });
+
     describe('#loadingAdditionalItems', () => {
       it('calls new page when scroll in the bootom and hasMoreItems', () => {
         let connect = ReactTestUtils.findRenderedComponentWithType(component, Thumbnails);
