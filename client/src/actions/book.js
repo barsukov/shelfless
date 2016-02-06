@@ -5,12 +5,20 @@ function requestBooks() {
   }
 }
 
+export const CLEAR_FETCH_RESULT = 'CLEAR_FETCH_RESULT'
+export function clearFetchResult() {
+  return {
+    type: CLEAR_FETCH_RESULT
+  }
+}
+
 export const RECEIVE_BOOKS = 'RECEIVE_BOOKS'
 function receiveBooks(json, books) {
   return {
     type: RECEIVE_BOOKS,
     books: books.concat(json.books),
-    page: parseInt(json.page)
+    page: parseInt(json.page),
+    hasMoreItems: Boolean(json.hasMoreItems)
   }
 }
 
@@ -18,7 +26,7 @@ function fetchBooks(fetcher, page, booksState) {
   return function (dispatch) {
     let books = booksState.items
     dispatch(requestBooks())
-    return fetcher(`api/v1/books.json?page=${page}`)
+    return fetcher(page)
       .then(json =>
         dispatch(receiveBooks(json, books))
       )
@@ -28,7 +36,7 @@ function fetchBooks(fetcher, page, booksState) {
 function shouldFetchBooks(books, page) {
   if (books.items.length == 0) {
     return true
-  } else if (books.isFetching) {
+  } else if (books.isLoading) {
     return false
   } else if (books.page != page) {
     return true
@@ -39,7 +47,7 @@ function shouldFetchBooks(books, page) {
 
 export function fetchBooksIfNeeded(fetcher, page) {
   return (dispatch, getState) => {
-    let booksState = getState().books
+    let booksState = getState().fetchedBooks
     if (shouldFetchBooks(booksState, page)) {
       return dispatch(fetchBooks(fetcher, page, booksState))
     }

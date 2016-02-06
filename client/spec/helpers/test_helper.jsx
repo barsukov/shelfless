@@ -43,7 +43,6 @@ export function mockStore(getState, expectedActions, done) {
         const expectedAction = expectedActions.shift()
 
         try {
-          debugger
           expect(action).to.deep.equal(expectedAction)
           if (done && !expectedActions.length) {
             done()

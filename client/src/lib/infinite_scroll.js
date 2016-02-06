@@ -17,7 +17,7 @@ export var InfiniteScroll = ComposedComponent => class extends React.Component {
   }
 
   hasMoreItems() {
-    return true
+    return this.props.hasMoreItems
   }
 
   componentDidMount() {
