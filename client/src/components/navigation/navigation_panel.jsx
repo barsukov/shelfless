@@ -1,9 +1,15 @@
 var React = require('react')
 import NavigationLinks from './navigation_links'
 import NavigationLink from './navigation_link'
-var NavigationPanel = React.createClass({
+import RouteLink from '../route_link'
+import { getCoockieByName } from '../../lib/coockies'
 
-  render: function () {
+var NavigationPanel = React.createClass({
+  getSettingsPath(){
+    let accountId = getCoockieByName("account_id")
+    return `/accounts/${accountId}`
+  },
+  render() {
     return (
       <div className="navbar navbar-default navbar-fixed-top topnav">
         <div className="container">
@@ -14,9 +20,10 @@ var NavigationPanel = React.createClass({
             </sub>
           </a>
           <div className="navbar-collapse collapse navbar-responsive-collapse">
-            <NavigationLinks accountId={1} />
+            <NavigationLinks accountId={getCoockieByName("account_id")} />
             <ul className="nav navbar-nav pull-right">
-              <NavigationLink name={"Login"} path={"/login"} />
+              <RouteLink refresh={true} activeClassName="active" to={this.getSettingsPath()}>Settings</RouteLink>
+              <RouteLink refresh={true} activeClassName="active" to="/users/sign_out">Sign out</RouteLink>
             </ul>
           </div>
         </div>

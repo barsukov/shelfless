@@ -8,10 +8,10 @@ var Router = Backbone.Router.extend({
     "accounts/:account/books/:book_param/edit" : "form_book",
     "accounts/:account/edit" : "form_account",
     "users/sign_up" : "form_new_user",
-    "new_interface" : "new_interface",
+    "single_page_application" : "single_page_application",
     "users" : "form_new_user"
   },
-  new_interface: function(){
+  single_page_application: function(){
     newInterFaceMain()
   },
   form_book : function() {

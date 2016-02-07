@@ -5,6 +5,10 @@ Rails.application.routes.draw do
     confirmations: 'users/confirmations', registrations: 'users/registrations',
     passwords: 'users/passwords'}
 
+  devise_scope :user do
+    match '/users/sign_out' => 'devise/sessions#destroy', :as => :destroy_users_session, via: [:get, :delete]
+  end
+
   resources :books, only: [:index, :show ,:create] do
     collection do
       match 'search' => 'books#search', via: [:get, :post], as: :search
@@ -13,17 +17,19 @@ Rails.application.routes.draw do
 
   resources :categories, only: [:index]
   resources :authors, only: [:index]
-
-  namespace :api do
-    namespace :v1 do
-      resources :books, only: [:index], format: :json do
-        collection do
-          match 'search' => '/api/v1/books#search', via: [:get, :post], as: :search
+  namespace :single_page_application do
+    match 'books' => 'application#preflight', via: [:get]
+    namespace :api do
+      namespace :v1 do
+        resources :books, only: [:index], format: :json do
+          collection do
+            match 'search' => '/api/v1/books#search', via: [:get, :post], as: :search
+          end
         end
-      end
-      resources :accounts do
-        scope module: :accounts do
-          resources :reader_book_requests, only: [:create], format: :json
+        resources :accounts do
+          scope module: :accounts do
+            resources :reader_book_requests, only: [:create], format: :json
+          end
         end
       end
     end
@@ -52,8 +58,7 @@ Rails.application.routes.draw do
   end
 
   root "main#index"
-  get "/new_interface", to: 'single_page_application#index'
-  get "/books_list", to: 'new_books#index'
+  get "/single_page_application", to: 'single_page_application/application#index'
   get '/about', :to => 'main#about'
   get '/privacy', :to => 'main#privacy'
   authenticate :user, lambda { |u| u.role == :admin } do
