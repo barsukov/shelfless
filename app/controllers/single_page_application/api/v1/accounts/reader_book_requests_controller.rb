@@ -1,4 +1,4 @@
-class SinglePageApplication::Api::V1::Accounts::ReaderBookRequestsController < SinglePageApplicationController
+class SinglePageApplication::Api::V1::Accounts::ReaderBookRequestsController < SinglePageApplication::ApplicationController
   include AccountKeeper
   skip_before_filter :verify_authenticity_token, only: :create
   # POST /books
