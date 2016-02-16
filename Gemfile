@@ -11,6 +11,7 @@ gem "twitter-bootstrap-rails"
 gem "will_paginate"
 gem "rails_admin"
 gem "pry", group: [:development, :test]
+gem 'rack-rewrite' 
 gem "devise"
 gem "cancan"
 gem "pg"

@@ -1,6 +1,6 @@
 var Backbone = require('backbone')
 var selectizeInput = require('./selectize_input')
-var newInterFaceMain = require('./new_interface_main')
+var newInterFaceMain = require('./single_page_main')
 
 var Router = Backbone.Router.extend({
   routes : {

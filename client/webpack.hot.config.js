@@ -12,8 +12,8 @@ config.entry.push('webpack-dev-server/client?http://localhost:8080',
 
 config.output = {
   // this file is served directly by webpack
-  filename: 'assets/client-bundle.js',
   path: __dirname,
+  filename: 'index.js',
   publicPath: 'http://localhost:8080/' // Required for webpack-dev-server
 };
 

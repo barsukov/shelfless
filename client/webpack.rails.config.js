@@ -1,19 +1,17 @@
 const config = require('./webpack.common.config');
 var webpack = require('webpack')
 config.output = {
-  filename: 'client-bundle.js',
-  path: '../app/assets/javascripts/'
+  filename: '/client-bundle.js',
+  path: '../public/'
 };
 
-// load jQuery from cdn or rails asset pipeline
-config.externals = {jquery: 'var jQuery'};
-
 // You can add entry points specific to rails here
-config.entry.push('./src/components/main');
+config.entry.push('./src/components/single_page_main');
 config.plugins.push(new webpack.ProvidePlugin({
   'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch',
   "React": 'react',
-  "$": 'jquery'
+  "$": 'jquery',
+  "jQuery": 'jquery'
 }))
 config.module.loaders.push(
   {test: /\.jsx$/, exclude: /node_modules/, loader: 'babel' },

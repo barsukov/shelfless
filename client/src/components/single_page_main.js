@@ -1,9 +1,10 @@
 'use strict';
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Router, Route, browserHistory } from 'react-router';
+import { Router, Route } from 'react-router';
 import { Provider } from 'react-redux'
 import configureStore from '../store/book'
+import createBrowserHistory from 'history/lib/createBrowserHistory'
 import App from './app'
 import BookList from './book_list'
 var rootInstance = null;
@@ -20,20 +21,18 @@ var routes = (
   </Route>
 );
 
-function newMainStart(){
-  $(document).ready(function(){
-    ReactDOM.render(
-        <Provider store={configureStore()}>
-          {
-            <Router history={browserHistory}>
+$(document).ready(function(){
+  ReactDOM.render(
+      <Provider store={configureStore()}>
+        {
+          <Router history={createBrowserHistory()}>
             {routes}
-            </Router>
-          }
-        </Provider>,
-        document.getElementById('react-content')
-    );
-  })
-}
+          </Router>
+        }
+      </Provider>,
+      document.getElementById('react-content')
+  );
+})
 
 if (module.hot) {
   require('react-hot-loader/Injection').RootInstanceProvider.injectProvider({
@@ -43,4 +42,3 @@ if (module.hot) {
     }
   });
 }
-module.exports = newMainStart

@@ -11,7 +11,12 @@ module Shelfless
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
-
+    config.middleware.insert_before(Rack::Runtime, Rack::Rewrite) do
+      index_file = Rails.root.join('public', 'index.html').to_s
+      send_file(/single_page_application.*/, index_file, if: ->(rack_env) {
+        rack_env['PATH_INFO'] !~ /api/
+      })
+    end
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     # config.time_zone = 'Central Time (US & Canada)'

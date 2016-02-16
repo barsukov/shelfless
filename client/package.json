@@ -52,6 +52,7 @@
     "enzyme": "^1.2.0",
     "gulp-mocha": "^2.2.0",
     "gulp-mocha-phantomjs": "^0.10.1",
+    "html-webpack-plugin": "^2.8.2",
     "jsx-loader": "^0.13.2",
     "karma": "~0.12.21",
     "karma-jasmine": "~0.1.5",
