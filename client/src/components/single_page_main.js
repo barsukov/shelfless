@@ -1,5 +1,7 @@
 'use strict';
 import React from 'react'
+require("script!jquery");
+require("../../assets/css/bootstrap_and_overrides.css.less")
 import ReactDOM from 'react-dom'
 import { Router, Route } from 'react-router';
 import { Provider } from 'react-redux'

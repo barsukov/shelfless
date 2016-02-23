@@ -40,6 +40,8 @@ GEM
       tzinfo (~> 1.1)
     analytics-ruby (2.0.12)
     arel (6.0.0)
+    backbone-rails (1.2.3)
+      rails (>= 3.0.0)
     bcrypt (3.1.10)
     builder (3.2.2)
     cancan (1.6.10)
@@ -318,6 +320,7 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers
   analytics-ruby (~> 2.0.0)
+  backbone-rails
   cancan
   coffee-rails (~> 4.0.0)
   devise

@@ -12,7 +12,7 @@ module Shelfless
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
     config.middleware.insert_before(Rack::Runtime, Rack::Rewrite) do
-      index_file = Rails.root.join('public', 'index.html').to_s
+      index_file = Rails.root.join('public', 'spa.html').to_s
       send_file(/single_page_application.*/, index_file, if: ->(rack_env) {
         rack_env['PATH_INFO'] !~ /api/
       })

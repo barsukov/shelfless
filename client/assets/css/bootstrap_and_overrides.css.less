@@ -1,0 +1,99 @@
+@import "bootstrap";
+
+// Set the correct sprite paths
+@iconSpritePath: image-url("twitter/bootstrap/glyphicons-halflings.png");
+@iconWhiteSpritePath: image-url("twitter/bootstrap/glyphicons-halflings-white.png");
+
+// Set the Font Awesome (Font Awesome is default. You can disable by commenting below lines)
+@fontAwesomeEotPath: font-url("fontawesome-webfont.eot");
+@fontAwesomeEotPath_iefix: font-url("fontawesome-webfont.eot?#iefix");
+@fontAwesomeWoffPath: font-url("fontawesome-webfont.woff");
+@fontAwesomeTtfPath: font-url("fontawesome-webfont.ttf");
+@fontAwesomeSvgPath: font-url("fontawesome-webfont.svg#fontawesomeregular");
+
+// Font Awesome
+@import "../fonts/fontawesome/less/font-awesome";
+/*
+ * Row with equal height columns
+ * --------------------------------------------------
+ */
+
+ body,
+ html {
+     width: 100%;
+     height: 100%;
+ }
+
+ body,
+ h1,
+ h2,
+ h3,
+ h4,
+ h5,
+ h6 {
+  font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-weight: 700;
+ }
+.topnav {
+  font-size: 14px;
+}
+.row-eq-height {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display:         flex;
+  margin: 0;
+}
+li.thumbnail.list-group-item {
+  padding: 7px;
+}
+
+// Glyphicons
+//@import "twitter/bootstrap/glyphicons.less";
+
+// Your custom LESS stylesheets goes here
+//
+// Since bootstrap was imported above you have access to its mixins which
+// you may use and inherit here
+//
+// If you'd like to override bootstrap's own variables, you can do so here as well
+// See http://twitter.github.com/bootstrap/customize.html#variables for their names and documentation
+//
+// Example:
+// @link-color: #ff0000;
+// Creates a wrapper for a series of columns
+.row.row-wrapper {
+    padding-top: 30px
+}
+.row.row-bottom-pading {
+    padding-bottom: 30px
+}
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  margin-top: 60px;
+}
+.panel {
+  margin-top: 40px;
+}
+.panel.clearfix {
+   min-height: 340px;
+   height: 100%;
+   position:relative;
+}
+
+.panel.new-interface {
+  margin-top: 00px;
+}
+.footer.stick-panel {
+  margin: 20px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+}

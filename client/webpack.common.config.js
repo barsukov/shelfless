@@ -6,10 +6,10 @@ module.exports = {
 
   // the project dir
   context: __dirname,
-  entry: ['./src/components/main'],
+  entry: ['./src/components/single_page_main'],
   output: {
     path: __dirname,
-    filename: 'index.js'
+    filename: 'spa.js'
   },
   // In case you wanted to load jQuery from the CDN, this is how you would do it:
   // externals: {
@@ -30,6 +30,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'Custom template',
       template: 'index.ejs',
+      filename: 'spa.html',
       inject: 'head'
       }
     )
@@ -49,6 +50,10 @@ module.exports = {
       {
         test: /\.less/,
         loader: 'style-loader!css-loader!less-loader'
+      },
+      {
+          test: /\.woff($|\?)|\.woff2($|\?)|\.ttf($|\?)|\.eot($|\?)|\.svg($|\?)/,
+          loader: 'url-loader'
       }
      ],
     preLoaders: []

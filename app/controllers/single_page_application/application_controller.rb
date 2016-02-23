@@ -1,5 +1,4 @@
 class SinglePageApplication::ApplicationController < ApplicationController
-  layout 'single_page_application'
   before_action :admin_authenticate
 
   def index
