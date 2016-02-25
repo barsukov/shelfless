@@ -6,7 +6,7 @@ var NavigationLinks = React.createClass({
   linkObjs: [
     { name: "My books", path: `/books`},
     { name: "Reading list", path:`/reader_book_requests`},
-    { name: "Incoming request", path: `/holder_book_requests`}
+    { name: "Incoming requests", path: `/holder_book_requests`}
   ],
 
   getOldRootPath(){

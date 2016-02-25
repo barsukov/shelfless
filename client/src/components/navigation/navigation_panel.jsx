@@ -13,7 +13,7 @@ var NavigationPanel = React.createClass({
     return (
       <div className="navbar navbar-default navbar-fixed-top topnav">
         <div className="container">
-          <a className="navbar-brand topnav" href="">
+          <a className="navbar-brand topnav" href="/">
             Shelfless
             <sub>
               &beta;
