@@ -12,4 +12,5 @@
  *
  *= require_self
  *= require_tree .
+ *= require selectize.bootstrap3.css
  */

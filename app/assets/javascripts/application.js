@@ -17,3 +17,6 @@
 //= require turbolinks
 //= require analytics
 //= require bootstrap
+//= require backbone-rails
+//= require selectize.min.js
+//= require old_main

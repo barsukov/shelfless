@@ -1,4 +1,4 @@
-class Api::V1::BooksController < SinglePageApplicationController
+class Api::V1::BooksController < ApplicationController
   skip_before_filter :verify_authenticity_token, only: :search
 
   def render_books(books, page)

@@ -1,11 +1,14 @@
-class SinglePageApplicationController < ApplicationController
-  layout 'single_page_application'
+class SinglePageApplication::ApplicationController < ApplicationController
   before_action :admin_authenticate
 
   def index
     respond_to do |format|
       format.html { render :index }
     end
+  end
+
+  def preflight
+    render nothing: true
   end
 
   def admin_authenticate
