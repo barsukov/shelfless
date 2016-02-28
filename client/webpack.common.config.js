@@ -28,7 +28,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Custom template',
+      title: 'Shelfless.io',
       template: 'index.ejs',
       filename: 'spa.html',
       inject: 'head'

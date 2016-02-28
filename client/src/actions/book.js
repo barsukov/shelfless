@@ -1,3 +1,4 @@
+import { errorAction } from './error'
 export const REQUEST_BOOKS = 'REQUEST_BOOKS'
 function requestBooks() {
   return {
@@ -16,7 +17,7 @@ export const RECEIVE_BOOKS = 'RECEIVE_BOOKS'
 function receiveBooks(json, books) {
   return {
     type: RECEIVE_BOOKS,
-    books: books.concat(json.books),
+    books: books.concat(json.books || []),
     page: parseInt(json.page),
     hasMoreItems: Boolean(json.hasMoreItems)
   }
@@ -29,6 +30,8 @@ function fetchBooks(fetcher, page, booksState) {
     return fetcher(page)
       .then(json =>
         dispatch(receiveBooks(json, books))
+      ).catch(message =>
+        dispatch(errorAction(message))
       )
   }
 }

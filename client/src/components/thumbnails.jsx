@@ -18,9 +18,11 @@ class Thumbnails extends Component {
 
   getThumbs(items, id){
     var bookThumbs = []
-    for (var book of items) {
-      let requested = this.props.requestedBooks.includes(book.id)
-      bookThumbs.push(<Thumbnail requested={requested} requestBook={this.requestBook} key={book.id} book={book} />)
+    if(items.length > 0) {
+      for (var book of items) {
+        let requested = this.props.requestedBooks.includes(book.id)
+        bookThumbs.push(<Thumbnail requested={requested} requestBook={this.requestBook} key={book.id} book={book} />)
+      }
     }
     return React.DOM.div({className:"row row-eq-height", key: id}, bookThumbs)
   }

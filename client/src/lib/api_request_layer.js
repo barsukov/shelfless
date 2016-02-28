@@ -7,7 +7,7 @@ export function getRequest (url) {
     .then(function(json) {
       return json
     }).catch(function(ex) {
-      console.log('parsing failed', ex)
+      throw ex
     })
 }
 
@@ -23,6 +23,6 @@ export function postRequest (url, body) {
   }).then((response) => {
     return response.json()
   }).catch((ex) => {
-    console.log('parsing failed', ex)
+    return "Sorry something going wrong with server, please try later"
   })
 }
