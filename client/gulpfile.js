@@ -58,7 +58,7 @@ gulp.task("build_test", function(callback) {
 });
 
 gulp.task('watcher_build_test',function () {
-  gulp.watch('spec/**/*.js', ['test_mocha'])
+  gulp.watch('spec/**/*_spec.js', ['test_mocha'])
 });
 
 gulp.task("webpack-dev-server", function(callback) {

@@ -56,7 +56,6 @@ Rails.application.routes.draw do
   end
 
   root "main#index"
-  get "/single_page_application", to: 'single_page_application/application#index'
   get '/about', :to => 'main#about'
   get '/privacy', :to => 'main#privacy'
   authenticate :user, lambda { |u| u.role == :admin } do

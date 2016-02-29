@@ -1,4 +1,5 @@
 import { getCoockieByName } from '../lib/coockies'
+import { errorAction } from './error'
 
 export const START_REQUEST_BOOK = 'START_REQUEST_BOOK'
 export function startRequestBook(book) {
@@ -30,6 +31,8 @@ export function requestBook(requester, book) {
     return requester(url, serializeBodyParams(book))
       .then(json =>
         dispatch(requestBookComplete(json, requestedBooks))
+      ).catch(message =>
+        dispatch(errorAction("Sorry the request is not possible. Server problems."))
       )
   }
 }
