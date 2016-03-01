@@ -1,4 +1,5 @@
-import { errorAction } from './error'
+import { showDialog as showErrorDialog} from './dialog_visibility'
+
 export const REQUEST_BOOKS = 'REQUEST_BOOKS'
 function requestBooks() {
   return {
@@ -30,8 +31,12 @@ function fetchBooks(fetcher, page, booksState) {
     return fetcher(page)
       .then(json =>
         dispatch(receiveBooks(json, books))
-      ).catch(message =>
-        dispatch(errorAction(message))
+      ).catch(message => {
+        let errorMesage = "Sorry request is not possible. Problems on the server"
+        let title = "Error :("
+        let alertClass = "alert-danger"
+        dispatch(showErrorDialog(errorMesage, alertClass, title))
+      }
       )
   }
 }

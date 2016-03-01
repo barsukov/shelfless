@@ -6,8 +6,7 @@ var Link = Router.Link;
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { fetchBooksIfNeeded, clearFetchResult } from '../actions/book'
-import { closeError } from '../actions/error'
-import { toggleDialog } from '../actions/dialog_visibility'
+import { closeDialog } from '../actions/dialog_visibility'
 import { searchBook, clearSearchResult} from '../actions/search_book'
 import { fetchData as fetcher }  from '../lib/fetcher'
 import Thumbnails from './thumbnails'
@@ -22,7 +21,7 @@ class BookList extends Component {
     super(props)
     this.handleSearchClick = this.handleSearchClick.bind(this)
     this.loadAdditional = this.loadAdditional.bind(this)
-    this.close = this.closeError.bind(this)
+    this.closeModalDialog = this.closeModalDialog.bind(this)
   }
 
   componentDidMount() {
@@ -31,8 +30,8 @@ class BookList extends Component {
     dispatch(fetchBooksIfNeeded(fetcher, firstPage))
   }
 
-  closeError() {
-    this.props.dispatch(closeError())
+  closeModalDialog() {
+    this.props.dispatch(closeDialog())
   }
 
   handleSearchClick(form){
@@ -56,24 +55,14 @@ class BookList extends Component {
       dispatch(fetchBooksIfNeeded(fetcher, page))
     }
   }
-  showDialogMessage(){
-    var dialog;
-    if(this.props.error.showError) {
-      dialog = <ModalDialog dialogTitle={"Error :("} alertClassName={"alert-danger"}
-        message={this.props.error.errorMessage} close={this.close} showModal={this.props.error.showError} />
-    } else if (this.props.requestBook.status != undefined) {
-      dialog = <ModalDialog dialogTitle={"Request book"} alertClassName={"alert-success"}
-        message={"Request was succeed"} close={ () => this.props.dispatch(toggleDialog())}
-        showModal={this.props.dialog.isVisible} />
-    }
-    return dialog;
-  }
 
   render() {
     return (
       <div>
         <div className="container container-xs-height">
-          { this.showDialogMessage() }
+          <ModalDialog dialogTitle={this.props.dialog.title}
+            alertClassName={this.props.dialog.alertClass} message={this.props.dialog.message}
+            close={this.closeModalDialog} showModal={this.props.dialog.isVisible} />
           <SearchBar submitSearch={this.handleSearchClick}/>
           <Thumbnails loadAdditional={this.loadAdditional} />
         </div>

@@ -1,7 +1,5 @@
 import { getCoockieByName } from '../lib/coockies'
-import { errorAction } from './error'
-import { toggleDialog as toggleCompleteDialog} from './dialog_visibility'
-
+import { showDialog } from './dialog_visibility'
 
 export const START_REQUEST_BOOK = 'START_REQUEST_BOOK'
 export function startRequestBook(book) {
@@ -33,10 +31,17 @@ export function requestBook(requester, book) {
     return requester(url, serializeBodyParams(book))
       .then(json => {
         dispatch(requestBookComplete(json, requestedBooks))
-        dispatch(toggleCompleteDialog())
+        let succesMessage = "Take my congrats you made a book request, check the mail and keep in touch with the holder"
+        let title = "Request was succeed :)"
+        let alertClass = "alert-success"
+        dispatch(showDialog(succesMessage, alertClass, title))
       }
-      ).catch(message =>
-        dispatch(errorAction("Sorry the request is not possible. Server problems."))
+    ).catch(message => {
+        let errorMesage = "Sorry the request is not possible. Server problems."
+        let title = "Error :("
+        let alertClass = "alert-danger"
+        dispatch(showDialog(errorMesage, alertClass, title))
+      }
       )
   }
 }

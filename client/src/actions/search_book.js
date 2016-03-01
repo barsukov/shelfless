@@ -1,5 +1,5 @@
 import { searchRequest } from '../lib/fetcher'
-import { errorAction } from './error'
+import { showDialog as showErrorDialog} from './dialog_visibility'
 
 export const START_SEARCH_BOOK = 'START_SEARCH_BOOK'
 export function startSearchBook(searchTerm, page) {
@@ -38,8 +38,12 @@ export function searchBook(searchTerm, page, requester) {
     return searchRequest(searchTerm, page)
       .then(json =>
         dispatch(completeSearchBook(json, searchTerm, books))
-      ).catch(message =>
-        dispatch(errorAction("Sorry search is not possible. Problems on the server"))
+      ).catch(message => {
+        let errorMesage = "Sorry search is not possible. Problems on the server"
+        let title = "Error :("
+        let alertClass = "alert-danger"
+        dispatch(showErrorDialog(errorMesage, alertClass, title))
+      }
       )
   }
 }
