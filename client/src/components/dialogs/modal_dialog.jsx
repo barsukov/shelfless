@@ -4,6 +4,12 @@ import { Component } from 'react'
 class ModalDialog extends Component {
   constructor(props) {
     super(props)
+    this.getAlertClass = this.getAlertClass.bind(this)
+  }
+  getAlertClass() {
+    let className = "alert "
+    className += this.props.alertClassName
+    return className
   }
   render() {
     return (
@@ -14,7 +20,7 @@ class ModalDialog extends Component {
           </Modal.Header>
 
           <Modal.Body>
-            <div className="alert alert-danger" role="alert">{this.props.message}</div>
+            <div className={this.getAlertClass()} role="alert">{this.props.message}</div>
             <p></p>
           </Modal.Body>
 

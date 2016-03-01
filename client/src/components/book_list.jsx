@@ -7,6 +7,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { fetchBooksIfNeeded, clearFetchResult } from '../actions/book'
 import { closeError } from '../actions/error'
+import { toggleDialog } from '../actions/dialog_visibility'
 import { searchBook, clearSearchResult} from '../actions/search_book'
 import { fetchData as fetcher }  from '../lib/fetcher'
 import Thumbnails from './thumbnails'
@@ -55,13 +56,24 @@ class BookList extends Component {
       dispatch(fetchBooksIfNeeded(fetcher, page))
     }
   }
+  showDialogMessage(){
+    var dialog;
+    if(this.props.error.showError) {
+      dialog = <ModalDialog dialogTitle={"Error :("} alertClassName={"alert-danger"}
+        message={this.props.error.errorMessage} close={this.close} showModal={this.props.error.showError} />
+    } else if (this.props.requestBook.status != undefined) {
+      dialog = <ModalDialog dialogTitle={"Request book"} alertClassName={"alert-success"}
+        message={"Request was succeed"} close={ () => this.props.dispatch(toggleDialog())}
+        showModal={this.props.dialog.isVisible} />
+    }
+    return dialog;
+  }
 
   render() {
     return (
       <div>
         <div className="container container-xs-height">
-          <ModalDialog dialogTitle={"Error :("}
-            message={this.props.error.errorMessage} close={this.close} showModal={this.props.error.showError} />
+          { this.showDialogMessage() }
           <SearchBar submitSearch={this.handleSearchClick}/>
           <Thumbnails loadAdditional={this.loadAdditional} />
         </div>

@@ -1,5 +1,7 @@
 import { getCoockieByName } from '../lib/coockies'
 import { errorAction } from './error'
+import { toggleDialog as toggleCompleteDialog} from './dialog_visibility'
+
 
 export const START_REQUEST_BOOK = 'START_REQUEST_BOOK'
 export function startRequestBook(book) {
@@ -29,8 +31,10 @@ export function requestBook(requester, book) {
     let account_id = getCoockieByName("account_id")
     let url = `/api/v1/accounts/${account_id}/reader_book_requests`
     return requester(url, serializeBodyParams(book))
-      .then(json =>
+      .then(json => {
         dispatch(requestBookComplete(json, requestedBooks))
+        dispatch(toggleCompleteDialog())
+      }
       ).catch(message =>
         dispatch(errorAction("Sorry the request is not possible. Server problems."))
       )

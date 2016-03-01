@@ -3,6 +3,7 @@ import { books } from './book'
 import { requestBook } from './request_book'
 import { searchBook } from './search_book'
 import { errorReducer } from './error'
+import { toggleDialog } from './dialog_visibility'
 import { reducer as formReducer } from 'redux-form';
 
 const bookReducers = combineReducers({
@@ -10,6 +11,7 @@ const bookReducers = combineReducers({
   requestBook,
   searchedBooks: searchBook,
   form: formReducer,
-  error: errorReducer
+  error: errorReducer,
+  dialog: toggleDialog
 })
 module.exports = bookReducers
