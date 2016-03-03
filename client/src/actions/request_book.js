@@ -1,4 +1,5 @@
 import { getCoockieByName } from '../lib/coockies'
+import { showDialog } from './dialog_visibility'
 
 export const START_REQUEST_BOOK = 'START_REQUEST_BOOK'
 export function startRequestBook(book) {
@@ -28,8 +29,19 @@ export function requestBook(requester, book) {
     let account_id = getCoockieByName("account_id")
     let url = `/api/v1/accounts/${account_id}/reader_book_requests`
     return requester(url, serializeBodyParams(book))
-      .then(json =>
+      .then(json => {
         dispatch(requestBookComplete(json, requestedBooks))
+        let succesMessage = "Take my congrats you made a book request, check the mail and keep in touch with the holder"
+        let title = "Request was succeed :)"
+        let alertClass = "alert-success"
+        dispatch(showDialog(succesMessage, alertClass, title))
+      }
+    ).catch(message => {
+        let errorMesage = "Sorry the request is not possible. Server problems."
+        let title = "Error :("
+        let alertClass = "alert-danger"
+        dispatch(showDialog(errorMesage, alertClass, title))
+      }
       )
   }
 }

@@ -6,10 +6,12 @@ var Link = Router.Link;
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { fetchBooksIfNeeded, clearFetchResult } from '../actions/book'
+import { closeDialog } from '../actions/dialog_visibility'
 import { searchBook, clearSearchResult} from '../actions/search_book'
 import { fetchData as fetcher }  from '../lib/fetcher'
 import Thumbnails from './thumbnails'
 import SearchBar from './search_bar'
+import ModalDialog from './dialogs/modal_dialog'
 
 class BookList extends Component {
   contextTypes: {
@@ -19,12 +21,17 @@ class BookList extends Component {
     super(props)
     this.handleSearchClick = this.handleSearchClick.bind(this)
     this.loadAdditional = this.loadAdditional.bind(this)
+    this.closeModalDialog = this.closeModalDialog.bind(this)
   }
 
   componentDidMount() {
     const { dispatch } = this.props
     let firstPage = 1
     dispatch(fetchBooksIfNeeded(fetcher, firstPage))
+  }
+
+  closeModalDialog() {
+    this.props.dispatch(closeDialog())
   }
 
   handleSearchClick(form){
@@ -53,6 +60,9 @@ class BookList extends Component {
     return (
       <div>
         <div className="container container-xs-height">
+          <ModalDialog dialogTitle={this.props.dialog.title}
+            alertClassName={this.props.dialog.alertClass} message={this.props.dialog.message}
+            close={this.closeModalDialog} showModal={this.props.dialog.isVisible} />
           <SearchBar submitSearch={this.handleSearchClick}/>
           <Thumbnails loadAdditional={this.loadAdditional} />
         </div>

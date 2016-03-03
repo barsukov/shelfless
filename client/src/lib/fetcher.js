@@ -1,7 +1,7 @@
 import { getRequest, postRequest } from './api_request_layer'
 
 export function fetchData(page) {
-  let url = `api/v1/books.json?page=${page}`
+  let url = `/api/v1/books.json?page=${page}`
   return getRequest(url)
 }
 
