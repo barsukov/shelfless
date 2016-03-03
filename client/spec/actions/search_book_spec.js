@@ -1,7 +1,7 @@
 import { expect } from 'chai'
 import { mockStore } from '../helpers/test_helper'
 import * as actions from '../../src/actions/search_book'
-import { ERROR_ACTION } from '../../src/actions/error'
+import { SHOW_DIALOG } from '../../src/actions/dialog_visibility'
 import { Promise } from 'es6-promise'
 
 describe('Search book async actions', () => {
@@ -23,7 +23,11 @@ describe('When search book request was failed', () => {
   it('creates ERROR_ACTION', (done) => {
     const expectedActions = [
       { type: actions.START_SEARCH_BOOK, searchTerm: "book" , page: 1 },
-      { type: ERROR_ACTION, message: "Sorry search is not possible. Problems on the server" }
+      {
+        type: SHOW_DIALOG,
+        alertClass: "alert-danger",
+        message: "Sorry search is not possible. Problems on the server", title: "Error :(",
+       }
     ]
     let requester = () => { return new Promise((resolve, reject) => reject("Error")) }
     const store = mockStore({searchedBooks: {items: []} }, expectedActions, done)

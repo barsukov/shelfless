@@ -1,7 +1,7 @@
 import { expect } from 'chai'
 import { mockStore } from '../helpers/test_helper'
 import * as actions from '../../src/actions/book'
-import { ERROR_ACTION } from '../../src/actions/error'
+import { SHOW_DIALOG } from '../../src/actions/dialog_visibility'
 import { Promise } from 'es6-promise'
 
 describe('Fetch book async actions', () => {
@@ -17,11 +17,13 @@ describe('Fetch book async actions', () => {
     const store = mockStore({ fetchedBooks: {items: []} }, expectedActions, done)
     store.dispatch(actions.fetchBooksIfNeeded(fetcher, page))
   })
-  it('creates ERROR_ACTION when fetching books was failed', (done) => {
+  it('creates SHOW_DIALOG when fetching books was failed', (done) => {
     const page = 1
     const expectedActions = [
       { type: actions.REQUEST_BOOKS },
-      { type: ERROR_ACTION, message: "Error"}
+      { type: SHOW_DIALOG, alertClass: "alert-danger",
+        message: "Sorry request is not possible. Problems on the server", title: "Error :("
+      }
     ]
     let fetcher = () => { return new Promise((resolve, reject) => reject("Error")) }
     const store = mockStore({ fetchedBooks: {items: []} }, expectedActions, done)
