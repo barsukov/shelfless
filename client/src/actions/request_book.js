@@ -31,7 +31,7 @@ export function requestBook(requester, book) {
     return requester(url, serializeBodyParams(book))
       .then(json => {
         dispatch(requestBookComplete(json, requestedBooks))
-        let succesMessage = "Take my congrats you made a book request, check the mail and keep in touch with the holder"
+        let succesMessage = "Congrats, get in touch with the bookholder once you received a confirmation"
         let title = "Request was succeed :)"
         let alertClass = "alert-success"
         dispatch(showDialog(succesMessage, alertClass, title))
