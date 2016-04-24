@@ -61,16 +61,9 @@
                       %span.network-name
                         = I18n.t("landing_text.read_about")
                   %li
-                    -if user_signed_in?
-                      =link_to "",
-                        onclick: "history.replaceState(null, null, 'single_page_application/books'); history.go();",
-                        class: "btn btn-default btn-lg" do
-                        %i.fa.fa-facebook.fa-lg.fa-fw
-                        %span.network-name Login
-                    -else
-                      %a.btn.btn-default.btn-lg{:href => new_user_session_path}
-                        %i.fa.fa-facebook.fa-lg.fa-fw
-                        %span.network-name Login
+                    %a.btn.btn-default.btn-lg{:href => get_user_login_path}
+                      %i.fa.fa-facebook.fa-lg.fa-fw
+                      %span.network-name Login
       / /.container
     / /.intro-header
     / Page Content
@@ -118,9 +111,7 @@
         .call-to-action
           %h2
             = I18n.t('landing_text.search_book')
-          =link_to "",
-            onclick: "history.replaceState(null, null, 'single_page_application/books'); history.go();",
-            class: "btn btn-default btn-lg" do
+          %a.btn.btn-default.btn-lg{:href => books_path}
             %i.fa.fa-book.fa-fw
             %span.network-name Try it
     / /.content-section-a
