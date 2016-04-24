@@ -21,7 +21,7 @@ describe('Request Book async actions', () => {
       {
         type: SHOW_DIALOG,
         alertClass: "alert-success",
-        message: "Take my congrats you made a book request, check the mail and keep in touch with the holder",
+        message: "Congrats, get in touch with the bookholder once you received a confirmation",
         title: "Request was succeed :)"
       }
     ]
