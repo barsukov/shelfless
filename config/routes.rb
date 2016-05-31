@@ -15,16 +15,18 @@ Rails.application.routes.draw do
     end
   end
 
-  namespace :api do
-    namespace :v1 do
-      resources :books, only: [:index], format: :json do
-        collection do
-          match 'search' => '/api/v1/books#search', via: [:get, :post], as: :search
+  authenticate :user do
+    namespace :api do
+      namespace :v1 do
+        resources :books, only: [:index], format: :json do
+          collection do
+            match 'search' => '/api/v1/books#search', via: [:get, :post], as: :search
+          end
         end
-      end
-      resources :accounts do
-        scope module: :accounts do
-          resources :reader_book_requests, only: [:create], format: :json
+        resources :accounts do
+          scope module: :accounts do
+            resources :reader_book_requests, only: [:create], format: :json
+          end
         end
       end
     end

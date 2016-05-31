@@ -118,11 +118,16 @@
         .call-to-action
           %h2
             = I18n.t('landing_text.search_book')
-          =link_to "",
-            onclick: "history.replaceState(null, null, 'single_page_application/books'); history.go();",
-            class: "btn btn-default btn-lg" do
-            %i.fa.fa-book.fa-fw
-            %span.network-name Try it
+          -if user_signed_in?
+            =link_to "",
+              onclick: "history.replaceState(null, null, 'single_page_application/books'); history.go();",
+              class: "btn btn-default btn-lg" do
+              %i.fa.fa-book.fa-fw
+              %span.network-name Try it
+          -else
+            %a.btn.btn-default.btn-lg{:href => new_user_session_path}
+              %i.fa.fa-book.fa-fw
+              %span.network-name Try it
     / /.content-section-a
     %section#contact
       .container
